@@ -1,0 +1,92 @@
+AREXAI PRESALE ROUND AUTOMATED SECURITY REVIEW
+Date: 22 September 2026
+
+Project: ArexAi
+Network: BNB Smart Chain (chain ID 56)
+Reviewed contract: PresaleRound
+Round 1 address: 0x52c880e4d54a5dd3ca7dd185d44715017b25dee0
+
+IMPORTANT LIMITATION
+
+This is an internal automated and manual engineering review. It is not an independent audit, certification, guarantee of safety, legal approval or investment assurance. A professional third-party audit remains pending.
+
+SOURCE AND BUILD PROVENANCE
+
+- Source restored from the BscScan-verified Round 1 flattened source.
+- BscScan verification status: Exact Match.
+- Solidity compiler: 0.8.24+commit.e11b9ed9.
+- Optimizer: enabled, 200 runs.
+- EVM target: Paris.
+- OpenZeppelin Contracts: 5.4.0.
+- Local ABI matches the preserved deployment artifact.
+- Local executable runtime bytecode matches the preserved deployment artifact after compiler metadata is excluded.
+- A full metadata hash can differ because BscScan exports verified multi-file sources as one flattened file and the local project restores the import-based source layout.
+
+AUTOMATED ANALYSIS
+
+Tool: Slither 0.11.6
+Detector set: 102 detectors
+
+PresaleRound results:
+- Critical: 0
+- High: 0
+- Medium: 0
+- Low: 2 reviewed timestamp notices
+
+Active project results after archiving the retired combined-round source:
+- Critical: 0
+- High: 0
+- Medium: 0
+- Low: 3 reviewed timestamp notices (two in PresaleRound and one in team vesting)
+
+Reviewed notices:
+1. buy(uint256) compares block.timestamp with the immutable start and end times.
+2. finalize() checks that block.timestamp has reached the immutable end time.
+
+These notices describe intentional sale-schedule controls. They do not demonstrate an exploit. Small block-timestamp variation by a validator cannot alter the immutable price, allocation, treasury, payment token, minimum, maximum or the overall configured sale window.
+
+VERIFIED SECURITY PROPERTIES
+
+- Price, start time, end time, allocation, payment token, sale token, treasury and wallet limits are immutable.
+- Purchases are rejected before the start time and at or after the end time.
+- The minimum payment and cumulative per-wallet maximum are enforced by the contract.
+- totalSold and contributed state are updated before external token transfers.
+- buy() and finalize() are protected by ReentrancyGuard.
+- SafeERC20 is used for payment and sale-token transfers.
+- The configured payment amount is transferred directly from the buyer to the immutable treasury.
+- The calculated ARXAI amount is transferred immediately to the same buyer.
+- The contract does not request or create token allowances. Approval is initiated by the buyer interface; an exact approval is fully consumed in the tested exact-payment flow.
+- Purchases can be paused and unpaused only by the owner.
+- Ownership transfer uses Ownable2Step and requires acceptance by the pending owner.
+- Finalization is owner-only, cannot occur before the end time and burns only the configured unsold allocation.
+- The owner cannot change the price, dates, allocation, treasury, payment token or sale token after deployment.
+
+TEST RESULTS
+
+Hardhat tests: 11 passed, 0 failed.
+
+PresaleRound-specific tests cover:
+- exact treasury payment and immediate ARXAI delivery;
+- minimum and cumulative maximum enforcement;
+- exact payment-token approval consumption;
+- rejection before start and at the end timestamp;
+- owner-only pause and unpause;
+- two-step ownership acceptance;
+- post-end burning of only the unsold allocation.
+- invalid schedule and zero-allocation constructor rejection;
+- insufficient sale-token inventory rejection without moving payment funds;
+- exact quote calculation and owner-only finalization.
+
+The active wider suite also covers team vesting behavior. The retired combined-round source and its historical tests are preserved under archive/ and excluded from active compilation, testing and audit scope. Passing tests demonstrate covered behavior only and do not prove the absence of unknown vulnerabilities.
+
+MANUAL REVIEW NOTES AND RESIDUAL RISKS
+
+- The contract assumes the configured token contracts behave according to the ERC-20 interfaces used. Round 1 uses the published ARXAI and BSC-USDT addresses.
+- The contract has no general rescue function. Tokens accidentally sent to the presale contract outside the intended inventory could remain inaccessible. Users are instructed not to transfer assets directly to contract addresses.
+- Presale owner permissions are currently associated with the project administrator. Moving operational ownership to a tested multisignature wallet remains recommended.
+- Source verification and automated analysis do not replace independent review.
+- Wallet-provider reputation warnings are controlled by external security providers and are not automatically removed by this review.
+
+CONCLUSION
+
+No critical, high or medium severity issue was identified in PresaleRound by this automated review. The two low-severity timestamp notices are expected consequences of immutable sale scheduling. Independent audit and multisignature governance remain open security work.

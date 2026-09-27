@@ -1,2 +1,74 @@
-# arexai-contracts
-Official smart contracts, deployment records, automated tests and security documentation for ArexAi (ARXAI)
+# ArexAi Contracts
+
+Official public smart-contract engineering repository for **ArexAi (ARXAI)** on BNB Smart Chain.
+
+## Official links
+
+- Website: https://arexaidata.com
+- Security page: https://arexaidata.com/security
+- Contract registry: https://arexaidata.com/contracts.json
+- Email: info@arexaidata.com
+- X: https://x.com/ArexAIData
+- Telegram: https://t.me/arexai
+
+## BNB Smart Chain deployments
+
+| Component | Address | BscScan |
+| --- | --- | --- |
+| ARXAI token | `0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3` | [View](https://bscscan.com/token/0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3) |
+| Presale Round 1 | `0x52c880e4d54a5dd3ca7dd185d44715017b25dee0` | [View](https://bscscan.com/address/0x52c880e4d54a5dd3ca7dd185d44715017b25dee0#code) |
+| Presale Round 2 | `0x0709b5f668280f54b48b953c3d2bd7e137e43398` | [View](https://bscscan.com/address/0x0709b5f668280f54b48b953c3d2bd7e137e43398#code) |
+| Team vesting | `0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2` | [View](https://bscscan.com/address/0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2#code) |
+| Listing reserve | `0x6af332c903c8f3fde0e620b360247c28476a2180` | [View](https://bscscan.com/address/0x6af332c903c8f3fde0e620b360247c28476a2180#code) |
+| Liquidity reserve | `0xc141a3f0c90f3fa3b5f55fac6683715a14835e42` | [View](https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code) |
+
+The machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
+
+## Repository scope
+
+- `contracts/verified/ArexAIToken.sol`: source prepared for the exact BscScan-verified ARXAI token deployment.
+- `contracts/PresaleRound.sol`: active presale source used by Round 1 and Round 2.
+- `contracts/ArexAI.sol` and `contracts/ArexAITeamVesting.sol`: active test-workspace implementations.
+- `contracts/mocks/`: test-only payment-token contracts.
+- `test/`: the 37-test Hardhat suite.
+- `artifacts/`: public ABI and bytecode artifacts for the deployed contracts.
+- `reports/`: project-run automated test and static-analysis evidence.
+
+For deployments whose exact multi-file source is not duplicated in this release, the verified BscScan code page is the canonical source record. ABI or bytecode artifacts are not presented as source code.
+
+## Compiler configuration
+
+- Solidity: `0.8.24` (`v0.8.24+commit.e11b9ed9`)
+- Optimizer: enabled
+- Optimizer runs: `200`
+- EVM version: `paris`
+- OpenZeppelin Contracts: `5.4.0`
+- Hardhat: `3.15.0`
+
+## Run the tests
+
+Requirements: Node.js 22.13 or later and pnpm.
+
+```bash
+pnpm install
+pnpm test
+```
+
+Last project-run verification on 27 September 2026:
+
+- 37 passed
+- 0 failed
+- 100% line coverage within the stated active scope
+- 100% statement coverage within the stated active scope
+
+See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-27.txt) for scope and limitations.
+
+## Security status
+
+Automated testing and static analysis are engineering evidence, not an independent professional audit. The included Slither review reported no critical, high, or medium-severity findings within its stated scope. See [`SECURITY.md`](SECURITY.md) and the reports directory for limitations.
+
+Never share a seed phrase, private key, recovery phrase, or wallet credential with anyone claiming to represent ArexAi.
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).

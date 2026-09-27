@@ -1,0 +1,47 @@
+{
+  "project": "ArexAi",
+  "symbol": "ARXAI",
+  "network": "BNB Smart Chain",
+  "chainId": 56,
+  "compiler": "v0.8.24+commit.e11b9ed9",
+  "optimizer": { "enabled": true, "runs": 200 },
+  "evmVersion": "paris",
+  "contracts": [
+    {
+      "name": "ARXAI token",
+      "address": "0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3",
+      "verification": "exact",
+      "bscscan": "https://bscscan.com/token/0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3"
+    },
+    {
+      "name": "Presale Round 1",
+      "address": "0x52c880e4d54a5dd3ca7dd185d44715017b25dee0",
+      "verification": "exact",
+      "bscscan": "https://bscscan.com/address/0x52c880e4d54a5dd3ca7dd185d44715017b25dee0#code"
+    },
+    {
+      "name": "Presale Round 2",
+      "address": "0x0709b5f668280f54b48b953c3d2bd7e137e43398",
+      "verification": "similar",
+      "bscscan": "https://bscscan.com/address/0x0709b5f668280f54b48b953c3d2bd7e137e43398#code"
+    },
+    {
+      "name": "Team vesting",
+      "address": "0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2",
+      "verification": "exact",
+      "bscscan": "https://bscscan.com/address/0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2#code"
+    },
+    {
+      "name": "Listing reserve",
+      "address": "0x6af332c903c8f3fde0e620b360247c28476a2180",
+      "verification": "exact",
+      "bscscan": "https://bscscan.com/address/0x6af332c903c8f3fde0e620b360247c28476a2180#code"
+    },
+    {
+      "name": "Liquidity reserve",
+      "address": "0xc141a3f0c90f3fa3b5f55fac6683715a14835e42",
+      "verification": "exact",
+      "bscscan": "https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code"
+    }
+  ]
+}

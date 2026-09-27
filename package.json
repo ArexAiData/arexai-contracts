@@ -1,0 +1,27 @@
+{
+  "name": "arexai-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public smart-contract sources and automated tests for ArexAi (ARXAI)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "compile": "hardhat build",
+    "test": "hardhat test nodejs"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.4.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "4.0.15",
+    "@nomicfoundation/hardhat-node-test-runner": "3.1.0",
+    "@types/node": "22.19.19",
+    "ethers": "6.17.0",
+    "hardhat": "3.15.0",
+    "solc": "0.8.24",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

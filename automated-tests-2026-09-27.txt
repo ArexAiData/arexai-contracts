@@ -1,0 +1,55 @@
+ARXAI EXPANDED AUTOMATED CONTRACT TEST REPORT
+Date: 27 September 2026
+
+Project: ArexAi
+Network: BNB Smart Chain (chain ID 56)
+Status: Internal automated engineering evidence; independent audit pending
+
+SUMMARY
+- Hardhat tests: 37 passed, 0 failed
+- Line coverage: 100%
+- Statement coverage: 100%
+
+ACTIVE COVERAGE SCOPE
+- ARXAI token (ArexAI.sol)
+- PresaleRound (PresaleRound.sol)
+- Team vesting (ArexAITeamVesting.sol)
+- Test-only ERC-20 mocks used to exercise payment-token behavior
+
+The Listing Reserve and Liquidity Reserve contracts are not included in this
+coverage percentage. They remain listed in the broader independent audit scope.
+
+NEWLY VERIFIED NEGATIVE AND BOUNDARY BEHAVIORS
+- Zero-address and invalid constructor configurations are rejected.
+- Payment tokens with more than 18 decimals are rejected.
+- Payments producing zero ARXAI output are rejected.
+- Purchases cannot exceed the configured sale allocation.
+- Insufficient allowance, payment balance or sale inventory causes a revert.
+- Failed purchases roll back totalSold, contributed and token balances.
+- Purchases are rejected before START, at END and after finalization.
+- START, END and immediately adjacent timestamp boundaries are exercised.
+- Per-wallet limits remain independent across buyers.
+- Cumulative purchases cannot exceed the wallet maximum.
+- Only the pending owner can accept a two-step ownership transfer.
+- Ownership renunciation consequences are documented: pause and finalization
+  become unavailable after ownership is permanently removed.
+- A fully sold allocation finalizes without burning additional supply.
+- ARXAI fixed supply, token metadata, holder burn and allowance-based burnFrom
+  behavior are exercised.
+- The token ABI exposes no owner, mint, pause, blacklist or upgrade entry point.
+- Team vesting rejects zero addresses and invalid tranche indexes.
+- Underfunded vesting releases revert without changing released balances.
+- Release can be triggered by any caller but always pays the fixed beneficiary.
+- Exact tranche boundaries, cumulative catch-up and final release behavior are
+  exercised.
+
+LIMITATIONS
+Code coverage shows which instrumented source lines and statements were executed
+by the test suite. It does not prove the absence of unknown vulnerabilities,
+economic attacks, compromised-key events, integration errors or frontend risks.
+Hardhat 3's generated report for this run states line and statement coverage;
+this report does not claim 100% branch coverage.
+
+This document is not an independent security audit, certification, legal
+approval or guarantee of safety. A professional third-party audit remains
+pending and will be identified separately if completed.
