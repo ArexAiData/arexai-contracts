@@ -1,0 +1,52 @@
+name: Slither Security Analysis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+concurrency:
+  group: slither-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  slither:
+    name: Slither 0.11.6
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+
+      - name: Run Slither
+        id: slither
+        continue-on-error: true
+        uses: crytic/slither-action@v0.4.2
+        with:
+          target: .
+          node-version: 22.13.0
+          slither-version: 0.11.6
+          sarif: results.sarif
+          fail-on: medium
+          slither-args: >-
+            --filter-paths "contracts/mocks|contracts/verified"
+
+      - name: Upload Slither results to GitHub Security
+        if: always() && hashFiles('results.sarif') != '' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: results.sarif
+          category: slither
+
+      - name: Enforce medium-severity security gate
+        if: steps.slither.outcome == 'failure'
+        run: |
+          echo "Slither reported a medium-or-higher finding or failed to analyze the contracts."
+          exit 1

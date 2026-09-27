@@ -1,5 +1,8 @@
 # ArexAi Contracts
 
+[![Contract Tests](https://github.com/ArexAiData/arexai-contracts/actions/workflows/tests.yml/badge.svg)](https://github.com/ArexAiData/arexai-contracts/actions/workflows/tests.yml)
+[![Slither Security Analysis](https://github.com/ArexAiData/arexai-contracts/actions/workflows/slither.yml/badge.svg)](https://github.com/ArexAiData/arexai-contracts/actions/workflows/slither.yml)
+
 Official public smart-contract engineering repository for **ArexAi (ARXAI)** on BNB Smart Chain.
 
 ## Official links
@@ -62,6 +65,8 @@ Last project-run verification on 27 September 2026:
 - 100% statement coverage within the stated active scope
 
 See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-27.txt) for scope and limitations.
+
+GitHub Actions also runs the Hardhat test suite and Slither analysis automatically on every push to `main` and every pull request targeting `main`. The Slither workflow uploads SARIF findings to GitHub Security and blocks medium-or-higher findings.
 
 ## Security status
 
