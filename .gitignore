@@ -128,6 +128,13 @@ dist
 # pnpm
 .pnpm-store
 
+# Hardhat-generated output; curated public ABI files in artifacts/*.json remain tracked
+cache/
+artifacts/build-info/
+artifacts/contracts/
+artifacts/artifacts.d.ts
+
+
 # yarn v3
 .pnp.*
 .yarn/*

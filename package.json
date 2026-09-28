@@ -23,5 +23,5 @@
     "solc": "0.8.24",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@11.25.0"
+  "packageManager": "npm@11.9.0"
 }

@@ -10,6 +10,7 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 - Website: https://arexaidata.com
 - Security page: https://arexaidata.com/security
 - Contract registry: https://arexaidata.com/contracts.json
+- Product and engineering updates: https://arexaidata.com/updates
 - Email: info@arexaidata.com
 - X: https://x.com/ArexAIData
 - Telegram: https://t.me/arexai
@@ -26,6 +27,8 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 | Liquidity reserve | `0xc141a3f0c90f3fa3b5f55fac6683715a14835e42` | [View](https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code) |
 
 The machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
+
+Material repository changes are recorded in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Repository scope
 
@@ -52,11 +55,11 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 ## Run the tests
 
-Requirements: Node.js 22.13 or later and pnpm.
+Requirements: Node.js 22.13 or later and npm.
 
 ```bash
-pnpm install
-pnpm test
+npm ci --no-audit --no-fund
+npm test
 ```
 
 Last project-run verification on 27 September 2026:
