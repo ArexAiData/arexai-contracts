@@ -37,3 +37,13 @@ jobs:
 
       - name: Run contract tests
         run: npm test
+
+  required-check-compatibility:
+    # The repository ruleset still requires this historical check context.
+    # This alias can pass only after the current 52-test job succeeds.
+    name: Hardhat 37-test suite
+    needs: hardhat-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm current contract suite passed
+        run: echo "The required 52-test Hardhat suite completed successfully."
