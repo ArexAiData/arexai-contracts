@@ -10,6 +10,7 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 - Website: https://arexaidata.com
 - Security page: https://arexaidata.com/security
 - Contract registry: https://arexaidata.com/contracts.json
+- Product and engineering updates: https://arexaidata.com/updates
 - Email: info@arexaidata.com
 - X: https://x.com/ArexAIData
 - Telegram: https://t.me/arexai
@@ -27,17 +28,21 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 
 The machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
 
+Material repository changes are recorded in [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Repository scope
 
 - `contracts/verified/ArexAIToken.sol`: source prepared for the exact BscScan-verified ARXAI token deployment.
 - `contracts/PresaleRound.sol`: active presale source used by Round 1 and Round 2.
 - `contracts/ArexAI.sol` and `contracts/ArexAITeamVesting.sol`: active test-workspace implementations.
+- `contracts/ReserveVault.sol`: exact-match verified 575M listing-reserve source with twenty fixed tranches.
+- `contracts/LiquidityReserveVault.sol`: exact-match verified 200M liquidity-reserve source with an immutable manager.
 - `contracts/mocks/`: test-only payment-token contracts.
-- `test/`: the 37-test Hardhat suite.
+- `test/`: the 52-test Hardhat suite covering all five active contract types.
 - `artifacts/`: public ABI and bytecode artifacts for the deployed contracts.
 - `reports/`: project-run automated test and static-analysis evidence.
 
-For deployments whose exact multi-file source is not duplicated in this release, the verified BscScan code page is the canonical source record. ABI or bytecode artifacts are not presented as source code.
+The two reserve sources were recovered from exact-match verified BNB Chain records. Their locally compiled executable logic matches the published deployment artifacts; compiler metadata differences are not treated as contract behavior. ABI or bytecode artifacts are not presented as source code.
 
 ## Compiler configuration
 
@@ -50,19 +55,19 @@ For deployments whose exact multi-file source is not duplicated in this release,
 
 ## Run the tests
 
-Requirements: Node.js 22.13 or later and pnpm.
+Requirements: Node.js 22.13 or later and npm.
 
 ```bash
-pnpm install
-pnpm test
+npm ci --no-audit --no-fund
+npm test
 ```
 
 Last project-run verification on 27 September 2026:
 
-- 37 passed
+- 52 passed
 - 0 failed
-- 100% line coverage within the stated active scope
-- 100% statement coverage within the stated active scope
+- 5 active contract types covered by executable behavioral tests
+- clean compiler and CI test gates
 
 See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-27.txt) for scope and limitations.
 
