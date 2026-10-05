@@ -1,0 +1,26 @@
+name: Reproducible bug
+description: Report a non-sensitive contract or repository bug
+body:
+  - type: markdown
+    attributes:
+      value: "Report exploitable issues privately to info@arexaidata.com. Do not include private keys, wallet credentials or real customer data."
+  - type: input
+    id: version
+    attributes:
+      label: Commit and environment
+      description: Commit SHA, Node version and relevant tool versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Minimal steps or local mock test
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true

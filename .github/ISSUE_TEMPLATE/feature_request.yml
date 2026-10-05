@@ -1,0 +1,14 @@
+name: Feature proposal
+description: Propose a focused engineering improvement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation and compatibility
+      description: How should this be tested, and does it affect deployed contracts?

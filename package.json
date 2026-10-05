@@ -9,7 +9,8 @@
   },
   "scripts": {
     "compile": "hardhat build",
-    "test": "hardhat test nodejs"
+    "test": "hardhat test nodejs",
+    "verify:registry": "node scripts/verify-registry.mjs"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.4.0"

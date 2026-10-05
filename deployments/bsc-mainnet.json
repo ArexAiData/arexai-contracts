@@ -4,44 +4,88 @@
   "network": "BNB Smart Chain",
   "chainId": 56,
   "compiler": "v0.8.24+commit.e11b9ed9",
-  "optimizer": { "enabled": true, "runs": 200 },
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
   "evmVersion": "paris",
   "contracts": [
     {
       "name": "ARXAI token",
       "address": "0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3",
       "verification": "exact",
-      "bscscan": "https://bscscan.com/token/0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3"
+      "bscscan": "https://bscscan.com/token/0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3",
+      "source": "contracts/verified/ArexAIToken.sol",
+      "contractName": "ArexAIToken",
+      "artifact": "artifacts/ArexAIToken.json",
+      "sourceRole": "verified-source",
+      "sourceSha256": "dfee3455ca5d635b75196b986247b476295994e1bb54da4fbdd8017321f8045b",
+      "artifactSha256": "22e4960599b65c6f065eb37fab313c8ce0a0cae08f425fee1b8097bc9e377260"
     },
     {
       "name": "Presale Round 1",
       "address": "0x52c880e4d54a5dd3ca7dd185d44715017b25dee0",
       "verification": "exact",
-      "bscscan": "https://bscscan.com/address/0x52c880e4d54a5dd3ca7dd185d44715017b25dee0#code"
+      "bscscan": "https://bscscan.com/address/0x52c880e4d54a5dd3ca7dd185d44715017b25dee0#code",
+      "source": "contracts/PresaleRound.sol",
+      "contractName": "PresaleRound",
+      "artifact": "artifacts/PresaleRound.json",
+      "sourceRole": "presale-source",
+      "sourceSha256": "9d309764e3fb9a4e83733ac554f3cbbe9f9d9bbc1fd10ca4d2166a9e10fe8169",
+      "artifactSha256": "15a5f06aaae273d94932442f3fd00b001409304d3f504048f51ed11fe5f124a1"
     },
     {
       "name": "Presale Round 2",
       "address": "0x0709b5f668280f54b48b953c3d2bd7e137e43398",
       "verification": "similar",
-      "bscscan": "https://bscscan.com/address/0x0709b5f668280f54b48b953c3d2bd7e137e43398#code"
+      "bscscan": "https://bscscan.com/address/0x0709b5f668280f54b48b953c3d2bd7e137e43398#code",
+      "source": "contracts/PresaleRound.sol",
+      "contractName": "PresaleRound",
+      "artifact": "artifacts/PresaleRound.json",
+      "sourceRole": "presale-source",
+      "sourceSha256": "9d309764e3fb9a4e83733ac554f3cbbe9f9d9bbc1fd10ca4d2166a9e10fe8169",
+      "artifactSha256": "15a5f06aaae273d94932442f3fd00b001409304d3f504048f51ed11fe5f124a1"
     },
     {
       "name": "Team vesting",
       "address": "0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2",
       "verification": "exact",
-      "bscscan": "https://bscscan.com/address/0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2#code"
+      "bscscan": "https://bscscan.com/address/0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2#code",
+      "source": "contracts/ArexAITeamVesting.sol",
+      "contractName": "ArexAITeamVesting",
+      "artifact": "artifacts/TeamVesting.json",
+      "sourceRole": "test-workspace-source",
+      "sourceSha256": "ea5aaa3bae8b546be030ae53c145944a0fd2071999c76e207dc7b2faf5df9cf4",
+      "artifactSha256": "a02f8fd7113817dbd953ec63c8a5e46a245a3d62b6beb5103f0e1efca49c2061"
     },
     {
       "name": "Listing reserve",
       "address": "0x6af332c903c8f3fde0e620b360247c28476a2180",
       "verification": "exact",
-      "bscscan": "https://bscscan.com/address/0x6af332c903c8f3fde0e620b360247c28476a2180#code"
+      "bscscan": "https://bscscan.com/address/0x6af332c903c8f3fde0e620b360247c28476a2180#code",
+      "source": "contracts/ReserveVault.sol",
+      "contractName": "ReserveVault",
+      "artifact": "artifacts/ReserveVault.json",
+      "sourceRole": "verified-source",
+      "sourceSha256": "a0803ae622f0ced6674e8c03df37e9a466fa1f2c2593db95ff4894ff57e7ae8e",
+      "artifactSha256": "adb88fb70bb0e9f49d311826f33b9fa00b40f8edebd9e4de0af38333df709417"
     },
     {
       "name": "Liquidity reserve",
       "address": "0xc141a3f0c90f3fa3b5f55fac6683715a14835e42",
       "verification": "exact",
-      "bscscan": "https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code"
+      "bscscan": "https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code",
+      "source": "contracts/LiquidityReserveVault.sol",
+      "contractName": "LiquidityReserveVault",
+      "artifact": "artifacts/LiquidityReserveVault.json",
+      "sourceRole": "verified-source",
+      "sourceSha256": "1938cba79d566d39fa26024afee4360f60f1f324087cd5add0433ab57f76fe5b",
+      "artifactSha256": "ea6bcbfcbd4aab401a4173d1dcd50879f5143e8cee673f080e4199768f1f61e2"
     }
-  ]
+  ],
+  "provenance": {
+    "baselineCommit": "190603057b279b06d30e8a2d3bf8f40d49cea2c1",
+    "scope": "Repository file mapping and integrity only; not a new deployed-bytecode verification. Explorer verification labels are historical project records, not refreshed live by this check.",
+    "deploymentTransactionHashes": "Not yet independently verified; see TRANSACTION_HASHES.md."
+  }
 }
