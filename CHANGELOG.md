@@ -39,3 +39,9 @@ This changelog records material changes to the public ArexAi smart-contract engi
 ### Important limitation
 
 Project-run tests and automated static analysis are engineering evidence, not an independent professional security audit. See [SECURITY.md](SECURITY.md) and the reports directory for scope and limitations.
+
+## 2026-10-05 — Unreleased staking prototype
+
+- Added immutable flexible and 30/60/90-day staking terms, protected accounting, proportional bounded settlement and permanent multisignature emergency closure.
+- Added 15 staking tests (75 total locally passing), design limitations and unsigned BSC testnet preparation.
+- No deployed contracts, deployment registry, published allocations or treasury balances changed. Independent review and public testnet deployment remain pending.
