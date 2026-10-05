@@ -35,6 +35,9 @@ jobs:
       - name: Verify deployment registry integrity
         run: npm run verify:registry
 
+      - name: Reproduce creation and deployed bytecode snapshot
+        run: npm run verify:bytecode
+
       - name: Compile contracts
         run: npm run compile
 

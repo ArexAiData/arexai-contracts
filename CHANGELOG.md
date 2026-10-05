@@ -2,6 +2,14 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-05 — Deployed bytecode and team-vesting evidence
+
+- Recovered exact deployed TeamVesting source and original compilation inputs from Sourcify.
+- Cross-checked six creation transactions, successful receipts and runtime bytecode through BSC RPC at block 125790592.
+- Added an offline CI verifier reproducing full original creation/runtime bytecode and comparing current repository executable templates.
+- Added five behavioral tests for the deployed vesting source and actual constructor schedule.
+- Documented the test-workspace vesting's June 2027 start versus the deployed May 2027 start. No live contract or release schedule was changed.
+
 ## 2026-10-05 — Source traceability and verified-token tests
 
 - Added source/artifact paths and SHA-256 integrity records for six BSC deployment entries.

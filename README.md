@@ -34,7 +34,8 @@ Material repository changes are recorded in [`CHANGELOG.md`](CHANGELOG.md).
 
 - `contracts/verified/ArexAIToken.sol`: source prepared for the exact BscScan-verified ARXAI token deployment.
 - `contracts/PresaleRound.sol`: active presale source used by Round 1 and Round 2.
-- `contracts/ArexAI.sol` and `contracts/ArexAITeamVesting.sol`: active test-workspace implementations.
+- `contracts/TeamVesting.sol`: exact deployed team-vesting source recovered from Sourcify, tested directly with the verified constructor schedule.
+- `contracts/ArexAI.sol` and `contracts/ArexAITeamVesting.sol`: separate test-workspace implementations; not substitutes for deployed token/vesting sources.
 - `contracts/ReserveVault.sol`: exact-match verified 575M listing-reserve source with twenty fixed tranches.
 - `contracts/LiquidityReserveVault.sol`: exact-match verified 200M liquidity-reserve source with an immutable manager.
 - `contracts/mocks/`: test-only payment-token contracts.
@@ -48,7 +49,8 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 - [Source and deployment mapping](docs/VERIFICATION.md): distinguish published sources, test implementations and artifacts.
 - `npm run verify:registry` checks all six deployment records, source/artifact hashes and compiler configuration. It does not query BSC or certify deployed-bytecode equivalence.
-- The original 52 tests remain intact; three additional tests exercise `contracts/verified/ArexAIToken.sol`, including a seeded 100-operation balance/supply invariant and delegated-burn rollback boundaries.
+- `npm run verify:bytecode` reproduces six creation/runtime bytecode snapshots and checks current executable templates; see [creation transactions](deployments/TRANSACTION_HASHES.md).
+- Five additional direct TeamVesting tests cover the actual deployment schedule. The original 52 tests remain intact; three additional tests exercise `contracts/verified/ArexAIToken.sol`, including a seeded 100-operation balance/supply invariant and delegated-burn rollback boundaries.
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 
@@ -68,6 +70,7 @@ Requirements: Node.js 22.13 or later and npm.
 ```bash
 npm ci --no-audit --no-fund
 npm run verify:registry
+npm run verify:bytecode
 npm run compile
 npm test
 ```
@@ -83,7 +86,7 @@ See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-2
 
 GitHub Actions also runs the Hardhat test suite and Slither analysis automatically on every push to `main` and every pull request targeting `main`. The Slither workflow uploads SARIF findings to GitHub Security and blocks medium-or-higher findings.
 
-The additional token tests run the published `ArexAIToken` source; the original `ArexAI` tests still cover the test-workspace implementation. These are local simulated deployments, not transactions against BSC mainnet. The [5 October verification report](reports/engineering-verification-2026-10-05.md) records 55 passing tests. See CI for the result of each commit.
+The additional token tests run the published `ArexAIToken` source; the original `ArexAI` tests still cover the test-workspace implementation. Behavioral tests are local simulated deployments. Separate bytecode evidence reproduces mainnet creation/runtime snapshots; no transaction is sent to BSC. The [5 October verification report](reports/engineering-verification-2026-10-05.md) records 55 passing tests. See CI for the result of each commit.
 
 ## Security status
 
