@@ -11,3 +11,7 @@ Recovered TeamVesting is not the former test-workspace ArexAITeamVesting. The de
 Sourcify reports exact matches for both presales. Historical BscScan verification labels were not refreshed and remain separately identified.
 
 Limitations: one RPC provider plus Sourcify, a dated snapshot rather than continuous monitoring, no present balance/ownership/liquidity assurance, no independent professional audit. Matching deployed code does not eliminate vulnerabilities. Dependency source files retain their original licensing notices.
+
+## Reviewed Slither timestamp notice
+
+GitHub code scanning reported the calendar comparison in TeamVesting.vestedTranches (releaseTimes[count] versus block.timestamp) as a low-severity timestamp notice. This comparison is the deployed contract's intended mechanism for scheduled vesting. All twenty before/at boundary cases are tested. Block timestamps remain consensus-controlled and should not be treated as precise wall-clock guarantees; minor boundary timing variation is an accepted limitation of on-chain calendar vesting. No randomness, competitive price decision or timestamp-derived beneficiary is involved. The exact recovered source is retained without modification, and this notice is documented rather than presented as proof of no risk.
