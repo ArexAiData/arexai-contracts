@@ -38,11 +38,19 @@ Material repository changes are recorded in [`CHANGELOG.md`](CHANGELOG.md).
 - `contracts/ReserveVault.sol`: exact-match verified 575M listing-reserve source with twenty fixed tranches.
 - `contracts/LiquidityReserveVault.sol`: exact-match verified 200M liquidity-reserve source with an immutable manager.
 - `contracts/mocks/`: test-only payment-token contracts.
-- `test/`: the 52-test Hardhat suite covering all five active contract types.
+- `test/`: the Hardhat behavioral suite covering all five active contract types.
 - `artifacts/`: public ABI and bytecode artifacts for the deployed contracts.
 - `reports/`: project-run automated test and static-analysis evidence.
 
 The two reserve sources were recovered from exact-match verified BNB Chain records. Their locally compiled executable logic matches the published deployment artifacts; compiler metadata differences are not treated as contract behavior. ABI or bytecode artifacts are not presented as source code.
+
+## Review and reproduce
+
+- [Source and deployment mapping](docs/VERIFICATION.md): distinguish published sources, test implementations and artifacts.
+- `npm run verify:registry` checks all six deployment records, source/artifact hashes and compiler configuration. It does not query BSC or certify deployed-bytecode equivalence.
+- The original 52 tests remain intact; three additional tests exercise `contracts/verified/ArexAIToken.sol`, including a seeded 100-operation balance/supply invariant and delegated-burn rollback boundaries.
+- [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
+- [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 
 ## Compiler configuration
 
@@ -59,10 +67,12 @@ Requirements: Node.js 22.13 or later and npm.
 
 ```bash
 npm ci --no-audit --no-fund
+npm run verify:registry
+npm run compile
 npm test
 ```
 
-Last project-run verification on 27 September 2026:
+Historical project-run verification on 27 September 2026:
 
 - 52 passed
 - 0 failed
@@ -72,6 +82,8 @@ Last project-run verification on 27 September 2026:
 See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-27.txt) for scope and limitations.
 
 GitHub Actions also runs the Hardhat test suite and Slither analysis automatically on every push to `main` and every pull request targeting `main`. The Slither workflow uploads SARIF findings to GitHub Security and blocks medium-or-higher findings.
+
+The additional token tests run the published `ArexAIToken` source; the original `ArexAI` tests still cover the test-workspace implementation. These are local simulated deployments, not transactions against BSC mainnet. The [5 October verification report](reports/engineering-verification-2026-10-05.md) records 55 passing tests. See CI for the result of each commit.
 
 ## Security status
 

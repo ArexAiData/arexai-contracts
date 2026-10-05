@@ -2,6 +2,14 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-05 — Source traceability and verified-token tests
+
+- Added source/artifact paths and SHA-256 integrity records for six BSC deployment entries.
+- Added a CI registry-integrity gate with explicit limitations; retained the protected branch's historical required-check alias.
+- Added three tests against the published ArexAIToken source: constructor/privileged-function boundaries, a reproducible 100-operation supply invariant, and delegated-burn rollback boundaries. The original 52 tests remain intact.
+- Added contribution, issue, PR and release-evidence templates; clarified private security reporting.
+- No Solidity logic, deployed contract, token allocation or dependency version changed.
+
 ## 2026-09-28 — Public verification baseline
 
 ### Added
