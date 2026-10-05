@@ -231,3 +231,14 @@ test("More than one batch of positions closes without an unbounded transaction",
   await settle(f,64);assert.equal(await s.shutdownFinalized(),true);
   await s.connect(f.a).withdraw(70);await invariant(f);
 });
+
+test("Staking emergency with no positions burns the entire reward cap immediately",async()=>{
+  const f=await setup(), before=await f.token.totalSupply();
+  await close(f);
+  assert.equal(await f.staking.shutdownFinalized(),true);
+  assert.equal(await f.staking.phase(),0n);
+  assert.equal(await f.staking.burnedRewards(),cap);
+  assert.equal(await f.token.balanceOf(await f.staking.getAddress()),0n);
+  assert.equal(await f.token.totalSupply(),before-cap);
+  await invariant(f);
+});

@@ -53,6 +53,8 @@ contract ArexAIStaking is ReentrancyGuard {
     bool public shutdownFinalized;
     uint256 public shutdownAt;
     uint256 public flexResumeAt;
+    bool public flexPaused;
+    uint256 private pendingBurn;
     uint256 public nextFlexibleDue = type(uint256).max;
     Phase public phase;
     uint256 public checkpointAt;
@@ -152,13 +154,13 @@ contract ArexAIStaking is ReentrancyGuard {
         id = nextId++;
         uint256 ends = mode == Mode.Flexible ? 0 : block.timestamp + duration(mode);
         positions[id] = Position(msg.sender, amount, block.timestamp, ends, 0, reserved, mode, true);
-        activePositions.add(id);
+        assert(activePositions.add(id));
         totalPrincipal += amount;
         if (mode == Mode.Flexible && quote(amount, mode) > 0) {
-            flexiblePositions.add(id);
+            assert(flexiblePositions.add(id));
             nextFlexibleDue = Math.min(nextFlexibleDue, block.timestamp + 1 days);
         }
-        if (freeRewards == 0) flexResumeAt = type(uint256).max;
+        if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
         emit Staked(id, msg.sender, mode, amount, ends, reserved);
     }
 
@@ -173,7 +175,7 @@ contract ArexAIStaking is ReentrancyGuard {
 
     function _daysAndDue(Position storage p, uint256 at) private view returns (uint256 days_, uint256 due) {
         days_ = (at - p.started) / 1 days;
-        if (flexResumeAt == type(uint256).max) return (days_, 0);
+        if (flexPaused) return (days_, 0);
         uint256 baseline = p.settledDays;
         if (flexResumeAt > p.started) {
             baseline = Math.max(baseline, Math.ceilDiv(flexResumeAt - p.started, 1 days));
@@ -193,6 +195,7 @@ contract ArexAIStaking is ReentrancyGuard {
             if (phase == Phase.Scan) _scanOne();
             else _allocateOne();
         }
+        _burnUnused();
     }
 
     function _startCheckpoint(uint256 at) private {
@@ -244,7 +247,7 @@ contract ArexAIStaking is ReentrancyGuard {
         uint256 id = _idAt(checkpointCursor);
         Position storage p = positions[id];
         if (p.mode == Mode.Flexible) {
-            uint256 reward;
+            uint256 reward = 0;
             if (pending[id] > 0) {
                 reward = id == lastEligible ? checkpointRemaining : Math.mulDiv(pending[id], checkpointBudget, checkpointTotalDue);
                 checkpointRemaining -= reward;
@@ -260,16 +263,24 @@ contract ArexAIStaking is ReentrancyGuard {
     function _finishCheckpoint() private {
         phase = Phase.Idle;
         nextFlexibleDue = followingDue;
-        if (freeRewards == 0) flexResumeAt = type(uint256).max;
+        if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
         if (permanentlyClosed) {
             shutdownFinalized = true;
             uint256 toBurn = freeRewards;
             freeRewards = 0;
             burnedRewards += toBurn;
-            if (toBurn > 0) IBurnableARXAI(address(token)).burn(toBurn);
-            emit UnusedRewardsBurned(toBurn);
+            pendingBurn = toBurn;
         }
         emit CheckpointCompleted(checkpointAt, checkpointBudget);
+    }
+
+    // Final token interaction occurs once, after all bounded-loop state effects.
+    function _burnUnused() private {
+        uint256 amount = pendingBurn;
+        if (amount == 0) return;
+        pendingBurn = 0;
+        IBurnableARXAI(address(token)).burn(amount);
+        emit UnusedRewardsBurned(amount);
     }
 
     function claim(uint256 id) external nonReentrant {
@@ -288,18 +299,18 @@ contract ArexAIStaking is ReentrancyGuard {
         _requireSettled();
         Position storage p = _position(id);
         uint256 principal = p.principal;
-        uint256 reward;
+        uint256 reward = 0;
         bool early = !permanentlyClosed && p.mode != Mode.Flexible && block.timestamp < p.ends;
         if (p.mode == Mode.Flexible) {
             reward = p.reward;
             owedFlexible -= reward;
-            flexiblePositions.remove(id);
+            if (flexiblePositions.contains(id)) assert(flexiblePositions.remove(id));
         } else {
             reservedLocked -= p.reward;
             if (early) {
                 bool resume = freeRewards == 0;
                 freeRewards += p.reward;
-                if (resume && freeRewards > 0) flexResumeAt = block.timestamp;
+                if (resume && freeRewards > 0) { flexPaused = false; flexResumeAt = block.timestamp; }
             } else reward = p.reward;
         }
         paidRewards += reward;
@@ -307,7 +318,7 @@ contract ArexAIStaking is ReentrancyGuard {
         p.active = false;
         p.principal = 0;
         p.reward = 0;
-        activePositions.remove(id);
+        assert(activePositions.remove(id));
         token.safeTransfer(msg.sender, principal + reward);
         emit Withdrawn(id, msg.sender, principal, reward, early);
     }
@@ -329,5 +340,6 @@ contract ArexAIStaking is ReentrancyGuard {
         shutdownAt = block.timestamp;
         emit EmergencyClosed(shutdownAt);
         _startCheckpoint(shutdownAt);
+        _burnUnused();
     }
 }
