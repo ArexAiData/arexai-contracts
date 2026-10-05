@@ -15,6 +15,14 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 - X: https://x.com/ArexAIData
 - Telegram: https://t.me/arexai
 
+## Staking prototype (not live)
+
+`contracts/ArexAIStaking.sol` is an unreleased staking prototype with immutable simple APRs of 2% flexible, 5% for 30 days, 8% for 60 days and 12% for 90 days. The planned 115 million ARXAI reward budget has not been funded. No public testnet or mainnet staking address exists in this registry.
+
+Read [the staking design and release gates](docs/STAKING_DESIGN.md) and [local verification evidence](reports/staking-verification-2026-10-05.md). `StakingSafeHarness` is test-only and must never govern a public deployment. A genuine Safe requires independent proxy/singleton and module verification.
+
+After compilation, `npm run staking:prepare -- <testnet-rpc-url> <test-token-address> <genuine-safe-address>` performs read-only chain-97 checks and outputs unsigned deployment data. It does not sign or send transactions.
+
 ## BNB Smart Chain deployments
 
 | Component | Address | BscScan |
