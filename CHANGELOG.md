@@ -2,6 +2,17 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-06 — Recipient/pause reproductions and engineering evidence
+
+- Added nine transfer-rejection and pause-window tests, bringing the local Solidity suite to 85 passing checks; deployed and test-workspace vesting remain separately identified.
+- Documented immutable recipient availability risks, atomic rollback and unchanged presale deadlines; no recipient setter, extension or mainnet migration was introduced.
+- Added a generated six-contract evidence index linking addresses, sources, creation transactions, compiler inputs and historical verification labels, with a CI consistency gate.
+- Remediated the solc wrapper's vulnerable tmp dependency while retaining solc 0.8.24, original compiler inputs and bytecode reproduction.
+- Added high/critical npm audit gating and downloadable per-commit test/SARIF artifacts.
+- Added an exact-commit gated engineering prerelease workflow and release manifest.
+- Published synthetic AI v3.8.0 reference examples for call records, separate-currency invoices, categorical surveys and exact-key list reconciliation; these are reference checks, not product/model tests.
+- No deployed production Solidity logic, contract address, allocation, staking activation or on-chain state changed.
+
 ## 2026-10-05 — Deployed bytecode and team-vesting evidence
 
 - Recovered exact deployed TeamVesting source and original compilation inputs from Sourcify.

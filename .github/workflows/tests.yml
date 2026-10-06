@@ -32,17 +32,42 @@ jobs:
       - name: Install exact project dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Audit installed dependencies (high and critical gate)
+        run: npm run audit:dependencies
+
       - name: Verify deployment registry integrity
         run: npm run verify:registry
 
       - name: Reproduce creation and deployed bytecode snapshot
         run: npm run verify:bytecode
 
+      - name: Verify generated deployment documentation
+        run: npm run verify:docs
+
+      - name: Verify synthetic AI reference examples
+        run: npm run verify:ai-examples
+
       - name: Compile contracts
         run: npm run compile
 
       - name: Run contract tests
-        run: npm test
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p ci-evidence
+          npm test 2>&1 | tee ci-evidence/contract-tests.txt
+          node --version > ci-evidence/node-version.txt
+          npm --version > ci-evidence/npm-version.txt
+          git rev-parse HEAD > ci-evidence/commit-sha.txt
+
+      - name: Preserve test evidence for this commit
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: contract-evidence-${{ github.sha }}
+          path: ci-evidence/
+          if-no-files-found: ignore
+          retention-days: 30
 
   required-check-compatibility:
     # The repository ruleset still requires this historical check context.

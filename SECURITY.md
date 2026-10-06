@@ -25,3 +25,9 @@ Initial reports are handled through the official email above. No guaranteed resp
 ## Verification boundaries
 
 The deployment registry integrity check verifies repository files and configuration only. It does not independently refresh explorer verification labels, fetch current ownership or balances, or prove deployed-bytecode equivalence by itself. The separate bytecode verifier reproduces the recorded snapshot and exact original compiler inputs. See [verification notes](docs/VERIFICATION.md). No completed independent professional audit is published in this repository.
+
+## Known recipient and availability boundaries
+
+Recipients and presale timestamps are immutable. Issuer-controlled payment-token rejection can prevent purchases; atomic rollback protects failed transfers but cannot restore availability. Pausing does not extend the sale deadline. See [current source behavior and local reproductions](docs/RECIPIENT_AND_PAUSE_POLICY.md). These notes do not claim any current recipient is blocked.
+
+CI audits installed npm dependencies at the high/critical threshold, including build tools. Passing audit results are time-dependent advisory checks, not a guarantee. Compiler version and reproducible bytecode checks remain separate. Engineering GitHub Releases are source-evidence publications, not security certifications or deployed-contract upgrades.

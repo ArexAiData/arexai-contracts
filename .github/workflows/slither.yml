@@ -51,3 +51,11 @@ jobs:
         run: |
           echo "Slither reported a medium-or-higher finding or failed to analyze the contracts."
           exit 1
+
+      - name: Preserve SARIF as downloadable commit evidence
+        if: always() && hashFiles('results.sarif') != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: slither-evidence-${{ github.sha }}
+          path: results.sarif
+          retention-days: 30

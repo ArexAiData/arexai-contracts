@@ -1,0 +1,10 @@
+{
+  "synthetic":true,
+  "rows":[
+    {"responseId":"0001","channel":"Phone","answer":"Yes"},
+    {"responseId":"0002","channel":"Phone","answer":"No"},
+    {"responseId":"0003","channel":"Email","answer":"Yes"},
+    {"responseId":"0004","channel":"Email","answer":"No"}
+  ],
+  "expected":{"modes":["No","Yes"],"crossTab":{"Email":{"No":1,"Yes":1},"Phone":{"No":1,"Yes":1}}}
+}
