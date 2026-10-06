@@ -73,7 +73,11 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 - Optimizer runs: `200`
 - EVM version: `paris`
 - OpenZeppelin Contracts: `5.4.0`
-- Hardhat: `3.15.0`
+- Hardhat: `3.18.1`
+
+## Latest reproducible baseline
+
+The latest recorded local Solidity baseline is **96 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [staking engineering evidence](reports/staking-engineering-2026-10-06.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype with the documented daily-boundary availability limitation.
 
 ## Run the tests
 
@@ -88,6 +92,7 @@ npm run verify:ai-examples
 npm run audit:dependencies
 npm run compile
 npm test
+npm run test:tooling
 ```
 
 Historical project-run verification on 27 September 2026:
@@ -104,6 +109,8 @@ GitHub Actions also runs the Hardhat test suite and Slither analysis automatical
 The additional token tests run the published `ArexAIToken` source; the original `ArexAI` tests still cover the test-workspace implementation. Behavioral tests are local simulated deployments. Separate bytecode evidence reproduces mainnet creation/runtime snapshots; no transaction is sent to BSC. The [5 October verification report](reports/engineering-verification-2026-10-05.md) records 55 passing tests. See CI for the result of each commit.
 
 The [6 October verification report](reports/engineering-verification-2026-10-06.md) records **85 passing tests** including the existing staking prototype suite and nine new recipient/pause checks. CI now also blocks high/critical npm dependency findings and stale deployment documentation, and preserves test logs and Slither SARIF as downloadable artifacts for 30 days. Required branch checks remain enforced through the existing test compatibility alias and Slither job.
+
+See the [7 October repository hardening report](reports/repository-hardening-2026-10-07.md) for the jointly validated Hardhat/plugin update, pinned workflow actions and 16 reviewer-package tooling tests.
 
 ## Engineering releases
 

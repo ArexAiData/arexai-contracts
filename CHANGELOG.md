@@ -2,6 +2,15 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-07 — CI and reviewer-package hardening
+
+- Pinned all external GitHub Actions to verified commit SHAs and disabled persisted checkout credentials in test/security jobs.
+- Updated Hardhat and its ethers plugin together to resolve the proposed plugin peer-dependency conflict; grouped future Hardhat toolchain updates in Dependabot. Compiler and deployed artifacts remain unchanged.
+- Added reviewer-package negative tests and strict expected-commit/clean-tree gates in CI and release packaging.
+- Added canonical manifest-path and parent-symlink validation before reading package files.
+- Clarified current versus historical test counts and manual versus automated tag procedures.
+- No production Solidity logic, contract deployment, staking activation or on-chain state changed.
+
 ## 2026-10-06 — Staking model/load evidence and reviewer package
 
 - Added four seeded independent accounting-model tests with 60 randomized operations each, plus holder checks and full closure/withdrawal cleanup.
