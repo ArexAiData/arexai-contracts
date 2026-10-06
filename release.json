@@ -1,0 +1,7 @@
+{
+  "tag": "engineering-2026-10-06",
+  "title": "ArexAi engineering evidence — 6 October 2026",
+  "prerelease": true,
+  "report": "reports/engineering-verification-2026-10-06.md",
+  "summary": "Recipient-transfer rollback and fixed presale pause-window reproductions, dependency remediation, generated deployment evidence index, downloadable CI reports and synthetic AI v3.8.0 reference examples."
+}

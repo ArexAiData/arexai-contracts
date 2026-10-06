@@ -12,7 +12,11 @@
     "test": "hardhat test nodejs",
     "verify:registry": "node scripts/verify-registry.mjs",
     "verify:bytecode": "node scripts/verify-bytecode.mjs",
-    "staking:prepare": "node scripts/prepare-staking-testnet.mjs"
+    "staking:prepare": "node scripts/prepare-staking-testnet.mjs",
+    "verify:docs": "node scripts/generate-deployment-table.mjs --check",
+    "docs:generate": "node scripts/generate-deployment-table.mjs",
+    "verify:ai-examples": "node scripts/verify-ai-examples.mjs",
+    "audit:dependencies": "npm audit --audit-level=high"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.4.0"
@@ -26,5 +30,10 @@
     "solc": "0.8.24",
     "typescript": "5.9.3"
   },
-  "packageManager": "npm@11.9.0"
+  "packageManager": "npm@11.9.0",
+  "overrides": {
+    "solc": {
+      "tmp": "0.2.7"
+    }
+  }
 }

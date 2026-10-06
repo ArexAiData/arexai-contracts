@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "durationFormat": "ms",
+  "statusDefinitions": {"1":"Answered","2":"Unanswered"},
+  "rows": [
+    {"callId":"0001","agent":"Agent A","duration":"02:00","status":"1"},
+    {"callId":"0002","agent":"Agent A","duration":"04:00","status":"1"},
+    {"callId":"0003","agent":"Agent B","duration":"00:00","status":"2"},
+    {"callId":"0004","agent":"Agent B","duration":"03:00","status":"1"},
+    {"callId":"0005","agent":"Agent B","duration":"05:00","status":"1"},
+    {"callId":"0006","agent":"Agent A","duration":"01:00","status":"2"}
+  ],
+  "expected": {"recordCount":6,"medianSeconds":150,"percentile90Seconds":270,"outcomeCounts":{"Answered":4,"Unanswered":2}}
+}

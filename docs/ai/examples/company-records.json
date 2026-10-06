@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "rowMeaning":"One invoice; amounts may only be summed within the same currency.",
+  "rows":[
+    {"invoiceId":"INV-001","company":"Example Company A","currency":"EUR","amount":100},
+    {"invoiceId":"INV-002","company":"Example Company B","currency":"USD","amount":250},
+    {"invoiceId":"INV-003","company":"Example Company A","currency":"EUR","amount":300}
+  ],
+  "expected":{"recordCount":3,"currencyTotals":{"EUR":400,"USD":250},"mixedCurrencyTotal":null}
+}

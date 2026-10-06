@@ -24,6 +24,8 @@ for (const record of registry.contracts) {
   assert.equal(explorer.protocol, 'https:');
   assert(explorer.pathname.endsWith(record.address));
   assert(['exact', 'similar'].includes(record.verification));
+  assert.match(record.deploymentTransactionHash, /^0x[0-9a-f]{64}$/);
+  assert(Number.isSafeInteger(record.deploymentBlock) && record.deploymentBlock > 0);
   for (const [field, hashField] of [['source', 'sourceSha256'], ['artifact', 'artifactSha256']]) {
     assert.match(record[field], /^(contracts|artifacts)\/[A-Za-z0-9_./-]+$/);
     assert(!record[field].includes('..'));

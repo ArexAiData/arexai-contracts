@@ -1,0 +1,7 @@
+{
+  "synthetic":true,
+  "keyComparison":"Trim outer whitespace; otherwise exact string matching. No numeric coercion.",
+  "left":[{"key":"0001","value":"Open"},{"key":"0002","value":"Closed"},{"key":"DUP","value":"A"},{"key":"DUP","value":"B"},{"key":"LEFT","value":"Pending"}],
+  "right":[{"key":"0001","value":"Closed"},{"key":"0002","value":"Closed"},{"key":"DUP","value":"A"},{"key":"RIGHT","value":"Pending"}],
+  "expected":{"matchedUniquePairs":2,"onlyLeft":["LEFT"],"onlyRight":["RIGHT"],"changedKeys":["0001"],"ambiguousKeys":["DUP"]}
+}

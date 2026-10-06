@@ -2,6 +2,8 @@
 
 The machine-readable [registry](../deployments/bsc-mainnet.json) connects six historical BSC deployment records with repository source and artifact files. Its SHA-256 fields identify exact repository bytes, not a security verdict.
 
+The [generated deployment evidence index](DEPLOYMENTS.md) combines full addresses, sources, creation transactions, deployment blocks and original compiler-input links. Regenerate with `npm run docs:generate`; CI rejects stale output through `npm run verify:docs`.
+
 | Deployment | Repository source | Published artifact | Boundary |
 | --- | --- | --- | --- |
 | ARXAI token | `contracts/verified/ArexAIToken.sol` | `artifacts/ArexAIToken.json` | Published token source; newly tested directly |

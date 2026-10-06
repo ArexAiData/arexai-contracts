@@ -36,6 +36,8 @@ After compilation, `npm run staking:prepare -- <testnet-rpc-url> <test-token-add
 
 The machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
 
+For a single view of source files, creation transactions, compiler inputs and verification boundaries, use the [generated deployment evidence index](docs/DEPLOYMENTS.md). CI checks that it stays synchronized with the registry and recorded snapshot.
+
 Material repository changes are recorded in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Repository scope
@@ -61,6 +63,8 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 - Five additional direct TeamVesting tests cover the actual deployment schedule. The original 52 tests remain intact; three additional tests exercise `contracts/verified/ArexAIToken.sol`, including a seeded 100-operation balance/supply invariant and delegated-burn rollback boundaries.
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
+- [Immutable recipients and pause policy](docs/RECIPIENT_AND_PAUSE_POLICY.md) explains transfer failures, atomic rollback, fixed deadlines and recovery limitations, with nine executable reproductions.
+- [AI v3.8.0 technical reference](docs/ai/README.md) provides synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
 
 ## Compiler configuration
 
@@ -79,6 +83,9 @@ Requirements: Node.js 22.13 or later and npm.
 npm ci --no-audit --no-fund
 npm run verify:registry
 npm run verify:bytecode
+npm run verify:docs
+npm run verify:ai-examples
+npm run audit:dependencies
 npm run compile
 npm test
 ```
@@ -95,6 +102,12 @@ See [`reports/automated-tests-2026-09-27.txt`](reports/automated-tests-2026-09-2
 GitHub Actions also runs the Hardhat test suite and Slither analysis automatically on every push to `main` and every pull request targeting `main`. The Slither workflow uploads SARIF findings to GitHub Security and blocks medium-or-higher findings.
 
 The additional token tests run the published `ArexAIToken` source; the original `ArexAI` tests still cover the test-workspace implementation. Behavioral tests are local simulated deployments. Separate bytecode evidence reproduces mainnet creation/runtime snapshots; no transaction is sent to BSC. The [5 October verification report](reports/engineering-verification-2026-10-05.md) records 55 passing tests. See CI for the result of each commit.
+
+The [6 October verification report](reports/engineering-verification-2026-10-06.md) records **85 passing tests** including the existing staking prototype suite and nine new recipient/pause checks. CI now also blocks high/critical npm dependency findings and stale deployment documentation, and preserves test logs and Slither SARIF as downloadable artifacts for 30 days. Required branch checks remain enforced through the existing test compatibility alias and Slither job.
+
+## Engineering releases
+
+[Tagged releases](https://github.com/ArexAiData/arexai-contracts/releases) identify reviewed repository evidence, not new token deployments. Updating `release.json` through a protected PR requests an engineering prerelease for that exact merged commit. The release workflow requires successful Hardhat and Slither checks on the same commit and refuses to overwrite existing tags. Prototype-containing engineering releases are marked prerelease. No deployment, staking activation or independent audit is implied.
 
 ## Security status
 
