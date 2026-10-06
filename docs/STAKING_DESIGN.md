@@ -29,6 +29,12 @@ Before a stake, claim or withdrawal, all due flexible positions must be settled 
 
 Each transaction does at most 64 work items; a round typically requires two passes. Any account can progress it, including after emergency closure. Position mutation is blocked until the round completes. Large position counts therefore require multiple transactions and an operational checkpoint service. Users retain permissionless fallback, but withdrawal availability depends on settlement completion. Unlimited position creation presents a gas/availability griefing risk; independent review and load testing are required before deployment. Zero-daily-reward flexible positions are excluded from normal daily scans but included in emergency scans.
 
+### Measured daily-boundary availability limitation
+
+The 6 October fixture with 64 one-second-staggered deposits starts exactly at a daily boundary. New boundaries become due while settlement proceeds. The first round reaches Idle but claims remain blocked; **32 rounds / 64 checkpoint transactions** are needed before a claim succeeds in this bounded local case. Idle alone is therefore not a keeper readiness signal: normal operation must also check `nextFlexibleDue` against the current block time. This is not a production throughput prediction, but it is an unresolved deployment-readiness issue under unlimited positions.
+
+Away from boundaries, the local 1/64/256-position fixtures need 1/2/8 checkpoint transactions respectively; 256 normal settlements total approximately 23 million gas over eight transactions. See [load and boundary evidence](../reports/staking-engineering-2026-10-06.md). No checkpoint policy or production staking contract is changed by these tests. Independent review should consider whether the global settlement gate, position admission limits or settlement architecture need redesign before deployment.
+
 When free rewards reach zero, new deposits and flexible accrual stop. Existing locked reservations and allocated flexible claims remain protected. Early locked exits recycle their forfeited rewards and may reopen capacity. Flexible earning does not backfill the exhausted interval; it resumes at complete original-anchor day windows after replenishment. The first partial window after replenishment is skipped.
 
 ## Permanent emergency closure

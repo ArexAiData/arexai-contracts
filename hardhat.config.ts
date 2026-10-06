@@ -14,6 +14,16 @@ export default defineConfig({
     },
   },
   networks: {
+    ...(process.env.BSC_FORK_RPC_URL ? {
+      bscFork: {
+        type: "edr-simulated" as const,
+        chainType: "l1" as const,
+        chainId: 56,
+        accounts: [],
+        hardfork: "shanghai",
+        forking: {url: process.env.BSC_FORK_RPC_URL, blockNumber: 125790592},
+      },
+    } : {}),
     hardhatMainnet: {
       type: "edr-simulated",
       chainType: "l1",

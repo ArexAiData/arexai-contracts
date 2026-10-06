@@ -1,0 +1,11 @@
+{
+  "scope": "Local fixture: 64 staggered deposits, simulated one-second block advances, first day boundary; not a production throughput forecast",
+  "positions": 64,
+  "batchSize": 64,
+  "rounds": 32,
+  "transactions": 64,
+  "totalGas": "63847016",
+  "reblockedAfterFirstRound": true,
+  "claimEventuallySucceeded": true,
+  "limitation": "Phase Idle does not guarantee withdrawal/claim availability when another daily boundary has become due during the round."
+}

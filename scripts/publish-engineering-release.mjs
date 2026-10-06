@@ -1,6 +1,9 @@
 // Runs only in the trusted main-branch release workflow. Never overwrites a tag or release.
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync,writeFileSync } from 'node:fs';
+import {createHash} from 'node:crypto';
+import {tmpdir} from 'node:os';
+import {join,basename} from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
 const manifest = JSON.parse(readFileSync('release.json', 'utf8'));
@@ -35,5 +38,12 @@ if (existingTag) {
 // Default APIs return up to 100 releases; an old release outside the page is still protected by gh create failing.
 const releases = api(`repos/${repo}/releases?per_page=100`);
 if (releases.some(r => r.tag_name === manifest.tag)) {console.log('Release already exists; left unchanged.');process.exit(0);}
-const notes = `${manifest.summary}\n\nSource commit: ${sha}\n\nEvidence: https://github.com/${repo}/blob/${sha}/${manifest.report}\n\nRequired Hardhat and Slither checks passed for this exact commit. Dependency audit, registry/snapshot reproduction and synthetic reference checks are part of the contract CI gate.\n\nNo mainnet deployment, token allocation change, staking activation or independent audit is implied. Staking remains an unreleased prototype. AI product versions are separate.\n`;
-execFileSync('gh', ['release','create',manifest.tag,'--repo',repo,'--target',sha,'--title',manifest.title,'--notes',notes,'--prerelease'], {stdio:'inherit'});
+const directory=join(tmpdir(),`arexai-review-${sha}`);
+execFileSync('node',['scripts/build-review-package.mjs',directory],{stdio:'inherit'});
+execFileSync('node',['scripts/verify-review-package.mjs',directory],{stdio:'inherit'});
+assert.equal(JSON.parse(readFileSync(join(directory,'MANIFEST.json'),'utf8')).workingTreeDirty,false,'Refuse a dirty-tree release package');
+const archive=join(tmpdir(),`${manifest.tag}.tar.gz`);
+execFileSync('tar',['-czf',archive,'-C',directory,'.']);
+const checksum=archive+'.sha256';writeFileSync(checksum,createHash('sha256').update(readFileSync(archive)).digest('hex')+'  '+basename(archive)+'\n');
+const notes = `${manifest.summary}\n\nSource commit: ${sha}\n\nEvidence: https://github.com/${repo}/blob/${sha}/${manifest.report}\n\nRequired Hardhat and Slither checks passed for this exact commit. Dependency audit, registry/snapshot reproduction and synthetic reference checks are part of the contract CI gate.\n\nAttached review archive contains per-file SHA-256 values and its source commit in MANIFEST.json. Check the archive checksum, extract into an empty directory, then run scripts/verify-review-package.mjs against that directory. Hashes establish integrity, not publisher identity.\n\nNo mainnet deployment, token allocation change, staking activation or independent audit is implied. Staking remains an unreleased prototype. AI product versions are separate.\n`;
+execFileSync('gh', ['release','create',manifest.tag,archive,checksum,'--repo',repo,'--target',sha,'--title',manifest.title,'--notes',notes,'--prerelease'], {stdio:'inherit'});

@@ -130,6 +130,7 @@ dist
 
 # Hardhat-generated output; curated public ABI files in artifacts/*.json remain tracked
 cache/
+ci-evidence/
 artifacts/build-info/
 artifacts/contracts/
 artifacts/artifacts.d.ts
