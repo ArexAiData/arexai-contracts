@@ -1,0 +1,27 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+No contracts to compile
+
+Running node:test tests
+
+
+  1) BSC fixed-block fork: six runtime sources, immutable links and local token transfer (58388ms)
+
+
+  0 passing (58533ms)
+  1 failing
+
+  1) BSC fixed-block fork: six runtime sources, immutable links and local token transfer:
+
+   ProviderError: The response reported error `-32000`: `missing trie node`. (optional data: None). Request: {"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3","0x77f6980"],"id":7}
+       at EdrProvider.#handleEdrResponse (node_modules/hardhat/dist/src/internal/builtin-plugins/network-manager/edr/edr-provider.js:194:27)
+       at EdrProvider.#handleRequest (node_modules/hardhat/dist/src/internal/builtin-plugins/network-manager/edr/edr-provider.js:258:45)
+       at async <anonymous> (node_modules/hardhat/src/internal/builtin-plugins/network-manager/network-manager.ts:278:49)
+       at async next (node_modules/hardhat/src/internal/core/hook-manager.ts:208:13)
+       at async Array.onRequest (node_modules/hardhat/src/internal/builtin-plugins/network-manager/hook-handlers/network.ts:81:14)
+       at async next (node_modules/hardhat/src/internal/core/hook-manager.ts:207:13)
+       at async HookManagerImplementation.runHandlerChain (node_modules/hardhat/src/internal/core/hook-manager.ts:213:12)
+       at async EdrProvider.request (node_modules/hardhat/dist/src/internal/builtin-plugins/network-manager/edr/edr-provider.js:117:31)
+       at async HardhatEthersProvider.getCode (node_modules/@nomicfoundation/hardhat-ethers/src/internal/hardhat-ethers-provider/hardhat-ethers-provider.ts:267:18)
+       at async TestContext.<anonymous> (test/bsc-fork.test.ts:19:18)
+
+

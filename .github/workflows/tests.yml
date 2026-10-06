@@ -51,6 +51,9 @@ jobs:
         run: npm run compile
 
       - name: Run contract tests
+        env:
+          STAKING_LOAD_REPORT: ci-evidence/staking-load.json
+          STAKING_BOUNDARY_REPORT: ci-evidence/staking-boundary.json
         shell: bash
         run: |
           set -o pipefail
@@ -59,6 +62,18 @@ jobs:
           node --version > ci-evidence/node-version.txt
           npm --version > ci-evidence/npm-version.txt
           git rev-parse HEAD > ci-evidence/commit-sha.txt
+
+      - name: Build and verify the reviewer handoff package
+        run: |
+          npm run review:package -- "$RUNNER_TEMP/arexai-review"
+          npm run review:verify -- "$RUNNER_TEMP/arexai-review"
+
+      - name: Preserve reviewer handoff package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: reviewer-package-${{ github.sha }}
+          path: ${{ runner.temp }}/arexai-review/
+          retention-days: 30
 
       - name: Preserve test evidence for this commit
         if: always()

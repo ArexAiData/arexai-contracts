@@ -2,6 +2,15 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-06 — Staking model/load evidence and reviewer package
+
+- Added four seeded independent accounting-model tests with 60 randomized operations each, plus holder checks and full closure/withdrawal cleanup.
+- Added local 1/64/256-position normal/emergency gas measurements and a 64-position daily-boundary reproduction. Repeated settlement can block claims after the first completed round; this remains a staking deployment-readiness limitation.
+- Added strict read-only Safe 1.4.1 proxy/singleton verification using pinned official package evidence, expected signer addresses and conservative module/guard/handler policy.
+- Added an optional fixed-block BSC fork test, explicitly skipped without a read-only archive RPC.
+- Added hash-verified reviewer package generation and CI/release attachments, with exact commit and dirty-tree disclosure.
+- No production Solidity logic, deployed contracts, staking funding, signer configuration or on-chain allocation was changed.
+
 ## 2026-10-06 — Recipient/pause reproductions and engineering evidence
 
 - Added nine transfer-rejection and pause-window tests, bringing the local Solidity suite to 85 passing checks; deployed and test-workspace vesting remain separately identified.

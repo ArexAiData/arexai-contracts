@@ -107,6 +107,14 @@ The [6 October verification report](reports/engineering-verification-2026-10-06.
 
 ## Engineering releases
 
+### Staking readiness and reviewer handoff
+
+The [staking engineering report](reports/staking-engineering-2026-10-06.md) adds four seeded accounting models, 1/64/256-position gas measurements and a daily-boundary catch-up reproduction. The boundary case requires repeated settlement before claims reopen; this remains a prototype deployment-readiness limitation.
+
+- [Reviewer scope and hashed package](docs/AUDIT_REVIEW_PACKAGE.md): per-file integrity manifest, CI artifact and release archive.
+- [Strict Safe preflight](docs/MULTISIG_VERIFICATION.md): pinned proxy/singleton evidence, expected owners, threshold and bypass settings; no real governance address is assumed.
+- Optional BSC fixed-block fork tests run only with `BSC_FORK_RPC_URL`; default CI does not claim this network-dependent check passed.
+
 [Tagged releases](https://github.com/ArexAiData/arexai-contracts/releases) identify reviewed repository evidence, not new token deployments. Updating `release.json` through a protected PR requests an engineering prerelease for that exact merged commit. The release workflow requires successful Hardhat and Slither checks on the same commit and refuses to overwrite existing tags. Prototype-containing engineering releases are marked prerelease. No deployment, staking activation or independent audit is implied.
 
 ## Security status

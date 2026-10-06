@@ -15,3 +15,5 @@ Edit `release.json` in a protected pull request with a unique `engineering-YYYY-
 The release links its exact commit and evidence report. It creates a lightweight tag through GitHub's release API, not a cryptographically signed or annotated tag. Never describe it as signed. Existing tags or releases are not rewritten; use a new tag for revised evidence. A manual retry is available through workflow_dispatch on main. A failed check or timeout withholds publication.
 
 Test logs and SARIF workflow artifacts have 30-day retention. Dated repository reports remain versioned evidence; do not rely on expiring artifacts as the only record. Review release workflow failures separately from contract CI.
+
+Engineering releases now also attach a review tar archive and SHA-256 checksum. Its MANIFEST.json records the exact clean commit and all copied file hashes; a dirty-tree package is refused. Verify extracted files before installing dependencies, since strict package verification rejects extra files. [Reviewer package procedure](AUDIT_REVIEW_PACKAGE.md).

@@ -1,0 +1,66 @@
+{
+  "scope": "Local EDR simulated fixture; Paris EVM, solc 0.8.24, optimizer 200; no token/BNB price estimate",
+  "batchSize": 64,
+  "measurements": [
+    {
+      "positions": 1,
+      "kind": "normal-flexible-checkpoint",
+      "transactions": 1,
+      "maximumGas": "302680",
+      "totalGas": "302680",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "136309",
+      "withdrawalGasKind": "estimate before emergency"
+    },
+    {
+      "positions": 1,
+      "kind": "emergency-flexible-checkpoint",
+      "transactions": 1,
+      "maximumGas": "160370",
+      "totalGas": "160370",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "84928",
+      "withdrawalGasKind": "receipt after emergency"
+    },
+    {
+      "positions": 64,
+      "kind": "normal-flexible-checkpoint",
+      "transactions": 2,
+      "maximumGas": "3871630",
+      "totalGas": "5897642",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "157678",
+      "withdrawalGasKind": "estimate before emergency"
+    },
+    {
+      "positions": 64,
+      "kind": "emergency-flexible-checkpoint",
+      "transactions": 2,
+      "maximumGas": "970020",
+      "totalGas": "1792998",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "101708",
+      "withdrawalGasKind": "receipt after emergency"
+    },
+    {
+      "positions": 256,
+      "kind": "normal-flexible-checkpoint",
+      "transactions": 8,
+      "maximumGas": "3844413",
+      "totalGas": "22995898",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "157678",
+      "withdrawalGasKind": "estimate before emergency"
+    },
+    {
+      "positions": 256,
+      "kind": "emergency-flexible-checkpoint",
+      "transactions": 8,
+      "maximumGas": "977000",
+      "totalGas": "6951322",
+      "firstWithdrawalBlocked": true,
+      "withdrawalGas": "101708",
+      "withdrawalGasKind": "receipt after emergency"
+    }
+  ]
+}
