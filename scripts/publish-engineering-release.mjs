@@ -40,7 +40,7 @@ const releases = api(`repos/${repo}/releases?per_page=100`);
 if (releases.some(r => r.tag_name === manifest.tag)) {console.log('Release already exists; left unchanged.');process.exit(0);}
 const directory=join(tmpdir(),`arexai-review-${sha}`);
 execFileSync('node',['scripts/build-review-package.mjs',directory],{stdio:'inherit'});
-execFileSync('node',['scripts/verify-review-package.mjs',directory],{stdio:'inherit'});
+execFileSync('node',['scripts/verify-review-package.mjs',directory,'--commit',sha,'--clean'],{stdio:'inherit'});
 assert.equal(JSON.parse(readFileSync(join(directory,'MANIFEST.json'),'utf8')).workingTreeDirty,false,'Refuse a dirty-tree release package');
 const archive=join(tmpdir(),`${manifest.tag}.tar.gz`);
 execFileSync('tar',['-czf',archive,'-C',directory,'.']);
