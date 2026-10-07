@@ -2,6 +2,13 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-07 — Live staking evidence and project consistency
+
+- Corrected current README and review scope to document live staking and the funded 115M reward cap separately from dated prototype reports.
+- Added frozen deployment compiler input, ABI, project sources, successful creation/activation receipts and pinned-block state. Offline checks reproduce exact creation and runtime including metadata.
+- Added site/registry/whitepaper consistency checks, local-site and published-site modes and CI rejection scenarios.
+- Preserved the original six-contract evidence and all historical test counts. Independent audit pending; no contract deployment, token transfer, rate change or upgrade is performed by this change.
+
 ## 2026-10-07 — Unreleased staking scheduled settlement
 
 - Added a packed deadline heap so normal rounds visit only due or retired deadlines, with aggregate daily-rate accounting and bounded root pruning.

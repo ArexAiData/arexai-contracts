@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import solc from 'solc';
+const read=p=>JSON.parse(readFileSync(p,'utf8'));
+const record=read('deployments/staking-mainnet.json');
+const snapshot=read('verification/staking/bsc-snapshot.json');
+const input=read('verification/staking/solidity-standard-input.json');
+assert.match(solc.version(),/^0\.8\.24\+commit\.e11b9ed9/);
+assert.equal(snapshot.chainId,56);
+assert.equal(snapshot.transaction.chainId,'0x38');
+assert.equal(snapshot.transaction.hash.toLowerCase(),record.deploymentTransaction.toLowerCase());
+assert.equal(snapshot.receipt.status,'0x1');assert.equal(snapshot.receipt.transactionHash,snapshot.transaction.hash);
+assert.equal(snapshot.receipt.contractAddress.toLowerCase(),record.stakingContract.toLowerCase());
+assert.equal(snapshot.activationReceipt.status,'0x1');
+assert.equal(snapshot.activationReceipt.transactionHash.toLowerCase(),record.activationTransaction.toLowerCase());
+assert.equal(snapshot.activatedEvents.length,1);
+assert.equal(snapshot.activatedEvents[0].args[0],(115000000n*10n**18n).toString());
+if(snapshot.activationBalance!==null) assert(BigInt(snapshot.activationBalance)>=115000000n*10n**18n);
+else assert.match(snapshot.archiveBalanceLimitation,/historical token state/);
+assert.equal(snapshot.state.token.toLowerCase(),record.token.toLowerCase());
+assert.equal(snapshot.state.governance.toLowerCase(),record.governanceSafe.toLowerCase());
+assert.equal(snapshot.state.activated,true);
+assert.equal(snapshot.state.REWARD_CAP,(115000000n*10n**18n).toString());
+assert.equal(snapshot.state.YEAR,(365*86400).toString());
+assert.deepEqual(snapshot.aprBps,['200','500','800','1200']);
+assert.deepEqual(input.settings.optimizer,{enabled:true,runs:200});assert.equal(input.settings.evmVersion,'paris');
+assert.equal(createHash('sha256').update(readFileSync(record.compilerInput)).digest('hex'),record.compilerInputSha256);
+for(const [path,source] of Object.entries(input.sources)) if(path.startsWith('contracts/')) assert.equal(readFileSync('verification/staking/source/'+path.split('/').at(-1),'utf8'),source.content);
+input.settings.outputSelection={'*':{'*':['abi','evm.bytecode','evm.deployedBytecode']}};
+const output=JSON.parse(solc.compile(JSON.stringify(input)));
+assert(!output.errors?.some(e=>e.severity==='error'),JSON.stringify(output.errors));
+const contract=output.contracts['contracts/ArexAIStaking.sol'].ArexAIStaking;
+assert.deepEqual(contract.abi,read('verification/staking/abi.json'));
+const args=record.token.slice(2).toLowerCase().padStart(64,'0')+record.governanceSafe.slice(2).toLowerCase().padStart(64,'0');
+assert.equal(snapshot.transaction.to,null);
+assert.equal(snapshot.transaction.input.toLowerCase(),'0x'+contract.evm.bytecode.object+args,'Exact creation including constructor arguments');
+let runtime=contract.evm.deployedBytecode.object;
+const expected=new Set([record.token.toLowerCase().slice(2).padStart(64,'0'),record.governanceSafe.toLowerCase().slice(2).padStart(64,'0')]);
+const observed=new Set();
+for(const refs of Object.values(contract.evm.deployedBytecode.immutableReferences)){
+ const value=snapshot.runtimeBytecode.slice(2+refs[0].start*2,2+(refs[0].start+refs[0].length)*2);
+ assert(expected.has(value),'Only token and governance immutable values allowed');observed.add(value);
+ for(const ref of refs){assert.equal(snapshot.runtimeBytecode.slice(2+ref.start*2,2+(ref.start+ref.length)*2),value);runtime=runtime.slice(0,ref.start*2)+value+runtime.slice((ref.start+ref.length)*2);}
+}
+assert.deepEqual(observed,expected);
+assert.equal('0x'+runtime,snapshot.runtimeBytecode,'Exact deployed runtime including metadata');
+console.log(`Live staking snapshot verified at block ${snapshot.blockNumber}: exact compiler input, creation/runtime, activation event/funding prerequisite and APRs. Offline evidence; not an audit or current-state attestation.`);

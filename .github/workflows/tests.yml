@@ -46,6 +46,14 @@ jobs:
       - name: Verify generated deployment documentation
         run: npm run verify:docs
 
+      - name: Reproduce frozen live staking evidence
+        run: npm run verify:staking-mainnet
+
+      - name: Check recorded project consistency and rejection scenarios
+        run: |
+          npm run verify:consistency
+          npm run test:consistency
+
       - name: Verify synthetic AI reference examples
         run: npm run verify:ai-examples
 

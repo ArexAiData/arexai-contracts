@@ -15,13 +15,18 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 - X: https://x.com/ArexAIData
 - Telegram: https://t.me/arexai
 
-## Staking prototype (not live)
+## Live staking on BNB Smart Chain
 
-`contracts/ArexAIStaking.sol` is an unreleased staking prototype with immutable simple APRs of 2% flexible, 5% for 30 days, 8% for 60 days and 12% for 90 days. The planned 115 million ARXAI reward budget has not been funded. No public testnet or mainnet staking address exists in this registry.
+ARXAI staking is live at `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864`. The funded reward cap is **115 million ARXAI** from the original 575 million reserve; the remaining reserve allocation is **460 million ARXAI**. Rates are immutable simple APRs: **2% flexible, 5% for 30 days, 8% for 60 days, 12% for 90 days**, using 365 days without automatic compounding.
 
-Read [the staking design and release gates](docs/STAKING_DESIGN.md) and [local verification evidence](reports/staking-verification-2026-10-05.md). `StakingSafeHarness` is test-only and must never govern a public deployment. A genuine Safe requires independent proxy/singleton and module verification.
+Staking governance is `0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6`; the recorded Safe configuration is 2-of-3 and its scope is permanent staking emergency closure. This does not claim that presale or reserve administration moved to the Safe, or that owners/modules cannot change.
 
-After compilation, `npm run staking:prepare -- <testnet-rpc-url> <test-token-address> <genuine-safe-address>` performs read-only chain-97 checks and outputs unsigned deployment data. It does not sign or send transactions.
+- [Live deployment and activation record](deployments/staking-mainnet.json).
+- [Frozen compiler input and sources](verification/staking/README.md), reproduced against exact creation and runtime bytecode, including metadata and constructor arguments.
+- [Live staking verification](docs/STAKING_MAINNET.md) and [application](https://arexaidata.com/staking).
+- `contracts/ArexAIStaking.sol` remains the development/test workspace. It is not substituted for the frozen deployment source; historical prototype reports retain their dated scope. Future source edits do not upgrade the immutable deployment.
+
+Independent professional audit remains pending. Historical source comments saying “unreleased” describe preparation time; the deployment receipt and activation evidence record the later mainnet status.
 
 ## BNB Smart Chain deployments
 
@@ -32,9 +37,10 @@ After compilation, `npm run staking:prepare -- <testnet-rpc-url> <test-token-add
 | Presale Round 2 | `0x0709b5f668280f54b48b953c3d2bd7e137e43398` | [View](https://bscscan.com/address/0x0709b5f668280f54b48b953c3d2bd7e137e43398#code) |
 | Team vesting | `0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2` | [View](https://bscscan.com/address/0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2#code) |
 | Listing reserve | `0x6af332c903c8f3fde0e620b360247c28476a2180` | [View](https://bscscan.com/address/0x6af332c903c8f3fde0e620b360247c28476a2180#code) |
+| ARXAI staking | `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864` | [View](https://bscscan.com/address/0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864#code) |
 | Liquidity reserve | `0xc141a3f0c90f3fa3b5f55fac6683715a14835e42` | [View](https://bscscan.com/address/0xc141a3f0c90f3fa3b5f55fac6683715a14835e42#code) |
 
-The machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
+The original six-contract machine-readable deployment registry is available at [`deployments/bsc-mainnet.json`](deployments/bsc-mainnet.json).
 
 For a single view of source files, creation transactions, compiler inputs and verification boundaries, use the [generated deployment evidence index](docs/DEPLOYMENTS.md). CI checks that it stays synchronized with the registry and recorded snapshot.
 
@@ -77,7 +83,7 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 ## Latest reproducible baseline
 
-The latest recorded local Solidity baseline is **109 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
+The latest recorded local Solidity baseline is **109 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. The live staking deployment is documented separately using frozen source and bytecode evidence; dated prototype test reports are engineering evidence, not an audit. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
 
 ## Run the tests
 
@@ -87,6 +93,8 @@ Requirements: Node.js 22.13 or later and npm.
 npm ci --no-audit --no-fund
 npm run verify:registry
 npm run verify:bytecode
+npm run verify:staking-mainnet
+npm run verify:consistency
 npm run verify:docs
 npm run verify:ai-examples
 npm run audit:dependencies

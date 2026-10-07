@@ -20,7 +20,11 @@
     "verify:safe": "node scripts/verify-safe.mjs",
     "review:package": "node scripts/build-review-package.mjs",
     "review:verify": "node scripts/verify-review-package.mjs",
-    "test:tooling": "node --test scripts/test-review-package.mjs"
+    "test:tooling": "node --test scripts/test-review-package.mjs",
+    "verify:staking-mainnet": "node scripts/verify-staking-mainnet.mjs",
+    "staking:snapshot": "node scripts/capture-staking-snapshot.mjs",
+    "verify:consistency": "node scripts/verify-project-consistency.mjs",
+    "test:consistency": "node --test scripts/test-project-consistency.mjs"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.4.0"

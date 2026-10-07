@@ -1,0 +1,30 @@
+name: Published project consistency
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'deployments/staking-mainnet.json'
+      - 'scripts/verify-project-consistency.mjs'
+      - 'README.md'
+      - '.github/workflows/project-consistency.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  published-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+        with:
+          node-version: 22.13.0
+      - name: Install PDF text reader
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Compare published site and whitepaper with reviewed registry
+        run: node scripts/verify-project-consistency.mjs --live

@@ -1,0 +1,147 @@
+{
+  "project": "ArexAi",
+  "symbol": "ARXAI",
+  "network": "BNB Smart Chain",
+  "chainId": 56,
+  "canonicalPage": "https://arexaidata.com/security",
+  "canonicalListingData": "https://arexaidata.com/listing-data.json",
+  "officialSourceRepository": "https://github.com/ArexAiData/arexai-contracts",
+  "updatedAt": "2026-10-07",
+  "auditStatus": "Independent audit pending",
+  "administrator": "0xDE3DbDa5eB157bFc9a56C426C2006c0Cd4958a9e",
+  "contracts": [
+    {
+      "name": "ARXAI token",
+      "address": "0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3",
+      "verification": "exact",
+      "purpose": "Fixed 1,000,000,000 token supply",
+      "owner": false,
+      "upgradeable": false,
+      "mintable": false,
+      "pausable": false,
+      "blacklist": false
+    },
+    {
+      "name": "Presale round 1",
+      "address": "0x52c880e4d54a5dd3ca7dd185d44715017b25dee0",
+      "verification": "exact",
+      "purpose": "50,000,000 ARXAI at 0.01 USD",
+      "ownerPermissions": [
+        "pause",
+        "unpause",
+        "finalize after end",
+        "transfer ownership"
+      ],
+      "immutableRules": [
+        "price",
+        "dates",
+        "allocation",
+        "payment token",
+        "treasury"
+      ]
+    },
+    {
+      "name": "Presale round 2",
+      "address": "0x0709b5f668280f54b48b953c3d2bd7e137e43398",
+      "verification": "similar",
+      "purpose": "25,000,000 ARXAI at 0.02 USD",
+      "ownerPermissions": [
+        "pause",
+        "unpause",
+        "finalize after end",
+        "transfer ownership"
+      ],
+      "immutableRules": [
+        "price",
+        "dates",
+        "allocation",
+        "payment token",
+        "treasury"
+      ]
+    },
+    {
+      "name": "Team vesting",
+      "address": "0x2d607fdb0da6407c29c2d4bdafab2e1479eb5ee2",
+      "verification": "exact",
+      "purpose": "50,000,000 ARXAI across 20 calendar releases",
+      "owner": false,
+      "release": "permissionless trigger to immutable beneficiary"
+    },
+    {
+      "name": "Exchange and ecosystem reserve",
+      "address": "0x6af332c903c8f3fde0e620b360247c28476a2180",
+      "verification": "exact",
+      "purpose": "460,000,000 ARXAI remaining across 16 fixed tranches of 28.75M; 115M funded staking",
+      "ownerPermissions": [
+        "release eligible tranche",
+        "transfer ownership"
+      ],
+      "originalAllocation": 575000000
+    },
+    {
+      "name": "Liquidity reserve",
+      "address": "0xc141a3f0c90f3fa3b5f55fac6683715a14835e42",
+      "verification": "exact",
+      "purpose": "200,000,000 ARXAI custody before pool creation",
+      "ownerPermissions": [
+        "release to immutable liquidity manager",
+        "transfer ownership"
+      ]
+    },
+    {
+      "name": "ARXAI staking",
+      "address": "0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864",
+      "verification": "exact",
+      "purpose": "115,000,000 ARXAI funded reward cap; user principal accounted separately",
+      "upgradeable": false,
+      "governance": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
+      "ownerPermissions": [
+        "2-of-3 Safe: permanent emergency closure"
+      ],
+      "immutableRules": [
+        "token",
+        "governance",
+        "simple APR rates",
+        "reward cap"
+      ],
+      "independentAudit": "Pending"
+    }
+  ],
+  "automatedChecks": [
+    {
+      "provider": "Hardhat 3",
+      "status": "52-passed-0-failed",
+      "result": "Behavioral tests cover ARXAI token, PresaleRound, TeamVesting, Listing Reserve and Liquidity Reserve",
+      "limitation": "Project-run automated tests; the expanded run does not claim a new whole-scope coverage percentage and is not an independent professional audit",
+      "url": "https://arexaidata.com/reports/arxai-expanded-automated-contract-tests-2026-09-27.txt"
+    },
+    {
+      "provider": "Honeypot.is",
+      "status": "passed-low-risk",
+      "result": "0% buy, sell and transfer tax; no buy or sell limit detected",
+      "limitation": "No live DEX pair; simulated liquidity used",
+      "url": "https://honeypot.is/?address=0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3"
+    },
+    {
+      "provider": "GoPlus Security",
+      "status": "review-needed",
+      "result": "0% buy and sell tax; holders can sell all; no gas abuse detected",
+      "limitation": "GoPlus source-verification index is inconsistent with the public BscScan verification; manual metadata review pending",
+      "url": "https://console.gopluslabs.io/token-security/56/0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3"
+    },
+    {
+      "provider": "Slither 0.11.6",
+      "status": "0-critical-0-high-0-medium",
+      "result": "102 detectors; three reviewed low-severity timestamp notices in active contracts",
+      "limitation": "Project-run automated analysis; not an independent professional audit",
+      "url": "https://arexaidata.com/reports/arxai-presale-round-automated-review-2026-09-22.txt"
+    }
+  ],
+  "riskNotice": "Source verification is not a security audit. Independent audit and LP-lock evidence remain pending. Staking emergency governance is a 2-of-3 Safe; presale and reserve permissions retain their separately documented administrator controls.",
+  "stakingGovernance": {
+    "address": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
+    "threshold": 2,
+    "ownerCount": 3,
+    "scope": "Staking emergency closure only; this does not imply presale or reserve ownership has moved to the Safe"
+  }
+}

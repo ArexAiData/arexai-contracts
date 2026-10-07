@@ -10,7 +10,7 @@ No release or deployment is implied by adding this procedure. Independent audit 
 
 ## Automated engineering evidence releases
 
-Edit `release.json` in a protected pull request with a unique `engineering-YYYY-MM-DD` tag (optional numeric suffix), a title, a summary, and a dated report path. Keep `prerelease: true` while the repository contains an unreleased staking prototype. The default-branch release workflow waits for successful GitHub Actions checks named `Hardhat 37-test suite` and `Slither 0.11.6` on the exact source commit before creating the tag and GitHub Release. The historical check name is a compatibility context, not the current test count.
+Edit `release.json` in a protected pull request with a unique `engineering-YYYY-MM-DD` tag (optional numeric suffix), a title, a summary, and a dated report path. Keep engineering evidence releases explicitly scoped; the live staking deployment is separate from development sources and unreleased changes. Existing prerelease tags retain their historical status. The default-branch release workflow waits for successful GitHub Actions checks named `Hardhat 37-test suite` and `Slither 0.11.6` on the exact source commit before creating the tag and GitHub Release. The historical check name is a compatibility context, not the current test count.
 
 The release links its exact commit and evidence report. It creates a lightweight tag through GitHub's release API, not a cryptographically signed or annotated tag. Never describe it as signed. Existing tags or releases are not rewritten; use a new tag for revised evidence. A manual retry is available through workflow_dispatch on main. A failed check or timeout withholds publication.
 

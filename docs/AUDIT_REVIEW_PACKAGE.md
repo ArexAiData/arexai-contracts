@@ -4,7 +4,7 @@
 
 1. Deployed contracts: six registry addresses, exact original compiler inputs, creation receipts, recorded runtime bytecode and repository source hashes in [DEPLOYMENTS.md](DEPLOYMENTS.md).
 2. Known recipient/pause availability boundaries: [RECIPIENT_AND_PAUSE_POLICY.md](RECIPIENT_AND_PAUSE_POLICY.md).
-3. Unreleased staking prototype: [STAKING_DESIGN.md](STAKING_DESIGN.md). Review reward/principal conservation, rounding, exhaustion, reservation recycling, flexible daily anchors, bounded checkpoint availability and permanent closure.
+3. Live staking: [STAKING_MAINNET.md](STAKING_MAINNET.md), frozen compilation input and snapshot. Development/test design: [STAKING_DESIGN.md](STAKING_DESIGN.md). Review reward/principal conservation, rounding, exhaustion, reservation recycling, flexible daily anchors, bounded checkpoint availability and permanent closure.
 4. Genuine governance: strict [Safe preflight](MULTISIG_VERIFICATION.md), signer custody, owner changes and recovery procedure. `StakingSafeHarness` is intentionally test-only.
 5. Review CI, dependency overrides and release/package provenance separately from deployed-contract logic. AI examples are synthetic reference material outside Solidity audit scope unless explicitly agreed.
 

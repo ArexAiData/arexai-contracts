@@ -1,6 +1,6 @@
-# ARXAI staking prototype — 5 October 2026
+# ARXAI staking design and historical prototype
 
-Status: unreleased prototype. Not deployed to public testnet or mainnet; no rewards funded. Existing token allocation documents and deployed contracts are unchanged. A planned 115 million ARXAI staking budget requires treasury authorization and revised allocation disclosures before funding.
+Current mainnet deployment and funded activation are recorded in [STAKING_MAINNET.md](STAKING_MAINNET.md). This design and its dated prototype reports describe engineering work before deployment. Their “not deployed” statements are historical and must not be read as current project status. Reproduce the frozen deployed source separately; development/test source changes do not upgrade the live contract.
 
 ## Fixed terms
 
