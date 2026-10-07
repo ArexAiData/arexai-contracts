@@ -3,14 +3,15 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 > arexai-contracts@1.0.0 test
 > hardhat test nodejs
 
-No contracts to compile
+
+Compiled 1 Solidity file with solc 0.8.24 (evm target: paris)
 
 Running node:test tests
 
 
   - BSC fixed-block fork: six runtime sources, immutable links and local token transfer
 
-  ✔ Deployed TeamVesting rejects zero addresses and invalid calendar schedules (361ms)
+  ✔ Deployed TeamVesting rejects zero addresses and invalid calendar schedules (269ms)
 
   ✔ Deployed TeamVesting retains the creation transaction's twenty dates and fixed destinations
 
@@ -124,21 +125,21 @@ Running node:test tests
 
   ✔ Safe proxy evidence is pinned to official 1.4.1 and not the unrestricted harness
 
-  ✔ Staking boundary load preserves allocated claims despite another overdue boundary (3471ms)
+  ✔ Staking boundary load preserves allocated claims despite another overdue boundary (2782ms)
 
-  ✔ Staking seeded model 17: mixed users, terms, time, claims, exits and closure conserve balances (1492ms)
+  ✔ Staking seeded model 17: mixed users, terms, time, claims, exits and closure conserve balances (1351ms)
 
-  ✔ Staking seeded model 2026: mixed users, terms, time, claims, exits and closure conserve balances (985ms)
+  ✔ Staking seeded model 2026: mixed users, terms, time, claims, exits and closure conserve balances (886ms)
 
-  ✔ Staking seeded model 64091: mixed users, terms, time, claims, exits and closure conserve balances (1048ms)
+  ✔ Staking seeded model 64091: mixed users, terms, time, claims, exits and closure conserve balances (945ms)
 
-  ✔ Staking seeded model 2638: mixed users, terms, time, claims, exits and closure conserve balances (1169ms)
+  ✔ Staking seeded model 2638: mixed users, terms, time, claims, exits and closure conserve balances (971ms)
 
   ✔ Staking load: 1 positions settle in bounded batches and unlock withdrawal
 
-  ✔ Staking load: 64 positions settle in bounded batches and unlock withdrawal (461ms)
+  ✔ Staking load: 64 positions settle in bounded batches and unlock withdrawal (485ms)
 
-  ✔ Staking load: 256 positions settle in bounded batches and unlock withdrawal (1962ms)
+  ✔ Staking load: 256 positions settle in bounded batches and unlock withdrawal (1840ms)
 
   ✔ Staking rejects EOAs as governance, requires full funding and has immutable rates
 
@@ -156,7 +157,7 @@ Running node:test tests
 
   ✔ Exhausted flexible allocation is pro rata independent of claim order and locked promises survive
 
-  ✔ Bounded checkpoints freeze mutation and anyone may complete settlement (82ms)
+  ✔ Bounded checkpoints freeze mutation and anyone may complete settlement
 
   ✔ Emergency closure needs two harness approvals and permanently burns only surplus
 
@@ -168,13 +169,13 @@ Running node:test tests
 
   ✔ Zero-rounded flexible positions do not enlarge daily checkpoint work
 
-  ✔ More than one batch of positions closes without an unbounded transaction (392ms)
+  ✔ More than one batch of positions closes without an unbounded transaction (365ms)
 
   ✔ Staking emergency with no positions burns the entire reward cap immediately
 
   ✔ Principal-only flexible exit is immediate, stops accrual and never pays principal twice
 
-  ✔ Principal exits and allocated claims cannot invalidate either checkpoint pass (95ms)
+  ✔ Principal exits and allocated claims cannot invalidate either checkpoint pass (88ms)
 
   ✔ Early locked principal exit remains forfeited if emergency happens before reward cleanup
 
@@ -212,12 +213,12 @@ Running node:test tests
 
   ✔ ArexAIToken verified source rejects a zero initial holder and has no privileged supply controls
 
-  ✔ ArexAIToken conserves balances and burned supply through a reproducible mixed operation sequence (355ms)
+  ✔ ArexAIToken conserves balances and burned supply through a reproducible mixed operation sequence (340ms)
 
   ✔ ArexAIToken failed delegated burns preserve supply, balance and allowance
 
 
-  103 passing (14911ms)
+  103 passing (12807ms)
   1 skipped
 
 

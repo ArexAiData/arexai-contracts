@@ -15,7 +15,8 @@ interface IBurnableARXAI is IERC20 { function burn(uint256 amount) external; }
 
 /// @notice Unreleased prototype. No mainnet deployment is authorized by this source.
 /// @dev Permissionless bounded checkpoints settle every eligible flexible position
-/// before claims or new reservations, preventing claim-order priority at exhaustion.
+/// before new reservations, preventing claim-order priority at exhaustion.
+/// Allocated claims and principal-only exits remain independent of those scans.
 contract ArexAIStaking is ReentrancyGuard {
     using SafeERC20 for IERC20;
     using EnumerableSet for EnumerableSet.UintSet;
@@ -221,7 +222,7 @@ contract ArexAIStaking is ReentrancyGuard {
     function _scanOne() private {
         uint256 id = _idAt(checkpointCursor);
         Position storage p = positions[id];
-        uint256 due;
+        uint256 due = 0;
         if (p.mode == Mode.Flexible) {
             uint256 cutoff = exitedAt[id] == 0 ? checkpointAt : Math.min(checkpointAt, exitedAt[id]);
             (uint256 days_, uint256 amount) = _daysAndDue(p, cutoff);
