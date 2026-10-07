@@ -6,6 +6,12 @@ pragma solidity 0.8.24;
 library StakingDeadlineQueue {
     struct Queue { uint256[] keys; }
     function length(Queue storage q) internal view returns(uint256) { return q.keys.length; }
+    function firstId(Queue storage q) internal view returns(uint256) {
+        return q.keys.length > 0 ? uint192(q.keys[0]) : 0;
+    }
+    function nextTime(Queue storage q) internal view returns(uint256) {
+        return q.keys.length > 0 ? q.keys[0] >> 192 : type(uint256).max;
+    }
     function first(Queue storage q) internal view returns(uint256 id,uint256 at) {
         if(q.keys.length==0)return(0,type(uint256).max);
         uint256 key=q.keys[0];id=uint192(key);at=key>>192;

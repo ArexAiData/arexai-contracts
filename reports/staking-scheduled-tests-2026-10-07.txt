@@ -4,14 +4,14 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 > hardhat test nodejs
 
 
-Compiled 1 Solidity file with solc 0.8.24 (evm target: paris)
+Compiled 3 Solidity files with solc 0.8.24 (evm target: paris)
 
 Running node:test tests
 
 
   - BSC fixed-block fork: six runtime sources, immutable links and local token transfer
 
-  ✔ Deployed TeamVesting rejects zero addresses and invalid calendar schedules (295ms)
+  ✔ Deployed TeamVesting rejects zero addresses and invalid calendar schedules (286ms)
 
   ✔ Deployed TeamVesting retains the creation transaction's twenty dates and fixed destinations
 
@@ -125,31 +125,31 @@ Running node:test tests
 
   ✔ Safe proxy evidence is pinned to official 1.4.1 and not the unrestricted harness
 
-  ✔ Staking boundary load preserves allocated claims despite another overdue boundary (960ms)
+  ✔ Staking boundary load preserves allocated claims despite another overdue boundary (935ms)
 
-  ✔ Deadline queue matches an independent sorted model through root pruning and rescheduling (1056ms)
+  ✔ Deadline queue matches an independent sorted model through root pruning and rescheduling (1168ms)
 
   ✔ Deadline queue enforces packed bounds, monotone deadlines and empty-root safety
 
-  ✔ Staking seeded model 17: mixed users, terms, time, claims, exits and closure conserve balances (1254ms)
+  ✔ Staking seeded model 17: mixed users, terms, time, claims, exits and closure conserve balances (1406ms)
 
-  ✔ Staking seeded model 2026: mixed users, terms, time, claims, exits and closure conserve balances (921ms)
+  ✔ Staking seeded model 2026: mixed users, terms, time, claims, exits and closure conserve balances (1070ms)
 
-  ✔ Staking seeded model 64091: mixed users, terms, time, claims, exits and closure conserve balances (871ms)
+  ✔ Staking seeded model 64091: mixed users, terms, time, claims, exits and closure conserve balances (1047ms)
 
-  ✔ Staking seeded model 2638: mixed users, terms, time, claims, exits and closure conserve balances (956ms)
+  ✔ Staking seeded model 2638: mixed users, terms, time, claims, exits and closure conserve balances (1116ms)
 
   ✔ Staking load: 1 positions settle in bounded batches and unlock withdrawal
 
-  ✔ Staking load: 64 positions settle in bounded batches and unlock withdrawal (551ms)
+  ✔ Staking load: 64 positions settle in bounded batches and unlock withdrawal (565ms)
 
-  ✔ Staking load: 256 positions settle in bounded batches and unlock withdrawal (2470ms)
+  ✔ Staking load: 256 positions settle in bounded batches and unlock withdrawal (2533ms)
 
-  ✔ Sparse deadlines: only two due positions are visited among 1,026 queued positions (5092ms)
+  ✔ Sparse deadlines: only two due positions are visited among 1,026 queued positions (5682ms)
 
-  ✔ Dense 1,024-position normal settlement uses one pass; emergency and simultaneous exits conserve rewards (10962ms)
+  ✔ Dense 1,024-position normal settlement uses one pass; emergency and simultaneous exits conserve rewards (11805ms)
 
-  ✔ 1,024-position exhaustion falls back to proportional allocation independent of claim order (11349ms)
+  ✔ 1,024-position exhaustion falls back to proportional allocation independent of claim order (10419ms)
 
   ✔ Staking rejects EOAs as governance, requires full funding and has immutable rates
 
@@ -159,15 +159,15 @@ Running node:test tests
 
   ✔ Locked staking early exit returns principal only and recycles the entire reserved reward
 
-  ✔ All locked terms pay their fixed reward at maturity and stop accruing afterwards (108ms)
+  ✔ All locked terms pay their fixed reward at maturity and stop accruing afterwards
 
   ✔ Flexible staking has no first-day reward and supports claims without resetting its clock
 
   ✔ Flexible exit before 24h pays only principal
 
-  ✔ Exhausted flexible allocation is pro rata independent of claim order and locked promises survive (114ms)
+  ✔ Exhausted flexible allocation is pro rata independent of claim order and locked promises survive (77ms)
 
-  ✔ Bounded checkpoints freeze mutation and anyone may complete settlement (105ms)
+  ✔ Bounded checkpoints freeze mutation and anyone may complete settlement
 
   ✔ Emergency closure needs two harness approvals and permanently burns only surplus
 
@@ -175,21 +175,21 @@ Running node:test tests
 
   ✔ Direct donations never enlarge the reward cap
 
-  ✔ Recycled locked rewards reopen admissions without paying the flexible paused interval (87ms)
+  ✔ Recycled locked rewards reopen admissions without paying the flexible paused interval (79ms)
 
   ✔ Zero-rounded flexible positions do not enlarge daily checkpoint work
 
-  ✔ More than one batch of positions closes without an unbounded transaction (462ms)
+  ✔ More than one batch of positions closes without an unbounded transaction (410ms)
 
   ✔ Staking emergency with no positions burns the entire reward cap immediately
 
   ✔ Principal-only flexible exit is immediate, stops accrual and never pays principal twice
 
-  ✔ Principal exits and allocated claims cannot invalidate either checkpoint pass (122ms)
+  ✔ Principal exits and allocated claims cannot invalidate either checkpoint pass (113ms)
 
   ✔ Early locked principal exit remains forfeited if emergency happens before reward cleanup
 
-  ✔ Emergency principal exits preserve locked and flexible cutoff rewards and the burn budget
+  ✔ Emergency principal exits preserve locked and flexible cutoff rewards and the burn budget (87ms)
 
   ✔ Principal exit during exhausted pro-rata allocation preserves both holders' reward shares
 
@@ -225,12 +225,12 @@ Running node:test tests
 
   ✔ ArexAIToken verified source rejects a zero initial holder and has no privileged supply controls
 
-  ✔ ArexAIToken conserves balances and burned supply through a reproducible mixed operation sequence (404ms)
+  ✔ ArexAIToken conserves balances and burned supply through a reproducible mixed operation sequence (340ms)
 
   ✔ ArexAIToken failed delegated burns preserve supply, balance and allowance
 
 
-  109 passing (40788ms)
+  109 passing (41676ms)
   1 skipped
 
 

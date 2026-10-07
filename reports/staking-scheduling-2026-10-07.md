@@ -22,15 +22,15 @@ Local tools: Node 24.19.0, npm 11.9.0, Hardhat 3.18.1, solc 0.8.24, Paris EVM, o
 
 | Positions | Fixture | Normal or exhaustion calls | Total gas | Largest call gas |
 | ---: | --- | ---: | ---: | ---: |
-| 1026 | sparse-normal | 2 | 637,081 | 414,398 |
-| 1024 | dense-normal-and-emergency | 16 | 105,438,524 | 7,585,755 |
-| 1024 | dense-exhaustion | 48 | 162,765,160 | 4,800,715 |
+| 1026 | sparse-normal | 2 | 636,730 | 414,217 |
+| 1024 | dense-normal-and-emergency | 16 | 105,318,529 | 7,578,203 |
+| 1024 | dense-exhaustion | 48 | 162,645,014 | 4,796,907 |
 
 [Raw scale data](staking-scale-2026-10-07.json). The dense normal fixture additionally completes emergency settlement in 32 calls while preserving 32 immediate principal exits. All tested calls are below 8M gas. Counts exclude staking deposits, Safe approvals, emergency initiation and claims/exits unless explicitly named.
 
-The [staggered-boundary case](staking-scheduled-boundary-2026-10-07.json) uses 62 rounds / 62 calls / **15,479,131 gas**, versus the previous prototype's 32 rounds / 64 calls / **68,822,968 gas**. Allocated claims remain available after the first round. Total gas falls approximately 77.5% in this fixture; catch-up still spans multiple calls and does not become constant-time.
+The [staggered-boundary case](staking-scheduled-boundary-2026-10-07.json) uses 62 rounds / 62 calls / **15,457,445 gas**, versus the previous prototype's 32 rounds / 64 calls / **68,822,968 gas**. Allocated claims remain available after the first round. Total gas falls approximately 77.5% in this fixture; catch-up still spans multiple calls and does not become constant-time.
 
-The dense 256-position full-budget fixture takes 4 calls / **24,226,238 gas**, compared with the dated earlier fixture's 8 calls / **22,995,898 gas**. Fewer calls do not imply lower total gas: heap maintenance increases total gas in this dense comparison. [Updated small load cases](staking-scheduled-load-2026-10-07.json). Historical reports use their recorded toolchains; these are fixture comparisons, not live BNB fee predictions.
+The dense 256-position full-budget fixture takes 4 calls / **24,196,159 gas**, compared with the dated earlier fixture's 8 calls / **22,995,898 gas**. Fewer calls do not imply lower total gas: heap maintenance increases total gas in this dense comparison. [Updated small load cases](staking-scheduled-load-2026-10-07.json). Historical reports use their recorded toolchains; these are fixture comparisons, not live BNB fee predictions.
 
 ## Remaining deployment concerns
 

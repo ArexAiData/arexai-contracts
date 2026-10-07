@@ -175,7 +175,7 @@ contract ArexAIStaking is ReentrancyGuard {
             deadlines.insert(id, block.timestamp + 1 days);
             scheduledFlexible[id] = true;
             dailyFlexibleRate += quote(amount, mode);
-            (, nextFlexibleDue) = deadlines.first();
+            nextFlexibleDue = deadlines.nextTime();
         }
         if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
         emit Staked(id, msg.sender, mode, amount, ends, reserved);
@@ -233,7 +233,7 @@ contract ArexAIStaking is ReentrancyGuard {
         checkpointBudget = 0;
         checkpointFullBudget = false;
         if (!permanentlyClosed && checkpointCount > 0) {
-            (, uint256 earliest) = deadlines.first();
+            uint256 earliest = deadlines.nextTime();
             uint256 maximumDays = (at - earliest) / 1 days + 1;
             // Conservative bound: every scheduled position could owe the oldest
             // position's number of days. Division avoids product overflow.
@@ -251,7 +251,8 @@ contract ArexAIStaking is ReentrancyGuard {
         Position storage p = positions[id];
         uint256 due = 0;
         if (p.mode == Mode.Flexible) {
-            uint256 cutoff = exitedAt[id] == 0 ? checkpointAt : Math.min(checkpointAt, exitedAt[id]);
+            uint256 cutoff = checkpointAt;
+            if (exitedAt[id] > 0) cutoff = Math.min(checkpointAt, exitedAt[id]);
             (uint256 days_, uint256 amount) = _daysAndDue(p, cutoff);
             due = amount;
             p.settledDays = days_;
@@ -272,16 +273,17 @@ contract ArexAIStaking is ReentrancyGuard {
         if (checkpointCursor == checkpointCount) _finishScan();
     }
     function _scanScheduled() private {
-        (uint256 id,) = deadlines.first();
+        uint256 id = deadlines.firstId();
         if (!scheduledFlexible[id]) {
             deadlines.removeFirst();
             ++checkpointCursor;
-            (, uint256 dueAt) = deadlines.first();
+            uint256 dueAt = deadlines.nextTime();
             if (dueAt > checkpointAt) _finishScan();
             return;
         }
         Position storage p = positions[id];
-        uint256 cutoff = exitedAt[id] == 0 ? checkpointAt : Math.min(checkpointAt, exitedAt[id]);
+        uint256 cutoff = checkpointAt;
+        if (exitedAt[id] > 0) cutoff = Math.min(checkpointAt, exitedAt[id]);
         (uint256 days_, uint256 due) = _daysAndDue(p, cutoff);
         p.settledDays = days_;
         uint256 next = p.started + (days_ + 1) * 1 days;
@@ -304,7 +306,7 @@ contract ArexAIStaking is ReentrancyGuard {
             }
         }
         ++checkpointCursor;
-        (, uint256 earliest) = deadlines.first();
+        uint256 earliest = deadlines.nextTime();
         if (earliest > checkpointAt) _finishScan();
     }
     function _finishScan() private {
@@ -343,9 +345,10 @@ contract ArexAIStaking is ReentrancyGuard {
     function _finishCheckpoint() private {
         phase = Phase.Idle;
         if (permanentlyClosed) nextFlexibleDue = followingDue;
-        else (, nextFlexibleDue) = deadlines.first();
-        if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
-        else if (!permanentlyClosed && flexPaused) { flexPaused = false; flexResumeAt = block.timestamp; }
+        else nextFlexibleDue = deadlines.nextTime();
+        if (freeRewards > 0) {
+            if (!permanentlyClosed && flexPaused) { flexPaused = false; flexResumeAt = block.timestamp; }
+        } else { flexPaused = true; flexResumeAt = type(uint256).max; }
         if (permanentlyClosed) {
             shutdownFinalized = true;
             uint256 toBurn = freeRewards;
@@ -359,10 +362,11 @@ contract ArexAIStaking is ReentrancyGuard {
     // Final token interaction occurs once, after all bounded-loop state effects.
     function _burnUnused() private {
         uint256 amount = pendingBurn;
-        if (amount == 0) return;
-        pendingBurn = 0;
-        IBurnableARXAI(address(token)).burn(amount);
-        emit UnusedRewardsBurned(amount);
+        if (amount > 0) {
+            pendingBurn = 0;
+            IBurnableARXAI(address(token)).burn(amount);
+            emit UnusedRewardsBurned(amount);
+        }
     }
 
     function claim(uint256 id) external nonReentrant {
@@ -427,7 +431,7 @@ contract ArexAIStaking is ReentrancyGuard {
                 scheduledFlexible[id] = false;
                 dailyFlexibleRate -= quote(p.principal, Mode.Flexible);
             }
-            if (!permanentlyClosed) (, nextFlexibleDue) = deadlines.first();
+            if (!permanentlyClosed) nextFlexibleDue = deadlines.nextTime();
         } else {
             reservedLocked -= p.reward;
             if (early) {

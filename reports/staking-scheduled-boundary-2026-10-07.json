@@ -4,7 +4,7 @@
   "batchSize": 64,
   "rounds": 62,
   "transactions": 62,
-  "totalGas": "15479131",
+  "totalGas": "15457445",
   "reblockedAfterFirstRound": false,
   "claimAfterFirstRoundSucceeded": true,
   "limitation": "Global catch-up is still required for new admissions and allocation of unsettled rewards, but not allocated claims or principal-only exit."
