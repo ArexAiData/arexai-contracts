@@ -1,0 +1,30 @@
+{
+  "scope": "Local simulated receipts; sparse/dense 1,024-position fixtures, not a production gas forecast",
+  "measurements": [
+    {
+      "kind": "sparse-normal",
+      "positions": 1026,
+      "duePositions": 2,
+      "transactions": 2,
+      "totalGas": "636730",
+      "maximumGas": "414217"
+    },
+    {
+      "kind": "dense-normal-and-emergency",
+      "positions": 1024,
+      "normalTransactions": 16,
+      "totalGas": "105318529",
+      "maximumGas": "7578203",
+      "emergencyTransactions": 32,
+      "principalExitsDuringEmergency": 32
+    },
+    {
+      "kind": "dense-exhaustion",
+      "positions": 1024,
+      "transactions": 48,
+      "totalGas": "162645014",
+      "maximumGas": "4796907",
+      "proportionalSharesVerified": true
+    }
+  ]
+}

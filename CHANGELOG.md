@@ -2,6 +2,14 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-07 — Unreleased staking scheduled settlement
+
+- Added a packed deadline heap so normal rounds visit only due or retired deadlines, with aggregate daily-rate accounting and bounded root pruning.
+- Added a conservative full-budget proof and one-pass full allocations; potential exhaustion retains proportional deferred allocation, with weighted work credits to bound per-call storage cost.
+- Added independent heap-model and 1,024-position sparse/dense/exhaustion/emergency tests. Local Solidity suite: 109 passed, 1 optional archive-RPC skip; tooling: 16 passed.
+- Preserved principal access, accrued-reward claims, original daily anchors, fixed rates/cap, locked forfeitures and closure rules.
+- Recorded the tradeoff: dense heap maintenance can increase total gas; sparse and boundary cases avoid repeated whole-set scans. No deployment, funding, Safe configuration or live contract changed.
+
 ## 2026-10-07 — Unreleased staking holder-access improvements
 
 - Added principal-only exit during either checkpoint pass and emergency settlement, retaining original calculation evidence and recording an immutable per-position exit cutoff.
