@@ -276,6 +276,7 @@ contract ArexAIStaking is ReentrancyGuard {
         phase = Phase.Idle;
         nextFlexibleDue = followingDue;
         if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
+        else if (!permanentlyClosed && flexPaused) { flexPaused = false; flexResumeAt = block.timestamp; }
         if (permanentlyClosed) {
             shutdownFinalized = true;
             uint256 toBurn = freeRewards;
@@ -317,6 +318,16 @@ contract ArexAIStaking is ReentrancyGuard {
         if (exitedAt[id] != 0) revert PrincipalAlreadyWithdrawn();
         exitedAt[id] = block.timestamp;
         forfeitedRewards[id] = !permanentlyClosed && p.mode != Mode.Flexible && block.timestamp < p.ends;
+        if (forfeitedRewards[id]) {
+            reservedLocked -= p.reward;
+            freeRewards += p.reward;
+            p.reward = 0;
+            // Do not change accrual baselines halfway through a captured scan.
+            if (phase == Phase.Idle && flexPaused && freeRewards > 0) {
+                flexPaused = false;
+                flexResumeAt = block.timestamp;
+            }
+        }
         if (!permanentlyClosed && p.mode == Mode.Flexible && quote(p.principal, Mode.Flexible) > 0
             && (block.timestamp - p.started) / 1 days > p.settledDays) {
             if (phase == Phase.Idle) nextFlexibleDue = Math.min(nextFlexibleDue, block.timestamp);
