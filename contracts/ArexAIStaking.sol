@@ -38,6 +38,9 @@ contract ArexAIStaking is ReentrancyGuard {
         bool active;
     }
     mapping(uint256 => Position) public positions;
+    /// @notice Exit cutoff. Original principal stays in Position for deferred reward calculation.
+    mapping(uint256 => uint256) public exitedAt;
+    mapping(uint256 => bool) public forfeitedRewards;
     mapping(uint256 => uint256) private pending;
     EnumerableSet.UintSet private activePositions;
     EnumerableSet.UintSet private flexiblePositions;
@@ -80,6 +83,7 @@ contract ArexAIStaking is ReentrancyGuard {
     error NoReward();
     error NotGovernance();
     error AlreadyClosed();
+    error PrincipalAlreadyWithdrawn();
     event Activated(uint256 amount);
     event Staked(uint256 indexed id, address indexed holder, Mode mode, uint256 amount, uint256 ends, uint256 rewardReserved);
     event RewardClaimed(uint256 indexed id, address indexed holder, uint256 reward);
@@ -88,6 +92,7 @@ contract ArexAIStaking is ReentrancyGuard {
     event CheckpointCompleted(uint256 at, uint256 flexibleAllocated);
     event EmergencyClosed(uint256 at);
     event UnusedRewardsBurned(uint256 amount);
+    event PrincipalWithdrawn(uint256 indexed id, address indexed holder, uint256 principal, uint256 at);
 
     constructor(address token_, address governance_) {
         if (token_.code.length == 0 || governance_.code.length == 0) revert InvalidConfiguration();
@@ -218,14 +223,20 @@ contract ArexAIStaking is ReentrancyGuard {
         Position storage p = positions[id];
         uint256 due;
         if (p.mode == Mode.Flexible) {
-            (uint256 days_, uint256 amount) = _daysAndDue(p, checkpointAt);
+            uint256 cutoff = exitedAt[id] == 0 ? checkpointAt : Math.min(checkpointAt, exitedAt[id]);
+            (uint256 days_, uint256 amount) = _daysAndDue(p, cutoff);
             due = amount;
             p.settledDays = days_;
-            followingDue = Math.min(followingDue, p.started + (days_ + 1) * 1 days);
+            if (exitedAt[id] == 0) followingDue = Math.min(followingDue, p.started + (days_ + 1) * 1 days);
+            else if ((exitedAt[id] - p.started) / 1 days > days_) {
+                // A day may complete between snapshot and principal exit.
+                followingDue = Math.min(followingDue, exitedAt[id]);
+            }
             checkpointTotalDue += due;
             if (due > 0) lastEligible = id;
         } else {
-            due = Math.mulDiv(p.principal, aprBps(p.mode) * (Math.min(checkpointAt, p.ends) - p.started), 10_000 * YEAR);
+            bool forfeited = forfeitedRewards[id];
+            if (!forfeited) due = Math.mulDiv(p.principal, aprBps(p.mode) * (Math.min(checkpointAt, p.ends) - p.started), 10_000 * YEAR);
             checkpointSaved += p.reward - due;
         }
         pending[id] = due;
@@ -284,7 +295,8 @@ contract ArexAIStaking is ReentrancyGuard {
     }
 
     function claim(uint256 id) external nonReentrant {
-        _requireSettled();
+        // Only already allocated rewards are paid. Claims cannot affect the scan,
+        // pro-rata budget or membership and therefore need no global catch-up.
         Position storage p = _position(id);
         if (p.mode != Mode.Flexible) revert WrongMode();
         uint256 reward = p.reward;
@@ -295,12 +307,37 @@ contract ArexAIStaking is ReentrancyGuard {
         token.safeTransfer(msg.sender, reward);
         emit RewardClaimed(id, msg.sender, reward);
     }
-    function withdraw(uint256 id) external nonReentrant {
-        _requireSettled();
+
+    /// @notice Return principal immediately, even during settlement or emergency.
+    /// Rewards remain on the position and can be claimed/finalized separately.
+    /// Never changes snapshot membership or original reward-calculation principal.
+    function withdrawPrincipal(uint256 id) external nonReentrant {
         Position storage p = _position(id);
-        uint256 principal = p.principal;
+        if (exitedAt[id] != 0) revert PrincipalAlreadyWithdrawn();
+        exitedAt[id] = block.timestamp;
+        forfeitedRewards[id] = !permanentlyClosed && p.mode != Mode.Flexible && block.timestamp < p.ends;
+        if (!permanentlyClosed && p.mode == Mode.Flexible && quote(p.principal, Mode.Flexible) > 0
+            && (block.timestamp - p.started) / 1 days > p.settledDays) {
+            if (phase == Phase.Idle) nextFlexibleDue = Math.min(nextFlexibleDue, block.timestamp);
+            else followingDue = Math.min(followingDue, block.timestamp);
+        }
+        totalPrincipal -= p.principal;
+        token.safeTransfer(msg.sender, p.principal);
+        emit PrincipalWithdrawn(id, msg.sender, p.principal, block.timestamp);
+    }
+
+    function withdraw(uint256 id) external nonReentrant {
+        Position storage p = _position(id);
+        if (phase != Phase.Idle || (permanentlyClosed && !shutdownFinalized)) revert CheckpointRequired();
+        // Other holders' new daily boundaries must not relock this settled position.
+        if (!permanentlyClosed && p.mode == Mode.Flexible && !flexPaused && quote(p.principal, Mode.Flexible) > 0) {
+            uint256 cutoff = exitedAt[id] == 0 ? block.timestamp : exitedAt[id];
+            if (p.settledDays < (cutoff - p.started) / 1 days) revert CheckpointRequired();
+        }
+        uint256 principal = exitedAt[id] == 0 ? p.principal : 0;
         uint256 reward = 0;
-        bool early = !permanentlyClosed && p.mode != Mode.Flexible && block.timestamp < p.ends;
+        bool early = forfeitedRewards[id] || (exitedAt[id] == 0 && !permanentlyClosed
+            && p.mode != Mode.Flexible && block.timestamp < p.ends);
         if (p.mode == Mode.Flexible) {
             reward = p.reward;
             owedFlexible -= reward;

@@ -1,0 +1,11 @@
+{
+  "scope": "Local fixture: 64 staggered deposits, simulated one-second block advances, first day boundary; not a production throughput forecast",
+  "positions": 64,
+  "batchSize": 64,
+  "rounds": 32,
+  "transactions": 64,
+  "totalGas": "68750296",
+  "reblockedAfterFirstRound": false,
+  "claimAfterFirstRoundSucceeded": true,
+  "limitation": "Global catch-up is still required for new admissions and allocation of unsettled rewards, but not allocated claims or principal-only exit."
+}
