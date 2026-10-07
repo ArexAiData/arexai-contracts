@@ -281,12 +281,11 @@ test("Principal exits and allocated claims cannot invalidate either checkpoint p
   await s.connect(f.a).withdrawPrincipal(1); // already scanned
   await s.connect(f.a).withdrawPrincipal(2); // not scanned
   await invariant(f);
-  await s.checkpoint(3);assert.equal(await s.phase(),2n);
-  await s.checkpoint(1); // first position allocated, other allocations still pending
+  assert.equal(await s.checkpointFullBudget(),true); // first position allocated during scan
   const reward=(await s.positions(1)).reward;
   assert.equal(reward,2n*await s.quote(amount,0));
   await s.connect(f.a).claim(1);await invariant(f);
-  await s.connect(f.a).withdrawPrincipal(3); // already scanned, not allocated
+  await s.connect(f.a).withdrawPrincipal(3); // not yet scanned
   await settle(f,1);
   await s.connect(f.a).withdraw(1);await s.connect(f.a).withdraw(2);await s.connect(f.a).withdraw(3);
   assert.equal(await s.totalPrincipal(),amount);
@@ -357,17 +356,32 @@ test("Locked maturity withdrawal is independent of other holders' overdue flexib
 
 test("A day completed between checkpoint snapshot and principal exit stays scheduled for allocation",async()=>{
   const f=await setup(),s=f.staking,amount=100_000n*unit;
-  await s.connect(f.a).stake(amount,0);const first=await s.positions(1);
+  await s.connect(f.a).stake(amount,0);
   await s.connect(f.a).stake(amount,0);const second=await s.positions(2);
-  await time(f,Number(first.started)+day-1);
-  await s.checkpoint(1); // snapshot reaches the first position's day, not the second's
-  assert((await s.checkpointAt())<second.started+BigInt(day));
-  await time(f,Number(second.started)+day+3600);
-  await s.connect(f.a).withdrawPrincipal(2);
+  await s.connect(f.a).stake(amount,0);const third=await s.positions(3);
+  await time(f,Number(second.started)+day-1);
+  await s.checkpoint(1);
+  assert((await s.checkpointAt())<third.started+BigInt(day));
+  assert.equal(await s.phase(),1n);
+  await time(f,Number(third.started)+day+3600);
+  await s.connect(f.a).withdrawPrincipal(3);
   await settle(f,1);
-  assert.equal((await s.positions(2)).reward,0n);
-  assert((await s.nextFlexibleDue())<=await s.exitedAt(2));
+  assert.equal((await s.positions(3)).reward,0n);
+  assert((await s.nextFlexibleDue())<=await s.exitedAt(3));
   await settle(f,1);
-  assert.equal((await s.positions(2)).reward,await s.quote(amount,0));
-  await s.connect(f.a).withdraw(2);await invariant(f);
+  assert.equal((await s.positions(3)).reward,await s.quote(amount,0));
+  await s.connect(f.a).withdraw(3);await invariant(f);
+});
+
+test("Inactive deadline entries are pruned once without accrual or aggregate-rate drift",async()=>{
+ const f=await setup(),s=f.staking,amount=100_000n*unit;
+ await s.connect(f.a).stake(amount,0);await s.connect(f.a).stake(amount,0);const p=await s.positions(2);
+ const daily=await s.quote(amount,0);await s.connect(f.a).withdraw(1);
+ assert.equal(await s.dailyFlexibleRate(),daily);
+ assert.equal(await s.scheduledFlexibleCount(),2n); // includes a lazily pruned entry
+ await time(f,Number(p.started)+day+3600);await settle(f,1);
+ assert.equal(await s.scheduledFlexibleCount(),1n);
+ assert.equal(await s.dailyFlexibleRate(),daily);
+ assert.equal((await s.positions(2)).reward,daily);
+ assert.equal((await s.positions(1)).reward,0n);await invariant(f);
 });

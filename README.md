@@ -77,7 +77,7 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 ## Latest reproducible baseline
 
-The latest recorded local Solidity baseline is **103 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [staking engineering evidence](reports/staking-engineering-2026-10-06.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while global reward-allocation load remains a deployment concern.
+The latest recorded local Solidity baseline is **109 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [staking engineering evidence](reports/staking-engineering-2026-10-06.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
 
 ## Run the tests
 

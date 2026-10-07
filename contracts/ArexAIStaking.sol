@@ -6,6 +6,7 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {StakingDeadlineQueue} from "./StakingDeadlineQueue.sol";
 
 interface IStakingSafe {
     function getOwners() external view returns (address[] memory);
@@ -20,6 +21,7 @@ interface IBurnableARXAI is IERC20 { function burn(uint256 amount) external; }
 contract ArexAIStaking is ReentrancyGuard {
     using SafeERC20 for IERC20;
     using EnumerableSet for EnumerableSet.UintSet;
+    using StakingDeadlineQueue for StakingDeadlineQueue.Queue;
 
     uint256 public constant REWARD_CAP = 115_000_000 ether;
     uint256 public constant YEAR = 365 days;
@@ -45,6 +47,12 @@ contract ArexAIStaking is ReentrancyGuard {
     mapping(uint256 => uint256) private pending;
     EnumerableSet.UintSet private activePositions;
     EnumerableSet.UintSet private flexiblePositions;
+    StakingDeadlineQueue.Queue private deadlines;
+    mapping(uint256 => bool) private scheduledFlexible;
+    uint256 public dailyFlexibleRate;
+    bool public checkpointFullBudget;
+    mapping(uint256 => uint256) private allocationIds;
+    uint256 private allocationCount;
     uint256 public nextId = 1;
     uint256 public totalPrincipal;
     uint256 public freeRewards;
@@ -164,7 +172,10 @@ contract ArexAIStaking is ReentrancyGuard {
         totalPrincipal += amount;
         if (mode == Mode.Flexible && quote(amount, mode) > 0) {
             assert(flexiblePositions.add(id));
-            nextFlexibleDue = Math.min(nextFlexibleDue, block.timestamp + 1 days);
+            deadlines.insert(id, block.timestamp + 1 days);
+            scheduledFlexible[id] = true;
+            dailyFlexibleRate += quote(amount, mode);
+            (, nextFlexibleDue) = deadlines.first();
         }
         if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
         emit Staked(id, msg.sender, mode, amount, ends, reserved);
@@ -172,6 +183,7 @@ contract ArexAIStaking is ReentrancyGuard {
 
     function activeCount() external view returns (uint256) { return activePositions.length(); }
     function activeIdAt(uint256 index) external view returns (uint256) { return activePositions.at(index); }
+    function scheduledFlexibleCount() external view returns (uint256) { return deadlines.length(); }
 
     function _requireSettled() private view {
         if (phase != Phase.Idle) revert CheckpointRequired();
@@ -197,9 +209,13 @@ contract ArexAIStaking is ReentrancyGuard {
             if (permanentlyClosed || block.timestamp < nextFlexibleDue) revert NotReady();
             _startCheckpoint(block.timestamp);
         }
-        for (uint256 work; work < maxWork && phase != Phase.Idle; ++work) {
+        for (uint256 work; work < maxWork && phase != Phase.Idle;) {
+            // A fallback heap scan also writes a deferred allocation record.
+            // Charge two work credits to keep its per-call storage cost bounded.
+            uint256 cost = !permanentlyClosed && phase == Phase.Scan && !checkpointFullBudget ? 2 : 1;
             if (phase == Phase.Scan) _scanOne();
             else _allocateOne();
+            work += cost;
         }
         _burnUnused();
     }
@@ -208,18 +224,29 @@ contract ArexAIStaking is ReentrancyGuard {
         phase = Phase.Scan;
         checkpointAt = at;
         checkpointCursor = 0;
-        checkpointCount = permanentlyClosed ? activePositions.length() : flexiblePositions.length();
+        checkpointCount = permanentlyClosed ? activePositions.length() : deadlines.length();
         checkpointTotalDue = 0;
         checkpointSaved = 0;
         lastEligible = 0;
         followingDue = type(uint256).max;
+        allocationCount = 0;
+        checkpointBudget = 0;
+        checkpointFullBudget = false;
+        if (!permanentlyClosed && checkpointCount > 0) {
+            (, uint256 earliest) = deadlines.first();
+            uint256 maximumDays = (at - earliest) / 1 days + 1;
+            // Conservative bound: every scheduled position could owe the oldest
+            // position's number of days. Division avoids product overflow.
+            checkpointFullBudget = flexPaused || dailyFlexibleRate <= freeRewards / maximumDays;
+        }
         emit CheckpointStarted(at, checkpointCount, permanentlyClosed);
         if (checkpointCount == 0) _finishScan();
     }
     function _idAt(uint256 index) private view returns (uint256) {
-        return permanentlyClosed ? activePositions.at(index) : flexiblePositions.at(index);
+        return permanentlyClosed ? activePositions.at(index) : allocationIds[index];
     }
     function _scanOne() private {
+        if (!permanentlyClosed) { _scanScheduled(); return; }
         uint256 id = _idAt(checkpointCursor);
         Position storage p = positions[id];
         uint256 due = 0;
@@ -244,7 +271,47 @@ contract ArexAIStaking is ReentrancyGuard {
         ++checkpointCursor;
         if (checkpointCursor == checkpointCount) _finishScan();
     }
+    function _scanScheduled() private {
+        (uint256 id,) = deadlines.first();
+        if (!scheduledFlexible[id]) {
+            deadlines.removeFirst();
+            ++checkpointCursor;
+            (, uint256 dueAt) = deadlines.first();
+            if (dueAt > checkpointAt) _finishScan();
+            return;
+        }
+        Position storage p = positions[id];
+        uint256 cutoff = exitedAt[id] == 0 ? checkpointAt : Math.min(checkpointAt, exitedAt[id]);
+        (uint256 days_, uint256 due) = _daysAndDue(p, cutoff);
+        p.settledDays = days_;
+        uint256 next = p.started + (days_ + 1) * 1 days;
+        if (exitedAt[id] != 0 && (exitedAt[id] - p.started) / 1 days <= days_) {
+            deadlines.removeFirst();
+            scheduledFlexible[id] = false;
+            dailyFlexibleRate -= quote(p.principal, Mode.Flexible);
+        } else deadlines.updateFirst(next);
+        checkpointTotalDue += due;
+        if (due > 0) {
+            if (checkpointFullBudget) {
+                p.reward += due;
+                owedFlexible += due;
+                freeRewards -= due;
+                checkpointBudget += due;
+            } else {
+                pending[id] = due;
+                allocationIds[allocationCount++] = id;
+                lastEligible = id;
+            }
+        }
+        ++checkpointCursor;
+        (, uint256 earliest) = deadlines.first();
+        if (earliest > checkpointAt) _finishScan();
+    }
     function _finishScan() private {
+        if (!permanentlyClosed) {
+            if (checkpointFullBudget) { _finishCheckpoint(); return; }
+            checkpointCount = allocationCount;
+        }
         if (permanentlyClosed) {
             reservedLocked -= checkpointSaved;
             freeRewards += checkpointSaved;
@@ -269,12 +336,14 @@ contract ArexAIStaking is ReentrancyGuard {
             freeRewards -= reward;
         } else p.reward = pending[id];
         delete pending[id];
+        if (!permanentlyClosed) delete allocationIds[checkpointCursor];
         ++checkpointCursor;
         if (checkpointCursor == checkpointCount) _finishCheckpoint();
     }
     function _finishCheckpoint() private {
         phase = Phase.Idle;
-        nextFlexibleDue = followingDue;
+        if (permanentlyClosed) nextFlexibleDue = followingDue;
+        else (, nextFlexibleDue) = deadlines.first();
         if (freeRewards == 0) { flexPaused = true; flexResumeAt = type(uint256).max; }
         else if (!permanentlyClosed && flexPaused) { flexPaused = false; flexResumeAt = block.timestamp; }
         if (permanentlyClosed) {
@@ -354,6 +423,11 @@ contract ArexAIStaking is ReentrancyGuard {
             reward = p.reward;
             owedFlexible -= reward;
             if (flexiblePositions.contains(id)) assert(flexiblePositions.remove(id));
+            if (scheduledFlexible[id]) {
+                scheduledFlexible[id] = false;
+                dailyFlexibleRate -= quote(p.principal, Mode.Flexible);
+            }
+            if (!permanentlyClosed) (, nextFlexibleDue) = deadlines.first();
         } else {
             reservedLocked -= p.reward;
             if (early) {

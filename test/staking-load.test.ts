@@ -20,7 +20,7 @@ for(const count of [1,64,256])test(`Staking load: ${count} positions settle in b
   async function batches(kind:string){
     const gases:bigint[]=[];
     do {const receipt=await(await s.checkpoint(64)).wait();gases.push(receipt!.gasUsed);assert.equal(await s.freeRewards()+await s.reservedLocked()+await s.owedFlexible()+await s.paidRewards()+await s.burnedRewards(),CAP);}while(await s.phase()!==0n);
-    assert.equal(gases.length,Math.ceil(2*count/64));
+    assert.equal(gases.length,Math.ceil((kind.startsWith("normal")?count:2*count)/64));
     // A reproducible availability ceiling for these fixtures, not a production gas guarantee.
     assert(gases.every(g=>g<8_000_000n));
     return {positions:count,kind,transactions:gases.length,maximumGas:String(gases.reduce((a,g)=>g>a?g:a,0n)),totalGas:String(gases.reduce((a,g)=>a+g,0n)),firstWithdrawalBlocked:true,withdrawalGas:"",withdrawalGasKind:""};
