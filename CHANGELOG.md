@@ -2,6 +2,15 @@
 
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
+## 2026-10-07 — Unreleased staking holder-access improvements
+
+- Added principal-only exit during either checkpoint pass and emergency settlement, retaining original calculation evidence and recording an immutable per-position exit cutoff.
+- Made allocated flexible claims independent of global catch-up; locked final withdrawals and settled flexible final withdrawals no longer wait for unrelated daily boundaries.
+- Preserved voluntary locked early-exit forfeiture across emergency closure and prevented double principal payment.
+- Scheduled complete flexible days reached between snapshot and principal exit for subsequent allocation.
+- Added seven access/accounting regressions; local Solidity suite: 103 passed, 1 optional archive-RPC skip. Existing 16 tooling tests remain separate.
+- Global two-pass reward allocation, unlimited-position scan costs and admission catch-up still require further review. No deployment, funding, Safe configuration or live contract changed.
+
 ## 2026-10-07 — CI and reviewer-package hardening
 
 - Pinned all external GitHub Actions to verified commit SHAs and disabled persisted checkout credentials in test/security jobs.

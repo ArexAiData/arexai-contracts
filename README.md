@@ -77,7 +77,7 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 ## Latest reproducible baseline
 
-The latest recorded local Solidity baseline is **96 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [staking engineering evidence](reports/staking-engineering-2026-10-06.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype with the documented daily-boundary availability limitation.
+The latest recorded local Solidity baseline is **103 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [staking engineering evidence](reports/staking-engineering-2026-10-06.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. Staking remains an unreleased prototype. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while global reward-allocation load remains a deployment concern.
 
 ## Run the tests
 
@@ -116,7 +116,7 @@ See the [7 October repository hardening report](reports/repository-hardening-202
 
 ### Staking readiness and reviewer handoff
 
-The [staking engineering report](reports/staking-engineering-2026-10-06.md) adds four seeded accounting models, 1/64/256-position gas measurements and a daily-boundary catch-up reproduction. The boundary case requires repeated settlement before claims reopen; this remains a prototype deployment-readiness limitation.
+The [staking engineering report](reports/staking-engineering-2026-10-06.md) adds four seeded accounting models, 1/64/256-position gas measurements and a daily-boundary catch-up reproduction. That historical boundary case required repeated settlement before claims reopened. The [7 October prototype change](reports/staking-access-2026-10-07.md) removes that gate for allocated claims and adds independent principal exits; global allocation still requires bounded scans.
 
 - [Reviewer scope and hashed package](docs/AUDIT_REVIEW_PACKAGE.md): per-file integrity manifest, CI artifact and release archive.
 - [Strict Safe preflight](docs/MULTISIG_VERIFICATION.md): pinned proxy/singleton evidence, expected owners, threshold and bypass settings; no real governance address is assumed.

@@ -107,7 +107,7 @@ test("Flexible staking has no first-day reward and supports claims without reset
   await time(f,Number(p.started)+day-2);
   await assert.rejects(s.connect(f.a).claim(1),/NoReward/);
   await time(f,Number(p.started)+day);
-  await assert.rejects(s.connect(f.a).claim(1),/CheckpointRequired/);
+  await assert.rejects(s.connect(f.a).claim(1),/NoReward/);
   await settle(f);const daily=await s.quote(amount,0);
   await s.connect(f.a).claim(1);
   assert.equal(await s.paidRewards(),daily);
@@ -208,7 +208,14 @@ test("Recycled locked rewards reopen admissions without paying the flexible paus
   await time(f,Number(lock.started)+extraDays*day);await settle(f);
   assert.equal(await s.freeRewards(),0n);
   assert(BigInt(Number(lock.started)+extraDays*day)<lock.ends);
-  await s.connect(f.a).withdraw(3);
+  const pausedReward=(await s.positions(1)).reward;
+  await time(f,Number(lock.started)+(extraDays+1)*day);
+  await s.checkpoint(1);
+  await s.connect(f.a).withdrawPrincipal(3);
+  assert.equal(await s.flexPaused(),true);
+  await settle(f,1);
+  assert.equal(await s.flexPaused(),false);
+  assert.equal((await s.positions(1)).reward,pausedReward);
   assert.equal(await s.freeRewards(),lock.reward);
   const before=(await s.positions(1)).reward;
   await s.connect(f.a).stake(unit,1);
@@ -241,4 +248,126 @@ test("Staking emergency with no positions burns the entire reward cap immediatel
   assert.equal(await f.token.balanceOf(await f.staking.getAddress()),0n);
   assert.equal(await f.token.totalSupply(),before-cap);
   await invariant(f);
+});
+
+test("Principal-only flexible exit is immediate, stops accrual and never pays principal twice",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,0);const p=await s.positions(1);
+  await time(f,Number(p.started)+2*day+3600);
+  const before=await f.token.balanceOf(f.a.address);
+  await assert.rejects(s.connect(f.b).withdrawPrincipal(1),/NotHolder/);
+  await s.connect(f.a).withdrawPrincipal(1);
+  assert.equal(await f.token.balanceOf(f.a.address),before+amount);
+  assert.equal(await s.totalPrincipal(),0n);
+  await assert.rejects(s.connect(f.a).withdrawPrincipal(1),/PrincipalAlreadyWithdrawn/);
+  await time(f,Number(p.started)+10*day);await settle(f,1);
+  const expected=2n*await s.quote(amount,0);
+  assert.equal((await s.positions(1)).reward,expected);
+  const balance=await f.token.balanceOf(f.a.address);
+  await s.connect(f.a).withdraw(1);
+  assert.equal(await f.token.balanceOf(f.a.address),balance+expected);
+  assert.equal(await s.totalPrincipal(),0n);await invariant(f);
+});
+
+test("Principal exits and allocated claims cannot invalidate either checkpoint pass",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  for(let i=0;i<4;i++)await s.connect(f.a).stake(amount,0);
+  await s.connect(f.a).stake(amount,3);
+  const p=await s.positions(4);await time(f,Number(p.started)+2*day+3600);
+  await s.checkpoint(1);assert.equal(await s.phase(),1n);
+  await s.connect(f.a).withdrawPrincipal(5);
+  assert.equal(await s.reservedLocked(),0n);
+  assert.equal((await s.positions(5)).reward,0n);
+  await s.connect(f.a).withdrawPrincipal(1); // already scanned
+  await s.connect(f.a).withdrawPrincipal(2); // not scanned
+  await invariant(f);
+  await s.checkpoint(3);assert.equal(await s.phase(),2n);
+  await s.checkpoint(1); // first position allocated, other allocations still pending
+  const reward=(await s.positions(1)).reward;
+  assert.equal(reward,2n*await s.quote(amount,0));
+  await s.connect(f.a).claim(1);await invariant(f);
+  await s.connect(f.a).withdrawPrincipal(3); // already scanned, not allocated
+  await settle(f,1);
+  await s.connect(f.a).withdraw(1);await s.connect(f.a).withdraw(2);await s.connect(f.a).withdraw(3);
+  assert.equal(await s.totalPrincipal(),amount);
+  assert.equal(await s.paidRewards(),3n*reward);await invariant(f);
+});
+
+test("Early locked principal exit remains forfeited if emergency happens before reward cleanup",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,3);
+  await s.connect(f.a).withdrawPrincipal(1);
+  assert.equal(await s.forfeitedRewards(1),true);
+  assert.equal(await s.reservedLocked(),0n);
+  assert.equal(await s.freeRewards(),cap);
+  await close(f);await settle(f,1);
+  assert.equal((await s.positions(1)).reward,0n);
+  assert.equal(await s.burnedRewards(),cap);
+  const balance=await f.token.balanceOf(f.a.address);
+  await s.connect(f.a).withdraw(1);
+  assert.equal(await f.token.balanceOf(f.a.address),balance);
+  await invariant(f);
+});
+
+test("Emergency principal exits preserve locked and flexible cutoff rewards and the burn budget",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,3);await s.connect(f.a).stake(amount,0);
+  const locked=await s.positions(1),flex=await s.positions(2);
+  await time(f,Number(flex.started)+20*day+3600);
+  await close(f);const at=await s.shutdownAt();
+  await s.checkpoint(1);
+  await s.connect(f.a).withdrawPrincipal(1);
+  await s.connect(f.a).withdrawPrincipal(2);
+  assert.equal(await s.totalPrincipal(),0n);
+  assert.equal(await s.forfeitedRewards(1),false);
+  await invariant(f);await settle(f,1);
+  const lockReward=amount*1200n*(at-locked.started)/(10000n*year);
+  const flexReward=((at-flex.started)/BigInt(day))*await s.quote(amount,0);
+  assert.equal((await s.positions(1)).reward,lockReward);
+  assert.equal((await s.positions(2)).reward,flexReward);
+  assert.equal(await s.burnedRewards(),cap-lockReward-flexReward);
+  await s.connect(f.a).withdraw(1);await s.connect(f.a).withdraw(2);await invariant(f);
+});
+
+test("Principal exit during exhausted pro-rata allocation preserves both holders' reward shares",async()=>{
+  const f=await setup(),s=f.staking;
+  await s.connect(f.a).stake(100_000_000n*unit,0);
+  await s.connect(f.b).stake(200_000_000n*unit,0);
+  const p=await s.positions(2);await time(f,Number(p.started)+1000*365*day);
+  await s.checkpoint(1);await s.connect(f.a).withdrawPrincipal(1);
+  await s.checkpoint(1);await s.connect(f.b).withdrawPrincipal(2);
+  await s.checkpoint(1);await s.connect(f.a).claim(1);
+  await s.checkpoint(1);
+  const paid=await s.paidRewards(),remaining=(await s.positions(2)).reward;
+  assert.equal(paid+remaining,cap);assert(remaining>paid);
+  await s.connect(f.b).claim(2);
+  await s.connect(f.a).withdraw(1);await s.connect(f.b).withdraw(2);await invariant(f);
+});
+
+test("Locked maturity withdrawal is independent of other holders' overdue flexible boundaries",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,1);const p=await s.positions(1);
+  await s.connect(f.b).stake(amount,0);
+  await time(f,Number(p.ends)+1);
+  const before=await f.token.balanceOf(f.a.address);
+  await s.connect(f.a).withdraw(1);
+  assert.equal(await f.token.balanceOf(f.a.address),before+amount+p.reward);
+  await invariant(f);
+});
+
+test("A day completed between checkpoint snapshot and principal exit stays scheduled for allocation",async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,0);const first=await s.positions(1);
+  await s.connect(f.a).stake(amount,0);const second=await s.positions(2);
+  await time(f,Number(first.started)+day-1);
+  await s.checkpoint(1); // snapshot reaches the first position's day, not the second's
+  assert((await s.checkpointAt())<second.started+BigInt(day));
+  await time(f,Number(second.started)+day+3600);
+  await s.connect(f.a).withdrawPrincipal(2);
+  await settle(f,1);
+  assert.equal((await s.positions(2)).reward,0n);
+  assert((await s.nextFlexibleDue())<=await s.exitedAt(2));
+  await settle(f,1);
+  assert.equal((await s.positions(2)).reward,await s.quote(amount,0));
+  await s.connect(f.a).withdraw(2);await invariant(f);
 });
