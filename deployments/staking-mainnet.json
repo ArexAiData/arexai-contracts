@@ -1,0 +1,37 @@
+{
+  "network": "BNB Smart Chain",
+  "chainId": 56,
+  "stakingContract": "0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864",
+  "token": "0xeaa12b3be7cdec7749b972ed5c342f4e933ccbb3",
+  "governanceSafe": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
+  "threshold": "2 of 3",
+  "deploymentTransaction": "0x2b6f8a5337c7923c4519439bc20c6f272b9d63c751f467d5860eec4aa8641169",
+  "activationTransaction": "0xa706e9a69422ec3ddb4fd449952f457c39bd4a334f7f12565470a5fe2fd82740",
+  "activationDate": "2026-10-07",
+  "fundedRewardBudgetARXAI": "115000000",
+  "initialReserveARXAI": "575000000",
+  "remainingReserveARXAI": "460000000",
+  "rates": {
+    "flexibleSimpleAPR": "2%",
+    "days30SimpleAPR": "5%",
+    "days60SimpleAPR": "8%",
+    "days90SimpleAPR": "12%"
+  },
+  "yearDays": 365,
+  "automaticCompounding": false,
+  "sourceVerification": "BscScan exact match",
+  "independentAudit": "Pending",
+  "scope": "Separate live staking deployment record. Original six-contract registry and historical prototype reports retain their own scope. Activation transaction is not a funding transfer. Not an independent audit.",
+  "compilerInput": "verification/staking/solidity-standard-input.json",
+  "compilerInputSha256": "42268ba0d05b7fade06f574f92341d5b1ca02ea7f5f288d391ee8eccd2899691",
+  "snapshot": "verification/staking/bsc-snapshot.json",
+  "abi": "verification/staking/abi.json",
+  "sourceCommit": "a9428b1fd42bc192ebc1d4495054d2c6d92b2b92",
+  "sourceProvenance": {
+    "url": "https://sourcify.dev/server/v2/contract/56/0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864?fields=all",
+    "verifiedAt": "2026-10-07T01:59:23Z",
+    "creationMatch": "exact_match",
+    "runtimeMatch": "exact_match",
+    "note": "Recovered verified compiler input; original unsigned preparation package differs in metadata and is not substituted for this record."
+  }
+}

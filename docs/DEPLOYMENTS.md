@@ -24,5 +24,5 @@ Offline creation/runtime evidence: BSC snapshot block **125790592**. This table 
 - `npm run verify:registry` checks repository integrity; `npm run verify:bytecode` reproduces the recorded original builds and current executable templates.
 - Round 2 keeps its historical BscScan similar-match label. The separately recorded Sourcify creation/runtime matches are exact; these are distinct statements.
 - `ArexAI.sol` and `ArexAITeamVesting.sol` are test-workspace implementations. Deployed token/vesting sources are linked in the table.
-- Staking remains an unreleased prototype outside this six-address deployment registry.
+- Live staking is recorded separately in [staking-mainnet.json](../deployments/staking-mainnet.json), with frozen compiler input and exact creation/runtime evidence. See [mainnet verification](STAKING_MAINNET.md). This table retains the original six-contract snapshot.
 - [Verification procedure](VERIFICATION.md) and [recipient/pause limitations](RECIPIENT_AND_PAUSE_POLICY.md).

@@ -18,7 +18,7 @@ const entries=files.sort().map(path=>({path,size:readFileSync(path).length,sha25
 for(const {path}of entries){mkdirSync(dirname(resolve(output,path)),{recursive:true});copyFileSync(path,resolve(output,path));}
 const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const dirty=execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trim().length>0;
-const manifest={formatVersion:1,sourceCommit,workingTreeDirty:dirty,compiler:{solc:'0.8.24',evmVersion:'paris',optimizer:{enabled:true,runs:200}},scope:'Contract source and recorded deployment evidence; staking prototype; project-run tests; synthetic AI references. Not a deployment or independent audit.',files:entries};
+const manifest={formatVersion:1,sourceCommit,workingTreeDirty:dirty,compiler:{solc:'0.8.24',evmVersion:'paris',optimizer:{enabled:true,runs:200}},scope:'Contract source and recorded deployment evidence; separate live staking frozen evidence and development/test workspace; project-run tests; synthetic AI references. Not a deployment or independent audit.',files:entries};
 writeFileSync(resolve(output,'MANIFEST.json'),JSON.stringify(manifest,null,2)+'\n');
 // Verify the actual copied bytes, not just the source files.
 for(const entry of entries)assert.equal(createHash('sha256').update(readFileSync(resolve(output,entry.path))).digest('hex'),entry.sha256);

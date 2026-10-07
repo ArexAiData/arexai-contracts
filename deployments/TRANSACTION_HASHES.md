@@ -12,3 +12,10 @@ Retrieved 5 October 2026. Each hash was cross-checked against a successful BSC t
 | Liquidity reserve | [0xfb24cfb925fa0c6c1b35d5f7ad23b43a340694d4aa089d9c4c0ad4c7586d1df7](https://bscscan.com/tx/0xfb24cfb925fa0c6c1b35d5f7ad23b43a340694d4aa089d9c4c0ad4c7586d1df7) | 121924528 |
 
 Full reproducible snapshot: [verification/bsc-snapshot.json](../verification/bsc-snapshot.json). Runtime snapshot block: 125790592. No current balance, ownership, liquidity or audit claim follows from a bytecode match.
+
+## Live staking
+
+- Creation: `0x2b6f8a5337c7923c4519439bc20c6f272b9d63c751f467d5860eec4aa8641169`.
+- Activation: `0xa706e9a69422ec3ddb4fd449952f457c39bd4a334f7f12565470a5fe2fd82740`.
+
+Activation is not labelled as a reward funding transfer. See [snapshot and exact source reproduction](../docs/STAKING_MAINNET.md).

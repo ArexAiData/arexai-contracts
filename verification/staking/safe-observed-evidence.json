@@ -1,0 +1,26 @@
+{
+  "address": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
+  "chainId": 56,
+  "version": "1.5.0",
+  "owners": [
+    "0xD019Fb2D6f4e83e2B5957891C04874Bb61B126C1",
+    "0x7dC466ba12C60B81087b778f69944E1d7C07aba9",
+    "0xE8f342CE1892B15B66088E8880a836A8EBd0A77f"
+  ],
+  "threshold": 2,
+  "configurationBlock": 126163126,
+  "modules": [],
+  "guard": "zero",
+  "codeCheckBlock": 126163772,
+  "proxyRuntimeHash": "0x4e381985ca68b3e5d27b4425fa581c19cf33146d3f887a3cfca96f55528ea46f",
+  "singleton": "0xEdd160fEBBD92E350D4D398fb636302fccd67C7e",
+  "fallback": "0x3efcBB83a4A7AFcB4f68D501e2c2203A38bE77F4",
+  "factory": "0x14F2982D601c9458F93bd70B218933A6f8165e7b",
+  "registryPackage": "@safe-global/safe-deployments@1.37.63",
+  "checks": "Factory, singleton and compatibility handler code hashes matched pinned official registry. Full proxy runtime was present in the authenticated factory creation template.",
+  "signatureCheck": "User screenshot showed nonce 0, Owner + Manager, 2/2, Executed and Success. Execution hash not supplied; no independently retrieved execution receipt.",
+  "limitations": [
+    "Observations use separate recorded blocks; not a single-block reusable preflight. Recheck configuration immediately before deployment.",
+    "Third signer access and separation of keys/devices not tested."
+  ]
+}

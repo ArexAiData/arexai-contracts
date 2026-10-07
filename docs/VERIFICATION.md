@@ -41,3 +41,7 @@ Sourcify reports exact creation and runtime matches for both presales. This does
 ### Vesting discrepancy resolved in repository evidence
 
 `contracts/ArexAITeamVesting.sol` remains an explicitly separate test-workspace implementation. Its hard-coded first release is 22 June 2027; the deployed TeamVesting constructor schedule starts on **22 May 2027**, as recovered from its verified creation transaction. The deployed source receives twenty calendar dates through its constructor and does not include the test implementation's ReentrancyGuard or custom Underfunded error. No mainnet contract was modified. Five direct TeamVesting tests now cover its actual schedule, constructor constraints, permissionless triggers, funding rollback and cumulative release cap.
+
+## Separate live staking evidence
+
+The seventh live address uses [a separate registry](../deployments/staking-mainnet.json), frozen compiler input and BSC snapshot. Run `npm run verify:staking-mainnet` for exact creation/runtime reproduction including constructor arguments and immutable addresses. The original six-address snapshot is unchanged. See [staking scope](STAKING_MAINNET.md).
