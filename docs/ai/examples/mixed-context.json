@@ -1,0 +1,28 @@
+{
+  "synthetic": true,
+  "headers": [
+    "call_id",
+    "agent",
+    "invoice_id",
+    "credit"
+  ],
+  "headerHints": {
+    "call_records": [
+      "call_id",
+      "agent"
+    ],
+    "accounting": [
+      "invoice_id",
+      "credit"
+    ]
+  },
+  "expected": {
+    "context": "general",
+    "contextIsTentative": true,
+    "candidates": [
+      "call_records",
+      "accounting"
+    ],
+    "businessMeaningConfirmed": false
+  }
+}

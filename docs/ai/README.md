@@ -1,6 +1,6 @@
-# ArexAi AI engineering reference — v3.8.0
+# ArexAi AI engineering reference — v3.9.2
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.8.0 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.2 and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
 
@@ -13,7 +13,24 @@ Product: https://arexaidata.com/app · Product release notes: https://arexaidata
 5. Compute supported results locally, keep the calculation scope visible and attach source evidence. Identifier/status fields are not numeric measures. Two-list reconciliation leaves duplicate keys ambiguous and does not coerce or sum values.
 6. Optional AI assistance uses a protected summary under the product's opt-in flow. Raw file rows are not sent by these local calculation/reference tools.
 
-## v3.8.0 supported additions
+## v3.9.2 pre-analysis review
+
+Product source commit: `d771473c5caf5fde7744d1d37218603732f563bb` (8 October 2026). This private Site source commit identifies the reviewed application version; it is not a commit in this public contracts repository.
+
+- On upload, the first imported worksheet shows missing-cell, trimmed exact-row duplicate and fully empty-column counts.
+- Day/month ambiguity, mixed date formats, unrecognized dates, non-numeric values in predominantly numeric fields and duration columns without explicit units are review signals.
+- Multiple plausible header contexts stay tentative; mixed or tied contexts do not establish one business domain.
+- Fully empty columns remain categorical, with no inferred numeric or date measure.
+- Review text is available in EN/TR/DE/ES/FR. Signals cover imported rows only and do not modify source cells.
+- This release does not certify business correctness, normalize values automatically or block every possible analysis based on a warning. Existing explicit format/definition approvals remain separate.
+
+Product verification ran dataset-understanding checks (including new empty-column, mixed-context, invalid-date, numeric-contamination, unit and row-offset assertions), 15 existing confirmed-definition checks and source-evidence checks. Type checking and the application build passed. No new model-accuracy score or combined application-test count is claimed.
+
+## Retained v3.9.0–v3.9.1 capabilities
+
+Reviewed portable analysis plans and period comparisons; answer-specific file/worksheet context; resolvable source-cell examples with sensitive values masked; explicit limits when complete exact-cell evidence is unavailable. Supported chat calculations require review of ambiguous dates or duration units.
+
+## Retained v3.8.0 supported additions
 
 - Suggested table areas plus manual range review; suspected total rows are excluded only with approval.
 - Median, mode (all ties), type-7 linear-interpolated percentiles and count cross-tabs.
@@ -30,6 +47,8 @@ Range detection is heuristic. Review is necessary for merged layouts, repeated h
 | `call-records.json` | Call outcomes and explicit mm:ss durations | Median 150 seconds; p90 270 seconds; confirmed outcome labels |
 | `company-records.json` | Multiple companies with separate currencies | EUR 400 and USD 250 separately; no mixed-currency grand total |
 | `survey.json` | Categorical data with no financial metric | Tied modes; count cross-tab |
+| `pre-analysis-review.json` | Missing cells, exact duplicates, empty fields, ambiguous/invalid dates, unit review and numeric contamination | Explicit issue counts and original row offsets; no corrections |
+| `mixed-context.json` | Call and accounting header hints tied in one table | General context; both possibilities retained, no domain assumption |
 | `lists.json` | Identifiers with leading zeros and duplicate keys | One changed value, one missing record on each side, one ambiguous key |
 
 Run `npm run verify:ai-examples`. This script is an independent, deterministic **reference-fixture consistency check**. It does not invoke the application, test the AI model, measure accuracy, or certify that the deployed product handles every workbook. Product source verification separately ran 173 existing application checks, 15 confirmed-definition checks and 19 advanced-analysis checks for the v3.8.0 source commit `c0a4b1607e56f1808594ed440812c40909f97a99`; those counts are not Solidity tests and cannot be reproduced from this contracts repository alone.
