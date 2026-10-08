@@ -1,5 +1,12 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-08 — Frozen deployment load and gas measurements
+
+- Add four local load scenarios compiled from frozen mainnet input: 30-day catch-up, 1,024 eligible positions, proportional exhaustion and emergency settlement.
+- Record per-call gas, bounded checkpoint counts, principal access and liability conservation; retain JSON evidence in CI artifacts.
+- Full suite: 173 passed, 1 optional fork skipped. No live transaction, deployed contract change or independent audit claim.
+
+
 ## 2026-10-08 — Current baseline and AI reference refresh
 
 - Correct the current README baseline to the recorded 169 passed / 1 optional fork skipped and link SafeL2 1.5.0 evidence and source commit. Older report counts remain historical.

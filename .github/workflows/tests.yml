@@ -67,6 +67,7 @@ jobs:
         env:
           STAKING_LOAD_REPORT: ci-evidence/staking-load.json
           STAKING_BOUNDARY_REPORT: ci-evidence/staking-boundary.json
+          STAKING_FROZEN_LOAD_REPORT: ci-evidence/staking-frozen-load.json
         shell: bash
         run: |
           set -o pipefail

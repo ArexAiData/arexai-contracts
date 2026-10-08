@@ -1,0 +1,103 @@
+{
+  "scope": "Local EDR receipts from hash-pinned frozen mainnet compiler input. Safe harness, synthetic token and positions. Not a mainnet transaction, audit or live gas quote.",
+  "batchWork": 64,
+  "measurements": [
+    {
+      "kind": "delayed-30-days",
+      "positions": 64,
+      "delayDays": 30,
+      "batchWork": 64,
+      "transactions": 1,
+      "gasByTransaction": [
+        "5310601"
+      ],
+      "maximumGas": "5310601",
+      "totalGas": "5310601",
+      "claimGas": "73729",
+      "principalExitGas": "86104",
+      "checkpointAt": "1792198872",
+      "accountingInvariantPassed": true
+    },
+    {
+      "kind": "dense-1024",
+      "positions": 1024,
+      "delayDays": 2,
+      "batchWork": 64,
+      "transactions": 16,
+      "gasByTransaction": [
+        "7578203",
+        "7380485",
+        "7006624",
+        "6990225",
+        "6576982",
+        "6615052",
+        "6574459",
+        "6619054",
+        "6205395",
+        "6248018",
+        "6200487",
+        "6306834",
+        "6200487",
+        "6252503",
+        "6204903",
+        "6358818"
+      ],
+      "maximumGas": "7578203",
+      "totalGas": "105318529",
+      "claimGas": "73729",
+      "principalExitGas": "86104",
+      "checkpointAt": "1789780632",
+      "accountingInvariantPassed": true
+    },
+    {
+      "kind": "exhaustion",
+      "positions": 256,
+      "delayDays": 365000,
+      "batchWork": 64,
+      "transactions": 12,
+      "gasByTransaction": [
+        "4178475",
+        "4019088",
+        "3855267",
+        "3836798",
+        "3676866",
+        "3696812",
+        "3669681",
+        "3774179",
+        "2035576",
+        "2008216",
+        "2008216",
+        "2042658"
+      ],
+      "maximumGas": "4178475",
+      "totalGas": "38801832",
+      "claimGas": "73729",
+      "principalExitGas": "86104",
+      "checkpointAt": "33325607064",
+      "accountingInvariantPassed": true
+    },
+    {
+      "kind": "emergency",
+      "positions": 256,
+      "delayDays": 2,
+      "batchWork": 64,
+      "transactions": 8,
+      "gasByTransaction": [
+        "3934281",
+        "3880017",
+        "3880017",
+        "3930071",
+        "2043637",
+        "2009437",
+        "2009437",
+        "2050988"
+      ],
+      "maximumGas": "3934281",
+      "totalGas": "23737885",
+      "claimGas": "73729",
+      "principalExitGas": "80700",
+      "checkpointAt": "1789779866",
+      "accountingInvariantPassed": true
+    }
+  ]
+}
