@@ -394,4 +394,61 @@ behaviorTest("Inactive deadline entries are pruned once without accrual or aggre
  assert.equal((await s.positions(1)).reward,0n);await invariant(f);
 });
 
+// Exact transaction timestamps matter: mining first would advance the withdrawal by a second.
+for (const mode of [1,2,3]) for (const offset of [-1,0]) {
+ behaviorTest(`Locked mode ${mode} withdrawal at maturity ${offset}s uses the exact reward boundary`,async()=>{
+  const f=await setup(),s=f.staking,amount=100_000n*unit;
+  await s.connect(f.a).stake(amount,mode);const p=await s.positions(1);
+  const before=await f.token.balanceOf(f.a.address);
+  await f.connection.provider.send("evm_setNextBlockTimestamp",[Number(p.ends)+offset]);
+  const receipt=await(await s.connect(f.a).withdraw(1)).wait();
+  const block=await f.ethers.provider.getBlock(receipt!.blockNumber);
+  assert.equal(block!.timestamp,Number(p.ends)+offset);
+  const reward=offset<0?0n:p.reward;
+  assert.equal(await f.token.balanceOf(f.a.address),before+amount+reward);
+  assert.equal(await s.paidRewards(),reward);
+  assert.equal(await s.reservedLocked(),0n);
+  assert.equal(await s.totalPrincipal(),0n);
+  await invariant(f);
+ });
+}
+
+behaviorTest("Flexible claims reject a foreign holder and repeated payment without altering liabilities",async()=>{
+ const f=await setup(),s=f.staking,amount=100_000n*unit;
+ await s.connect(f.a).stake(amount,0);const p=await s.positions(1);
+ await time(f,Number(p.started)+day+3600);await settle(f);
+ const reward=(await s.positions(1)).reward,before=await f.token.balanceOf(f.a.address);
+ await assert.rejects(s.connect(f.b).claim(1),/NotHolder/);
+ assert.equal((await s.positions(1)).reward,reward);
+ await s.connect(f.a).claim(1);
+ await assert.rejects(s.connect(f.a).claim(1),/NoReward/);
+ assert.equal(await f.token.balanceOf(f.a.address),before+reward);
+ assert.equal(await s.paidRewards(),reward);
+ assert.equal(await s.totalPrincipal(),amount);
+ await s.connect(f.a).withdrawPrincipal(1);await s.connect(f.a).withdraw(1);
+ await assert.rejects(s.connect(f.a).claim(1),/InvalidPosition/);
+ await invariant(f);
+});
+
+behaviorTest("Exhausted multi-holder allocations are identical for batches of 1 and 64",async()=>{
+ const f=await setup(),s=f.staking;
+ for(const [user,amount]of [[f.a,99_999_999n*unit+17n],[f.b,199_999_999n*unit+31n],[f.a,37_000_003n*unit+7n]] as const)
+  await s.connect(user).stake(amount,0);
+ const p=await s.positions(3);await time(f,Number(p.started)+1000*365*day);
+ const snapshot=await f.connection.provider.send("evm_snapshot",[]);
+ const result=async(batch:number)=>{
+  await settle(f,batch);await invariant(f);
+  return [await s.freeRewards(),await s.owedFlexible(),...(await Promise.all([1,2,3].map(async id=>(await s.positions(id)).reward)))];
+ };
+ const small=await result(1);
+ assert.equal(await f.connection.provider.send("evm_revert",[snapshot]),true);
+ const large=await result(64);
+ assert.deepEqual(small,large);
+ assert.equal(large[0],0n);assert.equal(large[1],cap);
+ assert.equal(large[2]+large[3]+large[4],cap);
+ for(const [id,user]of [[3,f.a],[1,f.a],[2,f.b]] as const)await s.connect(user).claim(id);
+ assert.equal(await s.paidRewards(),cap);assert.equal(await s.owedFlexible(),0n);
+ await invariant(f);
+});
+
 }
