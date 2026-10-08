@@ -1,7 +1,7 @@
 {
-  "tag": "engineering-2026-10-06.2",
-  "title": "ArexAi staking invariants and reviewer package — 6 October 2026",
+  "tag": "engineering-2026-10-08",
+  "title": "ArexAi frozen staking behavior and consistency \u2014 8 October 2026",
   "prerelease": true,
-  "report": "reports/staking-engineering-2026-10-06.md",
-  "summary": "Seeded staking accounting models, bounded gas/load measurements and daily-boundary availability reproductions; strict Safe preflight; optional fixed-block BSC fork and hashed reviewer handoff package."
+  "report": "reports/frozen-staking-behavior-2026-10-08.md",
+  "summary": "24 behavioral scenarios against hash-pinned original staking bytecode, alongside the development suite; daily public site/whitepaper consistency checks; live deployment evidence clearly separated from prototype evidence."
 }

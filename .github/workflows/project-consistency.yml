@@ -1,12 +1,24 @@
 name: Published project consistency
 
 on:
+  # 06:20 Istanbul: read-only public metadata check; no wallet or transaction access.
+  schedule:
+    - cron: "20 3 * * *"
+  pull_request:
+    branches: [main]
+    paths:
+      - "deployments/staking-mainnet.json"
+      - "scripts/verify-project-consistency.mjs"
+      - "scripts/test-project-consistency.mjs"
+      - "README.md"
+      - ".github/workflows/project-consistency.yml"
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'deployments/staking-mainnet.json'
       - 'scripts/verify-project-consistency.mjs'
+      - 'scripts/test-project-consistency.mjs'
       - 'README.md'
       - '.github/workflows/project-consistency.yml'
 
@@ -26,5 +38,7 @@ jobs:
           node-version: 22.13.0
       - name: Install PDF text reader
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Exercise consistency checker rejection cases
+        run: node --test scripts/test-project-consistency.mjs
       - name: Compare published site and whitepaper with reviewed registry
         run: node scripts/verify-project-consistency.mjs --live

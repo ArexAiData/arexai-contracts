@@ -1,5 +1,12 @@
 # ArexAi Contracts Changelog
 
+## Engineering — 8 October 2026
+
+- Run 24 shared staking behavioral scenarios separately against frozen original deployment bytecode and development artifacts.
+- Schedule read-only published site/whitepaper consistency checks and run rejection cases on relevant PRs.
+- Correct obsolete unreleased-staking wording in engineering release notes; prepare the new evidence prerelease.
+- Local suite: 133 passed, 1 optional fork skipped. No deployed contract changes or independent audit implied.
+
 This changelog records material changes to the public ArexAi smart-contract engineering repository. Product releases for the ArexAi Analyst application are published separately at [arexaidata.com/updates](https://arexaidata.com/updates).
 
 ## 2026-10-07 — Live staking evidence and project consistency
