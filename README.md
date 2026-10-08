@@ -81,9 +81,15 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 - OpenZeppelin Contracts: `5.4.0`
 - Hardhat: `3.18.1`
 
+## Frozen mainnet behavioral coverage
+
+`test/staking-mainnet.test.ts` runs the same 24 behavioral scenarios as the development suite, but deploys bytecode compiled directly from the hash-pinned original Standard JSON input. It never resolves staking imports from the development workspace. This covers funding, APRs, daily boundaries, early/mature exits, exhaustion, principal access, bounded settlement and emergency liability/burn accounting. These are local simulated deployments using a Safe test harness, not transactions against mainnet or a professional audit. Exact original creation/runtime reproduction remains a separate CI gate.
+
+Published website/whitepaper consistency is checked daily at 03:20 UTC (06:20 Istanbul), on relevant PRs and pushes, and manually. A failure reports drift or fetch failure; it never edits the website or sends a blockchain transaction. GitHub scheduled runs may be delayed.
+
 ## Latest reproducible baseline
 
-The latest recorded local Solidity baseline is **109 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. The live staking deployment is documented separately using frozen source and bytecode evidence; dated prototype test reports are engineering evidence, not an audit. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
+The latest recorded local Solidity baseline is **133 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [frozen staking behavioral evidence](reports/frozen-staking-behavior-2026-10-08.md) and [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. The live staking deployment is documented separately using frozen source and bytecode evidence; dated prototype test reports are engineering evidence, not an audit. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
 
 ## Run the tests
 
