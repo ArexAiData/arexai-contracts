@@ -1,0 +1,79 @@
+{
+  "synthetic": true,
+  "headers": [
+    "date",
+    "amount",
+    "duration",
+    "empty",
+    "customer_id"
+  ],
+  "sourceRows": [
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "rows": [
+    {
+      "date": "03/04/2026",
+      "amount": "10",
+      "duration": "60",
+      "empty": "",
+      "customer_id": "001"
+    },
+    {
+      "date": "2026-02-31",
+      "amount": "20",
+      "duration": "120",
+      "empty": "",
+      "customer_id": "002"
+    },
+    {
+      "date": "2026-04-01",
+      "amount": "30",
+      "duration": "90",
+      "empty": "",
+      "customer_id": "003"
+    },
+    {
+      "date": "not a date",
+      "amount": "unknown",
+      "duration": "30",
+      "empty": "",
+      "customer_id": "004"
+    },
+    {
+      "date": "2026-04-01",
+      "amount": "30",
+      "duration": "90",
+      "empty": "",
+      "customer_id": "003"
+    }
+  ],
+  "expected": {
+    "missingCells": 5,
+    "duplicateRows": 1,
+    "emptyColumns": [
+      "empty"
+    ],
+    "ambiguousDateRows": [
+      10
+    ],
+    "invalidDateRows": [
+      20,
+      40
+    ],
+    "dateFormats": [
+      "day-month",
+      "other",
+      "year-first"
+    ],
+    "nonNumericAmountRows": [
+      40
+    ],
+    "durationUnitRequiresReview": true,
+    "identifierIsNotMeasure": true,
+    "sourceUnchanged": true
+  }
+}

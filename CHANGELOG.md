@@ -1,5 +1,13 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-08 — Current baseline and AI reference refresh
+
+- Correct the current README baseline to the recorded 169 passed / 1 optional fork skipped and link SafeL2 1.5.0 evidence and source commit. Older report counts remain historical.
+- Refresh the separate AI reference to v3.9.2, including bounded pre-analysis review, mixed contexts, source evidence and retained reviewed plans.
+- Add two synthetic fixture consistency checks; they do not execute the private application or AI model and are not Solidity tests.
+- No contract source, deployment, governance, token allocation or funds changed.
+
+
 ## Engineering — 8 October 2026
 
 - Run 24 shared staking behavioral scenarios separately against frozen original deployment bytecode and development artifacts.

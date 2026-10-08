@@ -70,7 +70,7 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 - [Immutable recipients and pause policy](docs/RECIPIENT_AND_PAUSE_POLICY.md) explains transfer failures, atomic rollback, fixed deadlines and recovery limitations, with nine executable reproductions.
-- [AI v3.8.0 technical reference](docs/ai/README.md) provides synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
+- [AI v3.9.2 technical reference](docs/ai/README.md) provides synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
 
 ## Compiler configuration
 
@@ -89,7 +89,7 @@ Published website/whitepaper consistency is checked daily at 03:20 UTC (06:20 Is
 
 ## Latest reproducible baseline
 
-The latest recorded local Solidity baseline is **133 passed, 0 failed, 1 skipped**; the optional archive-RPC fork is skipped by default. See [frozen staking behavioral evidence](reports/frozen-staking-behavior-2026-10-08.md) and [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. The live staking deployment is documented separately using frozen source and bytecode evidence; dated prototype test reports are engineering evidence, not an audit. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
+The latest recorded local Solidity baseline is **169 passed, 0 failed, 1 skipped**, recorded in [SafeL2 1.5.0 and active-position emergency evidence](reports/staking-safe150-2026-10-08.md) and present in source commit `ea5c40edb9a5e09c6d1d635fdcd14b7fa8756c8d` (PR #25). This is a recorded baseline, not a claim that every later commit has already passed CI; the optional archive-RPC fork is skipped by default. See [frozen staking behavioral evidence](reports/frozen-staking-behavior-2026-10-08.md) and [scheduled-settlement evidence](reports/staking-scheduling-2026-10-07.md) and exact-commit GitHub Actions for current results. Historical counts below refer to their dated reports. The live staking deployment is documented separately using frozen source and bytecode evidence; dated prototype test reports are engineering evidence, not an audit. [7 October access improvements](reports/staking-access-2026-10-07.md) protect principal exits and allocated claims while the [scheduled-settlement prototype](reports/staking-scheduling-2026-10-07.md) now visits due deadlines only. Dense and emergency keeper costs remain deployment concerns.
 
 ## Run the tests
 
