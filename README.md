@@ -73,7 +73,7 @@ Start with the [reviewer quick start](docs/REVIEWER_QUICKSTART.md) for prerequis
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 - [Immutable recipients and pause policy](docs/RECIPIENT_AND_PAUSE_POLICY.md) explains transfer failures, atomic rollback, fixed deadlines and recovery limitations, with nine executable reproductions.
-- [AI v3.9.2 technical reference](docs/ai/README.md) provides synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
+- [AI v3.9.6 technical reference](docs/ai/README.md) documents saved source-row inspection and worksheet overviews alongside synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
 
 ## Compiler configuration
 

@@ -1,6 +1,6 @@
-# ArexAi AI engineering reference — v3.9.2
+# ArexAi AI engineering reference — v3.9.6
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.2 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.6 and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
 
@@ -13,7 +13,26 @@ Product: https://arexaidata.com/app · Product release notes: https://arexaidata
 5. Compute supported results locally, keep the calculation scope visible and attach source evidence. Identifier/status fields are not numeric measures. Two-list reconciliation leaves duplicate keys ambiguous and does not coerce or sum values.
 6. Optional AI assistance uses a protected summary under the product's opt-in flow. Raw file rows are not sent by these local calculation/reference tools.
 
-## v3.9.2 pre-analysis review
+## v3.9.6 saved source row inspection
+
+Product source commit: `64db1feb20cf4bccba40d8b2ba4b82549817dacc` (9 October 2026), from the separate private Site repository.
+
+- Resolvable cited cells can open an answer-time row snapshot with the first 24 original columns and their worksheet/cell coordinates.
+- The cited cell is highlighted. Sensitive fields detected by the product are masked; detection is heuristic and is not a guarantee that all personal data is recognized.
+- Snapshots retain saved values after the active source is replaced. They are browser-local examples, not all calculation inputs or the whole worksheet.
+- Missing or unresolvable source references do not create invented cells. Existing complete reviewed-query traces remain a separate inspection tool.
+- Inspection controls are localized in EN/TR/DE/ES/FR.
+- Source-evidence checks covered original row/column offsets, masking, saved-value stability, source isolation and the 24-column display bound. Type checking and the product build passed. No browser/device QA or model accuracy claim is made.
+
+## v3.9.5 file overview
+
+Product source commit: `35820df1e192ac6754c1df69b99dd7d1ec510032` (9 October 2026), from the separate private Site repository.
+
+Worksheet summaries show imported row/column counts, missing cells, exact duplicate rows and column types/missing/distinct counts. Date ranges are withheld when formats need review. Suggestions use available non-sensitive status and numeric fields; context labels remain tentative. Selecting a suggestion fills the question for the user to submit rather than starting analysis automatically. Overview controls support five languages. Source files remain unchanged.
+
+Product verification included file-overview, dataset-understanding and source-evidence checks, type checking and a build. Repository fixtures below remain independent reference checks and do not exercise these UI features.
+
+## Historical v3.9.2 pre-analysis review
 
 Product source commit: `d771473c5caf5fde7744d1d37218603732f563bb` (8 October 2026). This private Site source commit identifies the reviewed application version; it is not a commit in this public contracts repository.
 
