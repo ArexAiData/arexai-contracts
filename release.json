@@ -1,7 +1,7 @@
 {
-  "tag": "engineering-2026-10-08",
-  "title": "ArexAi frozen staking behavior and consistency \u2014 8 October 2026",
+  "tag": "engineering-2026-10-09",
+  "title": "ArexAi reviewer refresh and staking usage evidence — 9 October 2026",
   "prerelease": true,
-  "report": "reports/frozen-staking-behavior-2026-10-08.md",
-  "summary": "24 behavioral scenarios against hash-pinned original staking bytecode, alongside the development suite; daily public site/whitepaper consistency checks; live deployment evidence clearly separated from prototype evidence."
+  "report": "reports/reviewer-refresh-2026-10-09.md",
+  "summary": "Updated reviewer quick start, AI v3.9.6 documentation and a limited confirmed staking principal-exit observation. Documentation and evidence only; no deployed contract changes or independent audit."
 }
