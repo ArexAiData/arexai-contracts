@@ -63,6 +63,9 @@ The two reserve sources were recovered from exact-match verified BNB Chain recor
 
 ## Review and reproduce
 
+Start with the [reviewer quick start](docs/REVIEWER_QUICKSTART.md) for prerequisites, a single fail-fast verification command and the boundary between recorded snapshots and current chain state.
+
+
 - [Source and deployment mapping](docs/VERIFICATION.md): distinguish published sources, test implementations and artifacts.
 - `npm run verify:registry` checks all six deployment records, source/artifact hashes and compiler configuration. It does not query BSC or certify deployed-bytecode equivalence.
 - `npm run verify:bytecode` reproduces six creation/runtime bytecode snapshots and checks current executable templates; see [creation transactions](deployments/TRANSACTION_HASHES.md).

@@ -15,7 +15,14 @@ The [generated deployment evidence index](DEPLOYMENTS.md) combines full addresse
 
 `contracts/ArexAI.sol` is a test-workspace token implementation. Do not substitute its name or constructor error for the published `ArexAIToken` contract. Published artifact `sourceName` values retain their historical build paths; a current repository path is not proof those artifacts were rebuilt here.
 
+## Live staking source mapping
+
+The six-contract registry above predates staking. The separate [staking registry](../deployments/staking-mainnet.json) records `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864`; its authoritative compiler input and readable sources are frozen under [`verification/staking/`](../verification/staking/README.md). `contracts/ArexAIStaking.sol` is a development/test implementation and does not upgrade the immutable deployment. Use `npm run verify:staking-mainnet` for exact recorded creation/runtime reproduction and [STAKING_MAINNET.md](STAKING_MAINNET.md) for constructor, funding/activation and governance boundaries.
+
 ## Reproduce repository checks
+
+For prerequisites, a single fail-fast command and interpretation of each gate, start with the [reviewer quick start](REVIEWER_QUICKSTART.md).
+
 
 Use Node.js 22.13 or later, install the committed lockfile with `npm ci --no-audit --no-fund`, then run `npm run verify:registry`, `npm run compile` and `npm test`. The additional token invariant uses a fixed seed and checks every intermediate balance and total supply. It is bounded deterministic testing, not exhaustive fuzzing.
 
