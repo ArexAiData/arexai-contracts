@@ -1,5 +1,14 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-09 — Reviewer documentation and usage evidence
+
+- Consolidate deployment mapping and a fail-fast reviewer quick start (PR #28).
+- Refresh separate AI reference for v3.9.5 overview and v3.9.6 saved source-row inspection (PR #29).
+- Record the independently re-read successful 10,000 ARXAI principal-exit receipt; distinguish historical reward accounting from an unverified separate claim receipt.
+- Request a new exact-commit engineering review archive through the gated release workflow.
+- No Solidity, deployed contract, governance or allocation change; no new test-count or audit claim.
+
+
 ## 2026-10-08 — Frozen deployment load and gas measurements
 
 - Add four local load scenarios compiled from frozen mainnet input: 30-day catch-up, 1,024 eligible positions, proportional exhaustion and emergency settlement.
