@@ -15,7 +15,7 @@
     "staking:prepare": "node scripts/prepare-staking-testnet.mjs",
     "verify:docs": "node scripts/generate-deployment-table.mjs --check",
     "docs:generate": "node scripts/generate-deployment-table.mjs",
-    "verify:ai-examples": "node scripts/verify-ai-examples.mjs",
+    "verify:ai-examples": "node scripts/verify-ai-examples.mjs && node scripts/verify-ai-period-fixtures.mjs",
     "audit:dependencies": "npm audit --audit-level=high",
     "verify:safe": "node scripts/verify-safe.mjs",
     "review:package": "node scripts/build-review-package.mjs",

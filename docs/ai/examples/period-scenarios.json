@@ -1,0 +1,120 @@
+{
+  "synthetic": true,
+  "cases": [
+    {
+      "name": "calls",
+      "file": "period-calls.csv",
+      "field": "duration_seconds",
+      "unit": "seconds",
+      "operation": "average",
+      "sourceRows": [
+        3,
+        5
+      ],
+      "sourceCells": [
+        "A3",
+        "A5"
+      ],
+      "expected": 60,
+      "nextField": "updated_duration_seconds",
+      "nextValues": [
+        60,
+        180
+      ],
+      "nextExpected": 120,
+      "percentChange": 100
+    },
+    {
+      "name": "accounting",
+      "file": "period-accounting.csv",
+      "field": "debit_EUR",
+      "unit": "EUR",
+      "operation": "sum",
+      "sourceRows": [
+        3,
+        5
+      ],
+      "sourceCells": [
+        "A3",
+        "A5"
+      ],
+      "expected": 200,
+      "nextField": "updated_debit_EUR",
+      "nextValues": [
+        240,
+        160
+      ],
+      "nextExpected": 400,
+      "percentChange": 100
+    },
+    {
+      "name": "inventory",
+      "file": "period-inventory.csv",
+      "field": "stock_quantity",
+      "unit": "count",
+      "operation": "sum",
+      "sourceRows": [
+        3,
+        5
+      ],
+      "sourceCells": [
+        "A3",
+        "A5"
+      ],
+      "expected": 20,
+      "nextField": "updated_stock_quantity",
+      "nextValues": [
+        24,
+        16
+      ],
+      "nextExpected": 40,
+      "percentChange": 100
+    },
+    {
+      "name": "personnel",
+      "file": "period-personnel.csv",
+      "field": "worked_hours",
+      "unit": "hours",
+      "operation": "sum",
+      "sourceRows": [
+        3,
+        5
+      ],
+      "sourceCells": [
+        "A3",
+        "A5"
+      ],
+      "expected": 14,
+      "nextField": "updated_worked_hours",
+      "nextValues": [
+        16,
+        12
+      ],
+      "nextExpected": 28,
+      "percentChange": 100
+    },
+    {
+      "name": "survey",
+      "file": "period-survey.csv",
+      "field": "rating",
+      "unit": "count",
+      "operation": "average",
+      "sourceRows": [
+        3,
+        5
+      ],
+      "sourceCells": [
+        "A3",
+        "A5"
+      ],
+      "expected": 3,
+      "nextField": "updated_rating",
+      "nextValues": [
+        4,
+        8
+      ],
+      "nextExpected": 6,
+      "percentChange": 100
+    }
+  ]
+}

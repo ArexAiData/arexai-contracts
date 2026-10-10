@@ -1,8 +1,14 @@
-# ArexAi AI engineering reference — v3.9.6
+# ArexAi AI engineering reference — v3.9.7
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.6 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.7 and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
+
+## v3.9.7 mapping preflight and quality evidence
+
+Product feature source commit: `cf26e150f11fe9b396b27e8fe85eafd9a80bc28f` (9 October 2026), in the separate private Site repository. Before recurring analysis, the product shows missing/duplicate mappings, detected sensitive fields, identifier/status measures and explicit currency-header conflicts. Renamed fields require manual selection; no fuzzy matching or currency conversion is introduced.
+
+[10 October quality report](quality-2026-10-10.md) records five synthetic cross-domain application source scenarios and explicit verification limits. Downloadable `period-*.csv` examples and `period-scenarios.json` hold independent reference expectations. `npm run verify:ai-examples` runs both the retained reference checks and the five new period fixture checks, not the private application or AI model.
 
 ## Analysis flow
 
