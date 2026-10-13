@@ -1,6 +1,6 @@
 # Live ARXAI staking evidence
 
-ARXAI staking is deployed on BNB Smart Chain at `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864` and was activated on 7 October 2026. The reward cap is 115 million existing ARXAI from the original 575 million reserve; the revised reserve allocation is 460 million. User principal is separately accounted for. This evidence is not an independent audit.
+ARXAI staking is deployed on BNB Smart Chain at `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864` and was activated on 7 October 2026. The reward cap is 115 million existing ARXAI from the original 575 million reserve; the remaining reserve was 460 million at activation on 7 October. After the separate 28.75 million contribution allocation, the 13 October snapshot records 431.25 million remaining. See [current reserve allocation](RESERVE_ALLOCATION.md). User principal is separately accounted for. This evidence is not an independent audit.
 
 ## Exact deployed code
 

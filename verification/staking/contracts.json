@@ -6,7 +6,7 @@
   "canonicalPage": "https://arexaidata.com/security",
   "canonicalListingData": "https://arexaidata.com/listing-data.json",
   "officialSourceRepository": "https://github.com/ArexAiData/arexai-contracts",
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-13",
   "auditStatus": "Independent audit pending",
   "administrator": "0xDE3DbDa5eB157bFc9a56C426C2006c0Cd4958a9e",
   "contracts": [
@@ -71,7 +71,7 @@
       "name": "Exchange and ecosystem reserve",
       "address": "0x6af332c903c8f3fde0e620b360247c28476a2180",
       "verification": "exact",
-      "purpose": "460,000,000 ARXAI remaining across 16 fixed tranches of 28.75M; 115M funded staking",
+      "purpose": "431,250,000 ARXAI remaining across 15 fixed tranches of 28.75M; 115M allocated to staking and 28.75M to contribution rewards",
       "ownerPermissions": [
         "release eligible tranche",
         "transfer ownership"
@@ -110,10 +110,14 @@
   "automatedChecks": [
     {
       "provider": "Hardhat 3",
-      "status": "52-passed-0-failed",
-      "result": "Behavioral tests cover ARXAI token, PresaleRound, TeamVesting, Listing Reserve and Liquidity Reserve",
-      "limitation": "Project-run automated tests; the expanded run does not claim a new whole-scope coverage percentage and is not an independent professional audit",
-      "url": "https://arexaidata.com/reports/arxai-expanded-automated-contract-tests-2026-09-27.txt"
+      "status": "173-passed-0-failed-1-skipped",
+      "asOf": "2026-10-08",
+      "result": "8 October 2026: 173 automated contract tests passed; 1 optional fork test skipped. Merged PR #27 adds four frozen-deployment load scenarios to Safe signature and emergency coverage. Internal testing is not an independent audit.",
+      "limitation": "Local runtime fixtures cover Safe 1.4.1 and SafeL2 1.5.0 signatures, not current live configuration or factory deployment. No whole-system coverage percentage or independent audit claimed.",
+      "url": "https://arexaidata.com/reports/arxai-frozen-load-2026-10-08.txt",
+      "sourceCommit": "f4156d6435bcdd2a717b827ac1d9173c366801cc",
+      "publishedMainPassed": 173,
+      "pullRequest": "https://github.com/ArexAiData/arexai-contracts/pull/27"
     },
     {
       "provider": "Honeypot.is",
@@ -137,11 +141,21 @@
       "url": "https://arexaidata.com/reports/arxai-presale-round-automated-review-2026-09-22.txt"
     }
   ],
-  "riskNotice": "Source verification is not a security audit. Independent audit and LP-lock evidence remain pending. Staking emergency governance is a 2-of-3 Safe; presale and reserve permissions retain their separately documented administrator controls.",
+  "riskNotice": "Source verification is not a security audit. Independent audit and LP-lock evidence remain pending. Staking emergency governance and contribution payouts use separate 2-of-3 Safes with the same owners at the dated snapshot; presale and reserve permissions retain their separately documented administrator controls.",
   "stakingGovernance": {
     "address": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
     "threshold": 2,
     "ownerCount": 3,
     "scope": "Staking emergency closure only; this does not imply presale or reserve ownership has moved to the Safe"
+  },
+  "contributionGovernance": {
+    "address": "0x5B784DE88871484e6662e27046315DAC1c399B70",
+    "threshold": 2,
+    "ownerCount": 3,
+    "sameOwnersAsStaking": true,
+    "programBudgetARXAI": 28750000,
+    "verifiedAtBlock": 127300237,
+    "scope": "Manual contribution reward payments only; separate from staking emergency governance and ReserveVault ownership",
+    "evidence": "https://arexaidata.com/reports/arxai-reserve-allocation-2026-10-13.json"
   }
 }

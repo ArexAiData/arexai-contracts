@@ -11,6 +11,9 @@ on:
       - "scripts/verify-project-consistency.mjs"
       - "scripts/test-project-consistency.mjs"
       - "README.md"
+      - "verification/staking/listing-data.json"
+      - "verification/staking/contracts.json"
+      - "reports/reserve-allocation-*.json"
       - ".github/workflows/project-consistency.yml"
   workflow_dispatch:
   push:
@@ -20,6 +23,9 @@ on:
       - 'scripts/verify-project-consistency.mjs'
       - 'scripts/test-project-consistency.mjs'
       - 'README.md'
+      - 'verification/staking/listing-data.json'
+      - 'verification/staking/contracts.json'
+      - 'reports/reserve-allocation-*.json'
       - '.github/workflows/project-consistency.yml'
 
 permissions:

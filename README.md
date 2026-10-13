@@ -17,7 +17,7 @@ Official public smart-contract engineering repository for **ArexAi (ARXAI)** on 
 
 ## Live staking on BNB Smart Chain
 
-ARXAI staking is live at `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864`. The funded reward cap is **115 million ARXAI** from the original 575 million reserve; the remaining reserve allocation is **460 million ARXAI**. Rates are immutable simple APRs: **2% flexible, 5% for 30 days, 8% for 60 days, 12% for 90 days**, using 365 days without automatic compounding.
+ARXAI staking is live at `0xFc0e57528C171cd63F548AFD35Dd787A1cBb6864`. The funded reward cap is **115 million ARXAI** from the original 575 million reserve; the current remaining reserve allocation is **431.25 million ARXAI** after a separate **28.75 million ARXAI contribution-reward allocation**. See the [13 October allocation record](docs/RESERVE_ALLOCATION.md). Rates are immutable simple APRs: **2% flexible, 5% for 30 days, 8% for 60 days, 12% for 90 days**, using 365 days without automatic compounding.
 
 Staking governance is `0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6`; the recorded Safe configuration is 2-of-3 and its scope is permanent staking emergency closure. This does not claim that presale or reserve administration moved to the Safe, or that owners/modules cannot change.
 
@@ -27,6 +27,16 @@ Staking governance is `0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6`; the recorded
 - `contracts/ArexAIStaking.sol` remains the development/test workspace. It is not substituted for the frozen deployment source; historical prototype reports retain their dated scope. Future source edits do not upgrade the immutable deployment.
 
 Independent professional audit remains pending. Historical source comments saying “unreleased” describe preparation time; the deployment receipt and activation evidence record the later mainnet status.
+
+## Current reserve and contribution rewards
+
+The original 575M reserve now reconciles as **115M staking + 28.75M contribution rewards + 431.25M remaining reserve**. Five of twenty fixed 28.75M tranches have been released; fifteen remain. This allocation update mints no additional tokens.
+
+Contribution Safe: `0x5B784DE88871484e6662e27046315DAC1c399B70`. At recorded BSC block 127300237, it held 28,750,000 ARXAI with a 2-of-3 threshold and the same three owners as the staking Safe. This snapshot does not audit modules, guards or fallback handlers.
+
+- [Eight-category allocation and dated evidence](docs/RESERVE_ALLOCATION.md).
+- [Contribution reward rules and application](docs/CONTRIBUTION_REWARDS.md): team review by importance and impact, unlocked manual Safe payments, open until the budget is exhausted.
+- Apply at https://arexaidata.com/contributions or https://arexaidata.com/tr/contributions. Submitting an issue or pull request does not automatically apply for, or guarantee, a reward.
 
 ## BNB Smart Chain deployments
 
@@ -73,7 +83,7 @@ Start with the [reviewer quick start](docs/REVIEWER_QUICKSTART.md) for prerequis
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 - [Immutable recipients and pause policy](docs/RECIPIENT_AND_PAUSE_POLICY.md) explains transfer failures, atomic rollback, fixed deadlines and recovery limitations, with nine executable reproductions.
-- [AI v3.9.6 technical reference](docs/ai/README.md) documents saved source-row inspection and worksheet overviews alongside synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
+- [AI v3.9.7 technical reference](docs/ai/README.md) documents recurring-analysis mapping preflight, saved source-row inspection and worksheet overviews alongside synthetic call-record, accounting, survey and list-reconciliation examples. Reference checks are separate from Solidity tests and do not invoke the product or AI model.
 
 ## Compiler configuration
 

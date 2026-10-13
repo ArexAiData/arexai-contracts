@@ -21,7 +21,7 @@
   "automaticCompounding": false,
   "sourceVerification": "BscScan exact match",
   "independentAudit": "Pending",
-  "scope": "Separate live staking deployment record. Original six-contract registry and historical prototype reports retain their own scope. Activation transaction is not a funding transfer. Not an independent audit.",
+  "scope": "Separate live staking deployment record. Original six-contract registry and historical prototype reports retain their own scope. Activation transaction is not a funding transfer. Not an independent audit. The remainingReserveARXAI field is historical at staking activation, not the current reserve balance. Use currentAllocationEvidence for the later contribution allocation.",
   "compilerInput": "verification/staking/solidity-standard-input.json",
   "compilerInputSha256": "42268ba0d05b7fade06f574f92341d5b1ca02ea7f5f288d391ee8eccd2899691",
   "snapshot": "verification/staking/bsc-snapshot.json",
@@ -33,5 +33,7 @@
     "creationMatch": "exact_match",
     "runtimeMatch": "exact_match",
     "note": "Recovered verified compiler input; original unsigned preparation package differs in metadata and is not substituted for this record."
-  }
+  },
+  "remainingReserveARXAIAsOf": "2026-10-07",
+  "currentAllocationEvidence": "https://arexaidata.com/reports/arxai-reserve-allocation-2026-10-13.json"
 }
