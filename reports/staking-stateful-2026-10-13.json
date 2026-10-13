@@ -1,0 +1,258 @@
+{
+  "scope": "Local deterministic model tests, not a BSC fork, live governance check or independent audit.",
+  "randomizedOperationsPerImplementation": 256,
+  "seeds": [
+    17,
+    2026,
+    64091,
+    2638,
+    3735928559,
+    2654435769,
+    324508639,
+    38177486
+  ],
+  "completedRuns": 8,
+  "totalRandomizedOperations": 4096,
+  "records": [
+    {
+      "seed": 17,
+      "steps": 256,
+      "users": 6,
+      "observations": 351,
+      "checkpointCalls": 52,
+      "counts": {
+        "stakes": [
+          20,
+          14,
+          29,
+          20
+        ],
+        "timeJumps": 44,
+        "claims": 4,
+        "earlyExits": 13,
+        "matureExits": 23,
+        "unauthorized": 37,
+        "invalidAmount": 31,
+        "rejectedClaims": 34
+      },
+      "digest": "18c534eff5064b590457df1bad8dc41c19f2365c85ac14cf4d7aeb848650a132",
+      "paid": "42686580892560882800112",
+      "burned": "114957313419107439117199888",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 2026,
+      "steps": 256,
+      "users": 6,
+      "observations": 343,
+      "checkpointCalls": 40,
+      "counts": {
+        "stakes": [
+          23,
+          22,
+          19,
+          21
+        ],
+        "timeJumps": 39,
+        "claims": 5,
+        "earlyExits": 16,
+        "matureExits": 18,
+        "unauthorized": 47,
+        "invalidAmount": 33,
+        "rejectedClaims": 27
+      },
+      "digest": "c15b225956d9301d204cfec85977b8aa95654db6ea767b5a2ec0a4eca6931572",
+      "paid": "25625930147922691526741",
+      "burned": "114974374069852077308473259",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 64091,
+      "steps": 256,
+      "users": 6,
+      "observations": 329,
+      "checkpointCalls": 38,
+      "counts": {
+        "stakes": [
+          27,
+          15,
+          16,
+          21
+        ],
+        "timeJumps": 35,
+        "claims": 9,
+        "earlyExits": 19,
+        "matureExits": 24,
+        "unauthorized": 27,
+        "invalidAmount": 46,
+        "rejectedClaims": 35
+      },
+      "digest": "cd1e3cb6ef9671bf90a2b13ce0cc423096840d27d43990b60a724dd287aac198",
+      "paid": "20069771885589485032628",
+      "burned": "114979930228114410514967372",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 2638,
+      "steps": 256,
+      "users": 6,
+      "observations": 358,
+      "checkpointCalls": 55,
+      "counts": {
+        "stakes": [
+          16,
+          24,
+          16,
+          21
+        ],
+        "timeJumps": 47,
+        "claims": 8,
+        "earlyExits": 11,
+        "matureExits": 15,
+        "unauthorized": 35,
+        "invalidAmount": 34,
+        "rejectedClaims": 46
+      },
+      "digest": "99967216b14425a9db55a99823cb737ec01e259a6230598c96a27c48e084c7b1",
+      "paid": "36409066873294647386071",
+      "burned": "114963590933126705352613929",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 3735928559,
+      "steps": 256,
+      "users": 6,
+      "observations": 350,
+      "checkpointCalls": 43,
+      "counts": {
+        "stakes": [
+          19,
+          20,
+          20,
+          26
+        ],
+        "timeJumps": 38,
+        "claims": 11,
+        "earlyExits": 11,
+        "matureExits": 22,
+        "unauthorized": 30,
+        "invalidAmount": 37,
+        "rejectedClaims": 42
+      },
+      "digest": "e6e66cfed4026f75f82354cae4387c8f6514f7b4e43c39dee2aaae6be63ce543",
+      "paid": "37754344810757546929164",
+      "burned": "114962245655189242453070836",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 2654435769,
+      "steps": 256,
+      "users": 6,
+      "observations": 335,
+      "checkpointCalls": 42,
+      "counts": {
+        "stakes": [
+          18,
+          21,
+          21,
+          21
+        ],
+        "timeJumps": 41,
+        "claims": 11,
+        "earlyExits": 17,
+        "matureExits": 29,
+        "unauthorized": 32,
+        "invalidAmount": 34,
+        "rejectedClaims": 31
+      },
+      "digest": "e03fbb5ac0196934f75505063e7b4818b6f86f287f5743576245608eafc99356",
+      "paid": "34224363633704972094811",
+      "burned": "114965775636366295027905189",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 324508639,
+      "steps": 256,
+      "users": 6,
+      "observations": 341,
+      "checkpointCalls": 46,
+      "counts": {
+        "stakes": [
+          27,
+          20,
+          11,
+          22
+        ],
+        "timeJumps": 37,
+        "claims": 8,
+        "earlyExits": 18,
+        "matureExits": 18,
+        "unauthorized": 35,
+        "invalidAmount": 43,
+        "rejectedClaims": 34
+      },
+      "digest": "b72e5b1673a7dd1d9fe1893f7929e955857a65790c7e6fc29d7c4c7db9a45909",
+      "paid": "30485984746382864028005",
+      "burned": "114969514015253617135971995",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    },
+    {
+      "seed": 38177486,
+      "steps": 256,
+      "users": 6,
+      "observations": 337,
+      "checkpointCalls": 40,
+      "counts": {
+        "stakes": [
+          21,
+          21,
+          15,
+          19
+        ],
+        "timeJumps": 38,
+        "claims": 16,
+        "earlyExits": 15,
+        "matureExits": 19,
+        "unauthorized": 34,
+        "invalidAmount": 37,
+        "rejectedClaims": 46
+      },
+      "digest": "dca17b1c478063d6395593dbf961f87d6f60a90e341d7f0dfbe0454f074e5362",
+      "paid": "26109761673507102992262",
+      "burned": "114973890238326492897007738",
+      "implementations": [
+        "development",
+        "frozen-mainnet-input"
+      ],
+      "matched": true
+    }
+  ]
+}

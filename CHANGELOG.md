@@ -1,5 +1,13 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-13 — Stateful staking security expansion
+
+- Increase the local contract suite from 173 to **191 passing tests**, with 0 failures and 1 optional archive-RPC fork skipped.
+- Add eight reproducible differential scenarios: 256 randomized operations per seed per implementation, 4,096 operations total, independently modeled holder balances and reward accounting, plus matching development/frozen-deployment state digests.
+- Add ten partial-settlement tests across both implementations: normal scanning, exhaustion scanning/allocation, and emergency scanning/allocation, with claims, principal exits, delayed keepers, rejection rollback and final sweep checks.
+- Preserve the dated full output, per-seed results and new CI JSON evidence. See [scope and reproduction](reports/staking-security-expansion-2026-10-13.md).
+- Test and evidence changes only; deployed contracts, Solidity sources, allocation and token behavior remain unchanged. Internal engineering evidence is not an independent audit.
+
 ## 2026-10-13 — Contribution flows and dependency maintenance
 
 - Document the published contribution budget panel, explicit AI-feedback draft flow and private tracking links across the README, contribution guide and AI reference. Clarify reserved-versus-paid budget behavior, five-language support, no automatic email and older/lost-link support.
