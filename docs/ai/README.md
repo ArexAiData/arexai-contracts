@@ -4,6 +4,12 @@ This directory documents the ArexAi Analyst product separately from the Solidity
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
 
+## Contribution applications from feedback — 13 October 2026
+
+After a successful incorrect-answer report, the product offers an optional contribution application draft. The user writes a title and explanation, reviews the version/feedback reference and explicitly consents before opening the editable draft in another tab. Workbook files, filenames, rows, prompts, answers, email and wallet are not copied automatically. The form still requires evidence, contact details, a receiving wallet, consent and explicit submission. Reporting feedback alone does not apply for or guarantee a reward.
+
+See the [contribution program guide](../CONTRIBUTION_REWARDS.md) for the 15-minute browser-local draft, public budget panel and private tracking links. These website features do not change AI engine v3.9.7, and the synthetic reference checks here do not exercise their application implementation.
+
 ## v3.9.7 mapping preflight and quality evidence
 
 Product feature source commit: `cf26e150f11fe9b396b27e8fe85eafd9a80bc28f` (9 October 2026), in the separate private Site repository. Before recurring analysis, the product shows missing/duplicate mappings, detected sensitive fields, identifier/status measures and explicit currency-header conflicts. Renamed fields require manual selection; no fuzzy matching or currency conversion is introduced.
