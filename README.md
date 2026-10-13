@@ -35,8 +35,10 @@ The original 575M reserve now reconciles as **115M staking + 28.75M contribution
 Contribution Safe: `0x5B784DE88871484e6662e27046315DAC1c399B70`. At recorded BSC block 127300237, it held 28,750,000 ARXAI with a 2-of-3 threshold and the same three owners as the staking Safe. This snapshot does not audit modules, guards or fallback handlers.
 
 - [Eight-category allocation and dated evidence](docs/RESERVE_ALLOCATION.md).
-- [Contribution reward rules and application](docs/CONTRIBUTION_REWARDS.md): team review by importance and impact, unlocked manual Safe payments, open until the budget is exhausted.
+- [Contribution reward rules and application](docs/CONTRIBUTION_REWARDS.md): team review by importance and impact, unlocked manual Safe payments, applications open until the recorded paid total reaches the budget.
 - Apply at https://arexaidata.com/contributions or https://arexaidata.com/tr/contributions. Submitting an issue or pull request does not automatically apply for, or guarantee, a reward.
+
+The application page now shows total, paid, approved/reserved and available rewards from its ledger, with a last-checked time. These totals are not a live Safe balance; an open form may have no unreserved funds. Successful AI feedback can lead to an explicitly reviewed, editable application draft without automatically copying workbook or chat content. New applications receive a private status-tracking link; save it privately and never post it in an issue or PR. See the [program guide](docs/CONTRIBUTION_REWARDS.md) for the five-language flow, privacy boundaries and older/lost-link support.
 
 ## BNB Smart Chain deployments
 

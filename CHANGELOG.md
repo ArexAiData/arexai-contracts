@@ -1,5 +1,13 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-13 — Contribution flows and dependency maintenance
+
+- Document the published contribution budget panel, explicit AI-feedback draft flow and private tracking links across the README, contribution guide and AI reference. Clarify reserved-versus-paid budget behavior, five-language support, no automatic email and older/lost-link support.
+- Merge reviewed, SHA-pinned Actions updates: upload-artifact 7.0.2 (#32), setup-node 7.1.0 (#33) and CodeQL SARIF upload 4.38.3 (#34). Their Actions runtime does not change the project test runtime of Node.js 22.13.0.
+- Retain `@types/node` major 22 rather than adopting the Node 26 types proposed by #18. Ignore automated major updates for that package until an intentional runtime migration; minor and patch updates remain eligible.
+- Preserve allowlisted hidden files in CI reviewer-package uploads. Inspection of the downloaded #32 artifact found ten manifest-listed files missing (`.github/` files and `.gitignore`); this corrects archive completeness, not contract behavior.
+- No Solidity, deployment, allocation, AI engine version or engineering release manifest change. Website features are documented from their separate source; this repository's tests do not execute the private website implementation.
+
 ## 2026-10-13 — Contribution rewards and allocation reconciliation
 
 - Record 431.25M remaining reserve, 115M staking and 28.75M contribution rewards; five released and fifteen remaining tranches.

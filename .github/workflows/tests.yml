@@ -87,6 +87,9 @@ jobs:
         with:
           name: reviewer-package-${{ github.sha }}
           path: ${{ runner.temp }}/arexai-review/
+          # This directory contains only the review builder's explicit public-file allowlist.
+          # Preserve .github and .gitignore so the downloaded archive matches MANIFEST.json.
+          include-hidden-files: true
           retention-days: 30
 
       - name: Preserve test evidence for this commit
