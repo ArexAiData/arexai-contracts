@@ -1,14 +1,27 @@
-# ArexAi AI engineering reference — v3.9.7
+# ArexAi AI engineering reference — v3.16.1
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.9.7 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.16.1 and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
+
+## v3.16.0–v3.16.1 Excel and CSV file workspace — 13 October 2026
+
+The current AI workspace can inspect complete selected XLSX/CSV files, create downloadable Excel copies and continue editing the latest generated workbook. Earlier copies remain available within the current browser session. Local mode retains its browser-only tools.
+
+AI file processing is a separate opt-in mode: the complete selected file (including names, hidden worksheets and cell contents), the request and up to 12 recent messages are sent to OpenAI. Sensitive values are not automatically masked in this mode. Local analysis limits and privacy behavior do not describe this full-file mode.
+
+v3.16.1 retains uploaded CSV bytes for AI processing, continues edits from locally generated workbooks, formats AI answers as readable headings/lists/tables, and displays formula text when a workbook has no saved formula result.
+
+- [Features, processing limits, test results and verification boundaries](file-workspace-v3.16.1.md).
+- Actual model/file checks covered inventory, leave tracking, student grades, project tracking, monthly budgeting, continued edits, read-only analysis and a complete 1,005-record CSV.
+- Structural output validation and an AI self-check do not certify every business rule or provide full Excel recalculation. Browser visual/end-to-end checks were not performed.
+- The private application source remains separate from this public documentation and reference-fixture repository.
 
 ## Contribution applications from feedback — 13 October 2026
 
 After a successful incorrect-answer report, the product offers an optional contribution application draft. The user writes a title and explanation, reviews the version/feedback reference and explicitly consents before opening the editable draft in another tab. Workbook files, filenames, rows, prompts, answers, email and wallet are not copied automatically. The form still requires evidence, contact details, a receiving wallet, consent and explicit submission. Reporting feedback alone does not apply for or guarantee a reward.
 
-See the [contribution program guide](../CONTRIBUTION_REWARDS.md) for the 15-minute browser-local draft, public budget panel and private tracking links. These website features do not change AI engine v3.9.7, and the synthetic reference checks here do not exercise their application implementation.
+See the [contribution program guide](../CONTRIBUTION_REWARDS.md) for the 15-minute browser-local draft, public budget panel and private tracking links. This earlier contribution-flow update did not change the then-current AI engine v3.9.7; the synthetic reference checks here do not exercise its application implementation.
 
 ## v3.9.7 mapping preflight and quality evidence
 
@@ -16,14 +29,14 @@ Product feature source commit: `cf26e150f11fe9b396b27e8fe85eafd9a80bc28f` (9 Oct
 
 [10 October quality report](quality-2026-10-10.md) records five synthetic cross-domain application source scenarios and explicit verification limits. Downloadable `period-*.csv` examples and `period-scenarios.json` hold independent reference expectations. `npm run verify:ai-examples` runs both the retained reference checks and the five new period fixture checks, not the private application or AI model.
 
-## Analysis flow
+## Retained browser-local analysis flow
 
 1. Read bounded Excel/CSV data in the browser and retain source worksheet/row/column coordinates.
 2. Propose field roles and possible contexts such as call records, accounting, personnel, inventory or surveys. Tentative context is not a confirmed business definition.
 3. Let the user define what one row means, identifiers, units, blank handling and status-code labels. Definitions belong to the current file/sheet session.
 4. Review table ranges, suspected total rows, exact filters and date formats. Date/duration conversion requires a preview and explicit approval; unparseable values require a separate exclusion choice.
 5. Compute supported results locally, keep the calculation scope visible and attach source evidence. Identifier/status fields are not numeric measures. Two-list reconciliation leaves duplicate keys ambiguous and does not coerce or sum values.
-6. Optional AI assistance uses a protected summary under the product's opt-in flow. Raw file rows are not sent by these local calculation/reference tools.
+6. The retained summary-only assistance flow uses a protected summary. These local calculation/reference tools do not send raw rows. The separately enabled full-file AI workspace described above does send the complete selected file.
 
 ## v3.9.6 saved source row inspection
 
