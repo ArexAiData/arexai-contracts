@@ -1,5 +1,12 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-13 — AI file-workspace documentation v3.16.1
+
+- Refresh the separate AI product reference for complete XLSX/CSV processing, downloadable workbook copies, continued revisions and the CSV source-retention fix.
+- Publish [file-workspace verification evidence](docs/ai/file-workspace-v3.16.1.md): five workbook domains, preserved inventory revisions, read-only analysis and a 1,005-record CSV with a checked total of 505,515.
+- Distinguish actual model/API tests, simulated transport tests, private application regressions and the public synthetic reference checker. Record missing formula-cache and browser-verification limits.
+- Update the main README and contribution evidence link. This is product documentation; it publishes no private application source and changes no Solidity code, deployment, allocation, contract test count or engineering release manifest.
+
 ## 2026-10-13 — Stateful staking security expansion
 
 - Increase the local contract suite from 173 to **191 passing tests**, with 0 failures and 1 optional archive-RPC fork skipped.
