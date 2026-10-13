@@ -1,0 +1,49 @@
+{
+  "title": "ARXAI reserve allocation and contribution Safe snapshot",
+  "network": "BNB Smart Chain",
+  "chainId": 56,
+  "displayDate": "2026-10-13",
+  "displayTimezone": "Europe/Istanbul",
+  "verifiedAt": "2026-10-12T23:39:09.643Z",
+  "blockNumber": 127300237,
+  "blockTimestamp": 1791848343,
+  "rpc": "https://bsc-rpc.publicnode.com",
+  "token": "0xeaA12b3bE7CDEC7749b972eD5C342f4e933CcBb3",
+  "decimals": 18,
+  "totalSupplyARXAI": "1000000000",
+  "initialReserveARXAI": "575000000",
+  "stakingRewardAllocationARXAI": "115000000",
+  "contributionRewardAllocationARXAI": "28750000",
+  "remainingReserveARXAI": "431250000",
+  "reserveVault": "0x6af332c903c8f3fde0e620b360247c28476a2180",
+  "reserveVaultBalanceARXAI": "431250000",
+  "releasedTranches": 5,
+  "remainingTranches": 15,
+  "amountPerTrancheARXAI": "28750000",
+  "contributionSafe": "0x5B784DE88871484e6662e27046315DAC1c399B70",
+  "contributionSafeBalanceARXAI": "28750000",
+  "contributionThreshold": 2,
+  "contributionOwners": [
+    "0xD019Fb2D6f4e83e2B5957891C04874Bb61B126C1",
+    "0x7dC466ba12C60B81087b778f69944E1d7C07aba9",
+    "0xE8f342CE1892B15B66088E8880a836A8EBd0A77f"
+  ],
+  "stakingGovernanceSafe": "0x1C4a898e3355Dbc8D9A9C75400042a025DC209e6",
+  "sameOwnersAsStaking": true,
+  "fundingTransaction": null,
+  "methods": [
+    "ERC20.totalSupply",
+    "ERC20.balanceOf(reserveVault)",
+    "ERC20.balanceOf(contributionSafe)",
+    "ReserveVault.releasedTranches",
+    "ReserveVault.TRANCHE_AMOUNT",
+    "Safe.getOwners (both Safes)",
+    "Safe.getThreshold (contribution Safe)"
+  ],
+  "scope": "Read-only snapshot at the stated block, not a continuous live balance or an audit. Staking allocation is the existing funded program cap, not its current token balance including user deposits. Funding transfer hash was not retrieved: public RPC archive logs require authenticated access. Owner and threshold reads do not audit Safe modules, guards or fallback handlers.",
+  "stakingOwnersAtSnapshot": [
+    "0xD019Fb2D6f4e83e2B5957891C04874Bb61B126C1",
+    "0x7dC466ba12C60B81087b778f69944E1d7C07aba9",
+    "0xE8f342CE1892B15B66088E8880a836A8EBd0A77f"
+  ]
+}

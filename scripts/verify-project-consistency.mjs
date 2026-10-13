@@ -37,17 +37,42 @@ assert.equal(listing.maxSupply,1000000000);
 assert.equal(listing.currentAllocation.reduce((n,x)=>n+x.amount,0),1000000000);
 assert.equal(listing.currentAllocation.reduce((n,x)=>n+x.percentage,0),100);
 const allocations=Object.fromEntries(listing.currentAllocation.map(x=>[x.name,x.amount]));
-assert.equal(allocations['Staking rewards'],115000000);assert.equal(allocations['Exchange and ecosystem reserve'],460000000);
+assert.equal(allocations['Staking rewards'],115000000);assert.equal(allocations['Exchange and ecosystem reserve'],431250000);
+assert.equal(allocations['Contribution rewards'],28750000);
+assert.equal(listing.allocationRevision.stakingTransfer+listing.allocationRevision.contributionTransfer+listing.allocationRevision.remainingReserve,575000000);
+assert.equal(listing.allocationRevision.reserveTranchesReleased,5);
+assert.equal(listing.allocationRevision.reserveTranchesRemaining,15);
 assert.equal(listing.allocationRevision.newTokensMinted,0);
 const staking=contracts.contracts.find(x=>x.name==='ARXAI staking');assert(staking);
 assert.equal(lower(staking.address),lower(canonical.stakingContract));assert.equal(lower(staking.governance),lower(canonical.governanceSafe));
 assert.equal(staking.upgradeable,false);assert.equal(staking.independentAudit,'Pending');
 assert.equal(contracts.stakingGovernance.threshold,2);assert.equal(contracts.stakingGovernance.ownerCount,3);
 for(const key of ['stakingContract','token','governanceSafe','activationTransaction','deploymentTransaction','fundedRewardBudgetARXAI','remainingReserveARXAI'])assert.equal(lower(String(evidence[key])),lower(String(canonical[key])),key);
+
+// Current contribution policy must agree across independent public registries.
+assert.equal(listing.contributions.programBudget,28750000);
+assert.equal(listing.contributions.shareOfInitialSupply,2.875);
+assert.equal(listing.contributions.lockup,false);
+assert.equal(lower(listing.contributions.safe),'0x5b784de88871484e6662e27046315dac1c399b70');
+assert.equal(lower(contracts.contributionGovernance.address),lower(listing.contributions.safe));
+assert.equal(contracts.contributionGovernance.threshold,2);
+assert.equal(contracts.contributionGovernance.ownerCount,3);
+assert.equal(contracts.contributionGovernance.programBudgetARXAI,listing.contributions.programBudget);
+assert.equal(listing.contributions.governanceVerifiedAtBlock,contracts.contributionGovernance.verifiedAtBlock);
+assert.equal(listing.allocationRevision.reserveTranchesRemaining*listing.allocationRevision.amountPerTranche,listing.allocationRevision.remainingReserve);
+assert.equal(evidence.remainingReserveARXAIAsOf,'2026-10-07','Activation balance must be explicitly historical');
+const hardhat=contracts.automatedChecks.find(x=>x.provider==='Hardhat 3');
+assert.equal(hardhat.publishedMainPassed,listing.technicalEvidence.publishedMain.passed);
+assert.equal(hardhat.sourceCommit,listing.technicalEvidence.publishedMain.commit);
+assert.equal(hardhat.url,listing.technicalEvidence.report);
+
 if(!args.includes('--skip-readme')){
 const readme=readFileSync('README.md','utf8');
 assert(readme.includes(canonical.stakingContract));assert(readme.includes(canonical.governanceSafe));
 assert.match(readme,/115 million/);
+assert.match(readme,/431[.]25 million/);
+assert(readme.includes(listing.contributions.safe));
+assert(!/remaining reserve allocation is \*\*460|revised reserve allocation is 460/.test(readme));
 assert(!/Staking prototype \(not live\)|budget has not been funded|No public testnet or mainnet staking address|Staking remains an unreleased prototype/.test(readme),'Obsolete global staking status');
 assert.match(readme,/frozen|Frozen/,'Explain frozen deployment source');
 }else assert(dirIndex>=0&&registryIndex>=0,'README exclusion is reserved for the website prepublish gate');
@@ -56,8 +81,8 @@ if(live||dirIndex>=0){
  try {
   const file=join(temp,'whitepaper.pdf');writeFileSync(file,await bytes('whitepaper.pdf'));
   const text=execFileSync('pdftotext',[file,'-'],{encoding:'utf8'}).replace(/\s+/g,' ');
-  for(const address of [canonical.stakingContract,canonical.governanceSafe])assert(lower(text).includes(lower(address)),`Whitepaper address ${address}`);
-  for(const pattern of [/115[ ,]?(?:000[ ,]?000|million)/i,/460[ ,]?(?:000[ ,]?000|million)/i,/Flexible:\s*2% simple APR/i,/5%\s*\/\s*8%\s*\/\s*12% simple APR/i])assert.match(text,pattern);
+  for(const address of [canonical.stakingContract,canonical.governanceSafe,listing.contributions.safe])assert(lower(text).includes(lower(address)),`Whitepaper address ${address}`);
+  for(const pattern of [/115[ ,]?(?:000[ ,]?000|million)/i,/431[ ,]?250[ ,]?000/i,/28[ ,]?750[ ,]?000/i,/2[.]875%/i,/43[.]125%/i,/Flexible:\s*2% simple APR/i,/5%\s*\/\s*8%\s*\/\s*12% simple APR/i])assert.match(text,pattern);
  } finally {rmSync(temp,{recursive:true,force:true});}
 }
 if(dirIndex>=0){

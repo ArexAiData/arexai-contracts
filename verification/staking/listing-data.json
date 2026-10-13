@@ -82,20 +82,27 @@
     "telegram": "https://t.me/arexai",
     "email": "info@arexaidata.com",
     "staking": "https://arexaidata.com/staking",
-    "stakingEvidence": "https://arexaidata.com/reports/arxai-staking-mainnet-2026-10-07.json"
+    "stakingEvidence": "https://arexaidata.com/reports/arxai-staking-mainnet-2026-10-07.json",
+    "contributions": "https://arexaidata.com/contributions",
+    "reserveAllocationEvidence": "https://arexaidata.com/reports/arxai-reserve-allocation-2026-10-13.json"
   },
-  "updatedAt": "2026-10-07",
-  "initialAllocationNote": "Historical deployment allocation. See currentAllocation for the revision funded on 7 October 2026.",
+  "updatedAt": "2026-10-13",
+  "initialAllocationNote": "Historical deployment allocation, not current balances. currentAllocation includes the staking and contribution reward allocations; see allocationRevision and its dated on-chain snapshot.",
   "currentAllocation": [
     {
       "name": "Exchange and ecosystem reserve",
-      "amount": 460000000,
-      "percentage": 46
+      "amount": 431250000,
+      "percentage": 43.125
     },
     {
       "name": "Staking rewards",
       "amount": 115000000,
       "percentage": 11.5
+    },
+    {
+      "name": "Contribution rewards",
+      "amount": 28750000,
+      "percentage": 2.875
     },
     {
       "name": "Liquidity reserve",
@@ -129,14 +136,20 @@
     }
   ],
   "allocationRevision": {
-    "asOf": "2026-10-07",
+    "asOf": "2026-10-13",
     "source": "Original 575,000,000 ARXAI reserve",
     "stakingTransfer": 115000000,
-    "remainingReserve": 460000000,
+    "remainingReserve": 431250000,
     "newTokensMinted": 0,
-    "reserveTranchesRemaining": 16,
+    "reserveTranchesRemaining": 15,
     "amountPerTranche": 28750000,
-    "activationTransaction": "0xa706e9a69422ec3ddb4fd449952f457c39bd4a334f7f12565470a5fe2fd82740"
+    "activationTransaction": "0xa706e9a69422ec3ddb4fd449952f457c39bd4a334f7f12565470a5fe2fd82740",
+    "timezone": "Europe/Istanbul",
+    "contributionTransfer": 28750000,
+    "reserveTranchesReleased": 5,
+    "contributionSafe": "0x5B784DE88871484e6662e27046315DAC1c399B70",
+    "evidence": "https://arexaidata.com/reports/arxai-reserve-allocation-2026-10-13.json",
+    "note": "115M staking rewards + 28.75M contribution rewards + 431.25M remaining reserve = the original 575M reserve. Budget allocations are not circulating supply or continuously refreshed wallet balances."
   },
   "staking": {
     "status": "live",
@@ -156,5 +169,65 @@
     "flexiblePeriodHours": 24,
     "earlyLockedExit": "Principal returned; entire position reward forfeited",
     "independentAudit": "Pending"
+  },
+  "technicalEvidence": {
+    "asOf": "2026-10-08",
+    "latestLocal": {
+      "passed": 173,
+      "failed": 0,
+      "skipped": 1,
+      "commit": "a2600d99157037c2651edeaf759b0091d0d2c180",
+      "status": "merged",
+      "pullRequest": "https://github.com/ArexAiData/arexai-contracts/pull/27"
+    },
+    "publishedMain": {
+      "passed": 173,
+      "skipped": 1,
+      "commit": "f4156d6435bcdd2a717b827ac1d9173c366801cc"
+    },
+    "report": "https://arexaidata.com/reports/arxai-frozen-load-2026-10-08.txt",
+    "independentAudit": "pending",
+    "coveragePercentage": null,
+    "safeIntegration": {
+      "versions": [
+        "Safe 1.4.1",
+        "SafeL2 1.5.0"
+      ],
+      "scope": "Local runtime execution and EIP-712 test signatures; active fixed/flexible emergency liabilities",
+      "limitations": [
+        "Runtime-injected fixtures, not factory deployment",
+        "Not current live account ownership, guard, modules or fallback configuration",
+        "No production transactions"
+      ]
+    },
+    "scope": "Dated 8 October baseline including four frozen-mainnet load scenarios. Later commits require their own CI results; this metadata refresh is not a new Solidity test run.",
+    "historicalBaselines": [
+      {
+        "asOf": "2026-10-08",
+        "passed": 169,
+        "commit": "ea5c40edb9a5e09c6d1d635fdcd14b7fa8756c8d",
+        "report": "https://arexaidata.com/reports/arxai-safe150-tests-2026-10-08.txt"
+      }
+    ]
+  },
+  "product": {
+    "status": "Early Access Beta",
+    "version": "3.9.7-beta",
+    "application": "https://arexaidata.com/app"
+  },
+  "contributions": {
+    "status": "funded",
+    "programBudget": 28750000,
+    "shareOfInitialSupply": 2.875,
+    "safe": "0x5B784DE88871484e6662e27046315DAC1c399B70",
+    "signatureThreshold": "2 of 3",
+    "sameOwnersAsStaking": true,
+    "lockup": false,
+    "rewardPolicy": "Team review based on contribution importance and impact",
+    "payments": "Manual Safe multisig payments; recorded after on-chain verification",
+    "applications": "https://arexaidata.com/contributions",
+    "openUntil": "Program reward budget exhausted",
+    "evidence": "https://arexaidata.com/reports/arxai-reserve-allocation-2026-10-13.json",
+    "governanceVerifiedAtBlock": 127300237
   }
 }

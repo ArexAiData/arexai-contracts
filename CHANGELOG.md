@@ -1,5 +1,12 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-13 — Contribution rewards and allocation reconciliation
+
+- Record 431.25M remaining reserve, 115M staking and 28.75M contribution rewards; five released and fifteen remaining tranches.
+- Add the contribution Safe, application links, review/payment rules and block 127300237 snapshot with explicit limitations.
+- Synchronize website metadata mirrors and consistency checks; retain historical activation and immutable deployment evidence.
+- Align current product references with v3.9.7 and recorded contract evidence with the existing 173-test baseline. This documentation update makes no new audit claim and performs no on-chain action.
+
 ## 2026-10-09 — Reviewer documentation and usage evidence
 
 - Consolidate deployment mapping and a fail-fast reviewer quick start (PR #28).
