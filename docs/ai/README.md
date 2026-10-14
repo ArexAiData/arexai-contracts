@@ -1,12 +1,28 @@
-# ArexAi AI engineering reference — v3.16.1
+# ArexAi AI engineering reference — v3.22.0
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.16.1 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.22.0 and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
 
+## Current v3.22.0 workspace and delivery — 14 October 2026
+
+The current Beta supports up to three XLSX/CSV sources, user-reviewed exact-key comparison, downloadable reviewed reports, continued workbook edits, four retained output versions and optional device-local recovery. It covers inventory, accounting, personnel, call records and other tabular domains; it does not provide a live ERP connector or country-specific tax-compliance engine.
+
+v3.22.0 adds real task stages and timing, bounded retries of read-only polls/downloads, pausing and continuing the same received job within its 20-minute session, and source-address checks before delivery. Reviewed comparison explanations read the complete deterministic report. The original reviewed workbook remains the delivered file; four Summary checks gate the explanation, without certifying all qualitative prose.
+
+- [Current capabilities, limits, verification and unresolved observations](reliable-delivery-v3.22.0.md).
+- [Three downloadable synthetic cases and reproduction steps](examples/reliable-delivery-v3.22/README.md): 55 source records and 63 pairwise source occurrences, independently checked against saved report cells.
+- [Historical application evidence](../../reports/ai-v3.22.0/provenance.json): 94 application regression groups; seven live attempts with five passes and two initial failures retained. Both targeted replays passed. These observations are not a model-accuracy benchmark.
+- `npm run verify:ai-examples` now also checks these public source/report fixtures, their hashes and twelve damaged-report rejection cases using Python 3.10+ (standard library only). It does not execute the private application, rerun its 94 groups or call an AI provider.
+- Browser/mobile interaction and actual IndexedDB reloads remain untested. The previous unrestricted three-source model-generation timeout is not claimed universally fixed.
+
+Full-file AI mode still sends complete selected file bytes (including hidden sheets), the request and applicable conversation context to OpenAI; raw values are not automatically masked. Optional device storage is off by default and expires after 24 hours of inactivity. That setting does not govern provider retention, extend the signed job's 20-minute lifetime or create account-backed cloud history. A task must have returned a checkpoint before it can be resumed. Local-only analysis remains separate.
+
+The following sections retain dated historical scope. Their old version numbers and old local-import limits are not the current full-file workspace limits.
+
 ## v3.16.0–v3.16.1 Excel and CSV file workspace — 13 October 2026
 
-The current AI workspace can inspect complete selected XLSX/CSV files, create downloadable Excel copies and continue editing the latest generated workbook. Earlier copies remain available within the current browser session. Local mode retains its browser-only tools.
+At v3.16.1, the AI workspace could inspect complete selected XLSX/CSV files, create downloadable Excel copies and continue editing the latest generated workbook. Earlier copies remain available within the current browser session. Local mode retains its browser-only tools.
 
 AI file processing is a separate opt-in mode: the complete selected file (including names, hidden worksheets and cell contents), the request and up to 12 recent messages are sent to OpenAI. Sensitive values are not automatically masked in this mode. Local analysis limits and privacy behavior do not describe this full-file mode.
 

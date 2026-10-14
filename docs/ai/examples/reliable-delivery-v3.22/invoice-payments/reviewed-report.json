@@ -1,0 +1,158 @@
+{
+  "fingerprint": "cd1bd22867ee99645d63e71ef6e0ce8945de3fdc00fc973791ee15adbdeb427c",
+  "rows": [
+    {
+      "status": "review",
+      "key": "",
+      "left": "S1 · CSV!A8",
+      "right": "",
+      "leftValue": "10,00",
+      "rightValue": null,
+      "reason": "blank"
+    },
+    {
+      "status": "review",
+      "key": "",
+      "left": "",
+      "right": "S2 · CSV!A11",
+      "leftValue": null,
+      "rightValue": "5,00",
+      "reason": "blank"
+    },
+    {
+      "status": "matched",
+      "key": "INV-001",
+      "left": "S1 · CSV!B2",
+      "right": "S2 · CSV!B2",
+      "leftValue": "1.234,56",
+      "rightValue": "1.234,57",
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "INV-002",
+      "left": "S1 · CSV!B3",
+      "right": "S2 · CSV!B3",
+      "leftValue": "0,00",
+      "rightValue": "0,00",
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "INV-003",
+      "left": "S1 · CSV!B4",
+      "right": "S2 · CSV!B4",
+      "leftValue": "-150,00",
+      "rightValue": "-150,00",
+      "reason": "equal"
+    },
+    {
+      "status": "different",
+      "key": "INV-004",
+      "left": "S1 · CSV!B5",
+      "right": "S2 · CSV!B5",
+      "leftValue": "100,00",
+      "rightValue": "99,98",
+      "reason": "different"
+    },
+    {
+      "status": "review",
+      "key": "PART-5",
+      "left": "S1 · CSV!A6",
+      "right": "",
+      "leftValue": "200,00",
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "PART-5",
+      "left": "",
+      "right": "S2 · CSV!A6",
+      "leftValue": null,
+      "rightValue": "100,00",
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "PART-5",
+      "left": "",
+      "right": "S2 · CSV!A7",
+      "leftValue": null,
+      "rightValue": "100,00",
+      "reason": "duplicate"
+    },
+    {
+      "status": "unmatched",
+      "key": "MISSING",
+      "left": "S1 · CSV!A7",
+      "right": "",
+      "leftValue": "25,00",
+      "rightValue": null,
+      "reason": "missing"
+    },
+    {
+      "status": "review",
+      "key": "AMBIG",
+      "left": "S1 · CSV!B9",
+      "right": "S2 · CSV!B9",
+      "leftValue": "1,2,3",
+      "rightValue": "123,00",
+      "reason": "number"
+    },
+    {
+      "status": "review",
+      "key": "BLANK",
+      "left": "S1 · CSV!B10",
+      "right": "S2 · CSV!B10",
+      "leftValue": "",
+      "rightValue": "0,00",
+      "reason": "number"
+    },
+    {
+      "status": "unmatched",
+      "key": "EXTRA",
+      "left": "",
+      "right": "S2 · CSV!A8",
+      "leftValue": null,
+      "rightValue": "30,00",
+      "reason": "missing"
+    }
+  ],
+  "counts": {
+    "matched": 3,
+    "different": 1,
+    "unmatched": 2,
+    "review": 7
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "name": "invoices.csv",
+      "sha256": "14ebe71cec60fab9a7c93620779abef3a6f21296513ba25f3f570cc63f71c99c",
+      "sheet": "CSV",
+      "header": 1,
+      "end": 10,
+      "key": "InvoiceNo",
+      "value": "InvoiceAmount",
+      "rows": 9
+    },
+    {
+      "id": "S2",
+      "name": "payments.csv",
+      "sha256": "2941eb4768fc24497e8d25abd0673ed2b94ae1b1e94644161703357d9e9b4dbb",
+      "sheet": "CSV",
+      "header": 1,
+      "end": 11,
+      "key": "InvoiceNo",
+      "value": "PaidAmount",
+      "rows": 10
+    }
+  ],
+  "settings": {
+    "trim": true,
+    "caseSensitive": true,
+    "format": "decimal-comma",
+    "tolerance": 0.01
+  }
+}

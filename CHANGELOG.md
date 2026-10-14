@@ -1,5 +1,13 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-14 — AI v3.22.0 evidence and reviewer package refresh
+
+- Refresh AI documentation from v3.16.1 to v3.22.0: multi-source review, complete deterministic reports, local recovery, task stages and checked source addresses. Preserve historical reports and their limits.
+- Publish unchanged synthetic source files, reviewed XLSX/JSON reports and hashed application evidence: 94 historical regression groups, 55 independently checked source records and seven live attempts (five passes; two initial failures and successful targeted replays retained).
+- Add a standalone standard-library Python oracle to the existing AI reference CI command. It checks source bytes, all saved report cells, row multiplicity/classification, provenance and twelve deliberately damaged report variants. These are public fixture checks, not application or AI-model tests.
+- Request `engineering-2026-10-14` through the protected exact-commit release workflow. The package includes the previously merged 191-test staking coverage and newer contribution/allocation evidence.
+- No Solidity, deployed contract, governance, token allocation, dependency version or private application source changes. Browser/mobile/IndexedDB QA and real customer pilots remain outside the recorded verification.
+
 ## 2026-10-13 — AI file-workspace documentation v3.16.1
 
 - Refresh the separate AI product reference for complete XLSX/CSV processing, downloadable workbook copies, continued revisions and the CSV source-retention fix.

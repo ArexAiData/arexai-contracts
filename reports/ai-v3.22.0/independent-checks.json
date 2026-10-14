@@ -1,0 +1,44 @@
+[
+  {
+    "case": "stock-shipments",
+    "passed": true,
+    "mode": "v322",
+    "counts": {
+      "matched": 7,
+      "different": 2,
+      "unmatched": 3,
+      "review": 8
+    },
+    "sourceRows": 21,
+    "accountedSourceOccurrences": 29,
+    "sha256": "ff62c2ce765ec2489e69a621e1664f55b4cfe8de825642802d0d6cdd2b8776ef"
+  },
+  {
+    "case": "invoice-payments",
+    "passed": true,
+    "mode": "v322",
+    "counts": {
+      "matched": 3,
+      "different": 1,
+      "unmatched": 2,
+      "review": 7
+    },
+    "sourceRows": 19,
+    "accountedSourceOccurrences": 19,
+    "sha256": "8a8376ad8a4a899a2ea095129bd46994f94a61a6c080fd780879bdeec11e9954"
+  },
+  {
+    "case": "staff-calls",
+    "passed": true,
+    "mode": "v322",
+    "counts": {
+      "matched": 3,
+      "different": 1,
+      "unmatched": 3,
+      "review": 4
+    },
+    "sourceRows": 15,
+    "accountedSourceOccurrences": 15,
+    "sha256": "487eea07583d81fdf1ad8577289ad581c6a3b20c850d5e62dcce2c815ba2c8a2"
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "mode": "Node; synthetic fixtures and simulated provider; browser QA not performed",
+  "results": [
+    {
+      "name": "stock-shipments: complete approved scope and unchanged saved report",
+      "passed": true
+    },
+    {
+      "name": "invoice-payments: complete approved scope and unchanged saved report",
+      "passed": true
+    },
+    {
+      "name": "staff-calls: complete approved scope and unchanged saved report",
+      "passed": true
+    },
+    {
+      "name": "Exact file/sheet/cell references pass; placeholders, unknown source and out-of-scope cells fail",
+      "passed": true
+    },
+    {
+      "name": "Repair cannot bypass source checks by removing cited cells or renaming their sheet",
+      "passed": true
+    },
+    {
+      "name": "A previous report retains historic citations without certifying them as current sources",
+      "passed": true
+    },
+    {
+      "name": "Wrong evidence sheet, source identity and range withhold original answer and file",
+      "passed": true
+    },
+    {
+      "name": "Transient polling failure retries same task without a second start",
+      "passed": true
+    },
+    {
+      "name": "Pause retains token and expiry, then resumes without cancelling or reuploading",
+      "passed": true
+    },
+    {
+      "name": "Timeout keeps same task checkpoint and reports paused waiting",
+      "passed": true
+    },
+    {
+      "name": "Slow or stale status is disclosed without invented progress; expiry is separate",
+      "passed": true
+    },
+    {
+      "name": "Reviewed explanation requires all four independently checked totals; delivers exact local report bytes",
+      "passed": true
+    },
+    {
+      "name": "Signed original source catalogue rejects forged scope and permits one provenance repair",
+      "passed": true
+    }
+  ]
+}

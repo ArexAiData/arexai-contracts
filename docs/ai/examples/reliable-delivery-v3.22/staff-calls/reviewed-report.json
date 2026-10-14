@@ -1,0 +1,140 @@
+{
+  "fingerprint": "8be05abdf3a1607e5756fdf77c090e4e32b5ff9a9d002a0f307c1c291f2aefea",
+  "rows": [
+    {
+      "status": "review",
+      "key": "",
+      "left": "S1 · Personnel!A9",
+      "right": "",
+      "leftValue": 2,
+      "rightValue": null,
+      "reason": "blank"
+    },
+    {
+      "status": "matched",
+      "key": "007",
+      "left": "S1 · Personnel!B2",
+      "right": "S2 · CSV!B2",
+      "leftValue": 12,
+      "rightValue": "12",
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "008",
+      "left": "S1 · Personnel!B3",
+      "right": "S2 · CSV!B3",
+      "leftValue": 0,
+      "rightValue": "0",
+      "reason": "equal"
+    },
+    {
+      "status": "different",
+      "key": "009",
+      "left": "S1 · Personnel!B4",
+      "right": "S2 · CSV!B4",
+      "leftValue": 8,
+      "rightValue": "7",
+      "reason": "different"
+    },
+    {
+      "status": "matched",
+      "key": "010",
+      "left": "S1 · Personnel!B5",
+      "right": "S2 · CSV!B5",
+      "leftValue": 5,
+      "rightValue": "5",
+      "reason": "equal"
+    },
+    {
+      "status": "review",
+      "key": "DUP",
+      "left": "S1 · Personnel!A6",
+      "right": "",
+      "leftValue": 4,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP",
+      "left": "S1 · Personnel!A7",
+      "right": "",
+      "leftValue": 6,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP",
+      "left": "",
+      "right": "S2 · CSV!A6",
+      "leftValue": null,
+      "rightValue": "10",
+      "reason": "duplicate"
+    },
+    {
+      "status": "unmatched",
+      "key": "011",
+      "left": "S1 · Personnel!A8",
+      "right": "",
+      "leftValue": 7,
+      "rightValue": null,
+      "reason": "missing"
+    },
+    {
+      "status": "unmatched",
+      "key": "012",
+      "left": "",
+      "right": "S2 · CSV!A7",
+      "leftValue": null,
+      "rightValue": "4",
+      "reason": "missing"
+    },
+    {
+      "status": "unmatched",
+      "key": "7",
+      "left": "",
+      "right": "S2 · CSV!A8",
+      "leftValue": null,
+      "rightValue": "12",
+      "reason": "missing"
+    }
+  ],
+  "counts": {
+    "matched": 3,
+    "different": 1,
+    "unmatched": 3,
+    "review": 4
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "name": "staff-summary.xlsx",
+      "sha256": "d44151827ae41cac7cdc9e1d402f1550b39e70c166641fccc0259791300159f8",
+      "sheet": "Personnel",
+      "header": 1,
+      "end": 9,
+      "key": "EmployeeID",
+      "value": "RecordedCalls",
+      "rows": 8
+    },
+    {
+      "id": "S2",
+      "name": "call-summary.csv",
+      "sha256": "6c003c336920212db9a221053e4b0b351cba2a50c845582934366e6ff22db732",
+      "sheet": "CSV",
+      "header": 1,
+      "end": 8,
+      "key": "EmployeeID",
+      "value": "LoggedCalls",
+      "rows": 7
+    }
+  ],
+  "settings": {
+    "trim": true,
+    "caseSensitive": true,
+    "format": "native",
+    "tolerance": 0
+  }
+}

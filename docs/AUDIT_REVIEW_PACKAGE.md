@@ -10,7 +10,9 @@
 
 ## Reproduce
 
-Use the committed lockfile, pinned compiler and documented tool versions. Run `npm ci`, `npm run audit:dependencies`, registry/bytecode/docs/reference checks, `npm run compile`, and `npm test`. Seeded model tests use four fixed seeds and 60 operations per seed; they are bounded reproducible testing, not exhaustive fuzzing. Load fixtures cover 1/64/256 positions plus a daily-boundary case, not production traffic forecasts.
+Use the committed lockfile, pinned compiler and documented tool versions. Run `npm ci`, `npm run audit:dependencies`, registry/bytecode/docs/reference checks, `npm run compile`, and `npm test`. The original seeded models use four fixed seeds and 60 operations per seed. The [13 October expansion](../reports/staking-security-expansion-2026-10-13.md) additionally covers eight differential scenarios with 4,096 operations across development/frozen implementations and ten settlement-interleaving tests. The recorded baseline is 191 passed and one optional fork skipped. Load evidence includes the original 1/64/256-position fixtures and later 1,024-position frozen/development scenarios. These are bounded local simulations, not exhaustive fuzzing or production traffic forecasts.
+
+AI v3.22.0 evidence and source/report examples are included separately. Run `npm run verify:ai-examples` with Python 3.10+ available to check all 55 synthetic source records and saved report cells. This does not run the private application or model, reproduce its 94 historical regression groups, or expand the Solidity audit scope.
 
 Optional archived-state fork: `BSC_FORK_RPC_URL=<read-only-archive-rpc> npm test`. The fork is pinned to BSC block 125790592, verifies runtime code/constructor links and executes a token transfer only in the local simulated network. Default tests skip the fork without an RPC. EDR uses Shanghai semantics and does not emulate BSC consensus, mempool or every BSC-specific rule.
 

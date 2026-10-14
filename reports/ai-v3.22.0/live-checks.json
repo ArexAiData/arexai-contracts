@@ -1,0 +1,611 @@
+{
+  "data": "synthetic",
+  "browserQA": false,
+  "results": [
+    {
+      "name": "stock-shipments",
+      "passed": true,
+      "elapsedMs": 68496,
+      "starts": 1,
+      "repairRequests": 0,
+      "injected502": true,
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "reconnecting",
+        "thinking",
+        "checking",
+        "delivered"
+      ],
+      "text": "## Raporun özeti\n\nBu dosya, `Summary` sayfasındaki yönteme göre S1’in diğer kaynaklarla ayrı ayrı karşılaştırıldığı deterministik bir rapordur. Buradaki sayılar **kaynak kayıt sayısı değil, karşılaştırma girişlerinin sınıflandırma sayılarıdır**:\n\n- `Summary!B2`: **7 matched** — değerler eşleşmiş.\n- `Summary!B3`: **2 different** — anahtar eşleşmiş, değerler farklı.\n- `Summary!B4`: **3 unmatched** — karşı tarafta karşılığı bulunmamış.\n- `Summary!B5`: **8 review** — boş veya tekrarlı anahtarlar nedeniyle otomatik olarak kesin sınıfa alınmamış.\n- `Summary!B6`: **21 source records** — kaynak kaydı sayısıdır; giriş sayılarından farklı bir ölçüdür.\n\n`Summary!B8`, bir çiftin tek giriş sayıldığını ve belirsiz kayıtların ayrı tutulduğunu belirtir. Bu nedenle duplicate kayıtlar birleştirilmemiş veya toplanmamıştır.\n\n## Kaynaklar ve kapsam\n\n`Sources!A1:I5` bölümüne göre:\n\n- S1: `stock-plan.xlsx`, `Stock` sayfası; anahtar `SKU`, değer `PlannedQty`.\n- S2: `shipments.csv`, `CSV` sayfası; anahtar `SKU`, değer `ShippedQty`.\n- S3: `warehouse-count.xlsx`, `Count` sayfası; anahtar `SKU`, değer `CountedQty`.\n- `Sources!A5:I5` ayarlarında kırpma açık, büyük/küçük harf duyarlılığı açık, format `native` ve tolerans `0` olarak kaydedilmiştir.\n\n## Eşleşen kayıtlar — `matched`\n\n`matched!A1:F8` bölümünde `Summary!B2` ile uyumlu **7** giriş vardır. Raporun örnekleri:\n\n- `matched!A2:F2`: `0001`, S1 `Stock!B2` ile S2 `CSV!B2`; değerler `10` ve `\"10\"`, neden `equal`.\n- `matched!A3:F3`: `0002`, değerler `0` ve `\"0\"`; gerçek sıfır değeri eşleşmiş olarak korunmuştur.\n- `matched!A4:F4`: `X-10`, S1 `Stock!B9` ile S2 `CSV!B7`; değerler `20` ve `\"20\"`.\n- `matched!A5:F8`: S1–S3 karşılaştırmalarındaki eşleşmeler; bunlar arasında `0001`, `0002`, `0003` ve `OnlyStock` bulunmaktadır.\n\n## Farklı kayıtlar — `different`\n\n`different!A1:F3` bölümünde `Summary!B3` ile uyumlu **2** giriş vardır:\n\n- `different!A2:F2`: `0003`; S1 `Stock!B4` değeri `12`, S2 `CSV!B4` değeri `\"11\"`. Rapor nedeni `different`.\n- `different!A3:F3`: `X-10`; S1 `Stock!B9` değeri `20`, S3 `Count!B7` değeri `18`. Rapor nedeni `different`.\n\nBunlar anahtarın bulunduğunu, ancak karşılaştırılan değerlerin tolerans ayarı nedeniyle eşit kabul edilmediğini gösterir. Olası nedenler — **hipotez olarak** — farklı kayıt zamanı, farklı operasyonel tanım veya kaynak giriş hatası olabilir; rapor bu nedenlerden herhangi birini doğrulamamaktadır.\n\n## Eşleşmeyen kayıtlar — `unmatched`\n\n`unmatched!A1:F4` bölümünde `Summary!B4` ile uyumlu **3** giriş vardır:\n\n- `unmatched!A2:F2`: `OnlyStock`; S1 `Stock!A8` kaynağında değer `9`, karşı kaynak kaydı yok.\n- `unmatched!A3:F3`: `OnlyShipment`; S2 `CSV!A6` kaynağında değer `\"2\"`, S1 tarafında karşılık yok.\n- `unmatched!A4:F4`: anahtar `\"1\"`; S2 `CSV!A8` kaynağında değer `\"10\"`, S1 tarafında karşılık yok.\n\nOlası nedenler — **hipotez olarak** — kaynakların farklı kapsama sahip olması, kayıtların farklı dönemlerde alınması veya anahtarın bir kaynakta farklı biçimde tutulması olabilir. Bu rapor, eksik kaydı yeniden eşleştirmemekte ve kaynakları yeniden oluşturmamaktadır.\n\n## İnceleme gerektiren kayıtlar — `review`\n\n`review!A1:F9` bölümünde `Summary!B5` ile uyumlu **8** giriş vardır:\n\n- `review!A2:F2`: boş anahtar; S1 `Stock!A7`, değer `5`.\n- `review!A3:F5`: `DUP-7` anahtarının tekrarlı kayıtları:\n  - S1 `Stock!A5`, değer `4`;\n  - S1 `Stock!A6`, değer `6`;\n  - S2 `CSV!A5`, değer `\"10\"`.\n- `review!A6:F9`: aynı boş ve tekrarlı kayıtların S3 karşılaştırmasıyla ayrı tutulmuş görünümleri:\n  - boş anahtar için S1 `Stock!A7`, değer `5`;\n  - `DUP-7` için S1 `Stock!A5` ve `Stock!A6`, değerler `4` ve `6`;\n  - S3 `Count!A5`, değer `10`.\n\nBu kayıtlar için otomatik karar verilmemesinin nedeni raporda `blank` veya `duplicate` olarak kaydedilmiştir. Özellikle `DUP-7` kayıtları toplanmamış, tek bir kayda indirgenmemiş ve herhangi bir satır keyfî olarak seçilmemiştir.\n\n## Kısa sonraki adımlar\n\n1. `different` kayıtları için kaynak sahiplerinden ilgili kayıtların dönemini ve değer tanımını doğrulayın.\n2. `unmatched` kayıtlarında anahtarların kaynaklar arasında aynı iş kuralıyla kullanılıp kullanılmadığını kontrol edin.\n3. `review` grubunda boş anahtarları tamamlayın; `DUP-7` için hangi fiziksel/işlemsel kaydın doğru olduğunu belirleyin.\n4. Bu kararlar verilmeden duplicate kayıtları birleştirmeyin ve değerleri toplamayın.",
+      "evidence": {
+        "version": 1,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "Summary",
+            "range": "A1:B8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "B2:B5 giriş sınıflandırma sayılarıdır; B6 source-record sayısıdır; B8 yöntemi açıklar"
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "matched",
+            "range": "A1:F8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Eşleşen karşılaştırma girişleri; rapordaki referans ve değerler korunmuştur"
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "different",
+            "range": "A1:F3",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Anahtarı eşleşen ancak değeri farklı girişler"
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "unmatched",
+            "range": "A1:F4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Karşı kaynakta eşleşmeyen girişler"
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "review",
+            "range": "A1:F9",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Boş veya tekrarlı anahtarlar; kayıtlar ayrı tutulmuştur"
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "Sources",
+            "range": "A1:I5",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Kaynak dosya, sayfa, anahtar, değer, kayıt kapsamı ve ayarlar"
+            ]
+          }
+        ],
+        "clarification": null,
+        "calculations": [
+          {
+            "source": "S1",
+            "label": "matched",
+            "sheet": "Summary",
+            "ranges": [
+              "B2"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 7,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 7
+          },
+          {
+            "source": "S1",
+            "label": "different",
+            "sheet": "Summary",
+            "ranges": [
+              "B3"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 2,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 2
+          },
+          {
+            "source": "S1",
+            "label": "unmatched",
+            "sheet": "Summary",
+            "ranges": [
+              "B4"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 3,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 3
+          },
+          {
+            "source": "S1",
+            "label": "review",
+            "sheet": "Summary",
+            "ranges": [
+              "B5"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 8,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 8
+          }
+        ],
+        "source": {
+          "name": "ArexAi-reviewed-comparison.xlsx",
+          "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+        },
+        "sources": [
+          {
+            "id": "S1",
+            "name": "ArexAi-reviewed-comparison.xlsx",
+            "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+          }
+        ]
+      },
+      "check": {
+        "sheets": 6,
+        "rows": 37,
+        "columns": 9,
+        "formulas": 0,
+        "formulaErrors": 0,
+        "uncachedFormulas": 0,
+        "sheetNames": [
+          "Summary",
+          "matched",
+          "different",
+          "unmatched",
+          "review",
+          "Sources"
+        ]
+      }
+    },
+    {
+      "name": "invoice-payments",
+      "passed": true,
+      "elapsedMs": 43357,
+      "starts": 1,
+      "repairRequests": 0,
+      "injected502": false,
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "delivered"
+      ],
+      "text": "## ArexAi incelenmiş karşılaştırmanın açıklaması\n\nRapor, **S1 = `invoices.csv`** ve **S2 = `payments.csv`** kaynaklarını, `Sources` sayfasında kayıtlı satır sınırları, anahtar/değer alanları, `decimal-comma` biçimi ve `0.01` tolerans ayarıyla karşılaştırır (`Sources!A2:I4`). Yönteme göre her karşılaştırma çifti bir **giriş** sayılır; belirsiz kayıtlar ayrı tutulur (`Summary!A8:B8`). Bu nedenle **giriş sayıları**, kaynaklardaki ham kayıt sayılarıyla aynı kavram değildir.\n\n### Summary sonuçları\n\n- **matched: 3 giriş** — `Summary!B2`\n- **different: 1 giriş** — `Summary!B3`\n- **unmatched: 2 giriş** — `Summary!B4`\n- **review: 7 giriş** — `Summary!B5`\n\n`Summary!B6` rapordaki **kaynak kayıtları toplamını** gösterir. Bu alan, yukarıdaki durumlara ait giriş sayılarından farklı bir ölçüdür. Kaynaklara ilişkin kayıt kapsamı ayrıca `Sources!I2:I3` hücrelerinde yer alır.\n\n### 1. Matched — eşleşen girişler\n\n`matched!A2:F4` bölümünde rapor üç girişi `equal` olarak sınıflandırmıştır:\n\n- `INV-001`: S1 `CSV!B2` değeri `1.234,56`, S2 `CSV!B2` değeri `1.234,57` (`matched!A2:F2`). Rapor bunu eşit kabul etmiştir.\n- `INV-002`: Her iki kaynakta da `0,00` (`matched!A3:F3`).\n- `INV-003`: Her iki kaynakta da `-150,00` (`matched!A4:F4`).\n\nBu sınıflandırmalar rapordaki `Reason` alanındaki `equal` değerleridir; yeniden eşleştirme veya farklı tolerans uygulanmamıştır.\n\n### 2. Different — farklı değerler\n\n`different!A2:F2` kaydında:\n\n- `INV-004` için S1 değeri `100,00`, S2 değeri `99,98` olarak gösterilir.\n- Raporun sınıflandırması `different`tir (`different!A2:F2`).\n\n**Olası nedenler — hipotez:** kaynakların farklı tarihlerde alınması, yuvarlama/hesaplama farkı veya kaynaklardan birinde veri giriş düzeltmesi olabilir. Bunlar rapor tarafından doğrulanmış nedenler değildir; yalnızca incelenebilecek olası açıklamalardır.\n\n### 3. Unmatched — karşılığı bulunmayan girişler\n\n`unmatched!A2:F3` bölümünde:\n\n- `MISSING`: S1 `CSV!A7` referansında `25,00` değeri vardır; S2 tarafında karşılık gösterilmemiştir (`unmatched!A2:F2`).\n- `EXTRA`: S2 `CSV!A8` referansında `30,00` değeri vardır; S1 tarafında karşılık gösterilmemiştir (`unmatched!A3:F3`).\n\n**Olası nedenler — hipotez:** kayıtların yalnızca bir kaynakta bulunması, kaynakların farklı kapsam veya kesim zamanlarına sahip olması ya da bir kaydın ilgili dosyada eksik olması olabilir.\n\n### 4. Review — inceleme gerektiren girişler\n\n`review!A2:F8` bölümündeki kayıtlar otomatik olarak kesin eşleşme veya fark sonucuna dönüştürülmemiştir:\n\n- **Boş anahtar:** S1 `CSV!A8` kaydında `10,00`, S2 `CSV!A11` kaydında `5,00` bulunur; anahtar alanları boştur (`review!A2:F3`).\n- **Mükerrer anahtar:** `PART-5`, S1 `CSV!A6` kaydında `200,00`; S2 tarafında `CSV!A6` ve `CSV!A7` kayıtlarında `100,00` ve `100,00` olarak görünür (`review!A4:F6`). Rapor bu kayıtları toplamamış veya tek kayda indirgememiştir.\n- **Sayı biçimi belirsizliği:** `AMBIG` için S1 değeri `1,2,3`, S2 değeri `123,00` olarak kaydedilmiştir (`review!A7:F7`). Bu ifade, kaynak metin biçimi veya ondalık/binlik ayırıcı yorumu açısından açıklama gerektirir.\n- **Boş değer–sıfır farkı:** `BLANK` için S1 değeri boş, S2 değeri `0,00`dır (`review!A8:F8`). Boşluk, sıfırla otomatik olarak aynı kabul edilmemiştir.\n\n**Olası nedenler — hipotez:** boş anahtarlar eksik kaynak alanını; `PART-5` durumu bölünmüş işlem veya yinelenen kayıtları; `AMBIG` sayı gösterimindeki belirsizliği; `BLANK` ise “değer yok” ile gerçek sıfır arasındaki iş kuralı farkını gösterebilir.\n\n## Önerilen sonraki adımlar\n\n1. Önce `review` kayıtlarını, rapordaki kesin kaynak referanslarını kullanarak kaynak dosyalarda doğrulayın.\n2. `PART-5` için mükerrer kayıtların gerçekten ayrı işlemler mi yoksa yinelenen satırlar mı olduğunu netleştirin; rapor bunları kendiliğinden birleştirmemiştir.\n3. `AMBIG` için `1,2,3` değerinin kaynak sistemindeki anlamını kesinleştirin.\n4. `BLANK` için boş değer ile `0,00` değerinin iş kuralında eşdeğer olup olmadığını belirleyin.\n5. `different` ve `unmatched` kayıtlarında kaynak kesim zamanı, aktarım eksikliği veya düzeltme geçmişini kontrol edin.",
+      "evidence": {
+        "version": 1,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "Summary",
+            "range": "A1:B8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "B2:B5 raporun dört durum için giriş sayılarını içerir; B6 kaynak kayıtları toplamıdır."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "matched",
+            "range": "A1:F4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Eşleşen girişler ve kaynak hücre referansları."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "different",
+            "range": "A1:F2",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Farklı değer sınıflandırması."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "unmatched",
+            "range": "A1:F3",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Bir kaynakta karşılığı bulunmayan girişler."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "review",
+            "range": "A1:F8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Boş anahtar, mükerrer, sayı biçimi ve boş/değerli karşılaştırması için inceleme kayıtları."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "Sources",
+            "range": "A1:I4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Kaynak adları, satır sınırları, anahtar/değer alanları ve yöntem ayarları."
+            ]
+          }
+        ],
+        "clarification": null,
+        "calculations": [
+          {
+            "source": "S1",
+            "label": "matched",
+            "sheet": "Summary",
+            "ranges": [
+              "B2"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 3,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı; tek hücre",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 3
+          },
+          {
+            "source": "S1",
+            "label": "different",
+            "sheet": "Summary",
+            "ranges": [
+              "B3"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 1,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı; tek hücre",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 1
+          },
+          {
+            "source": "S1",
+            "label": "unmatched",
+            "sheet": "Summary",
+            "ranges": [
+              "B4"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 2,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı; tek hücre",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 2
+          },
+          {
+            "source": "S1",
+            "label": "review",
+            "sheet": "Summary",
+            "ranges": [
+              "B5"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 7,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary giriş sayısı; tek hücre",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 7
+          }
+        ],
+        "source": {
+          "name": "ArexAi-reviewed-comparison.xlsx",
+          "sha256": "88e1108df6e26ec276c8dc1a9eb0f63b8da3113295a5ca05264fb7a88062b645"
+        },
+        "sources": [
+          {
+            "id": "S1",
+            "name": "ArexAi-reviewed-comparison.xlsx",
+            "sha256": "88e1108df6e26ec276c8dc1a9eb0f63b8da3113295a5ca05264fb7a88062b645"
+          }
+        ]
+      },
+      "check": {
+        "sheets": 6,
+        "rows": 29,
+        "columns": 9,
+        "formulas": 0,
+        "formulaErrors": 0,
+        "uncachedFormulas": 0,
+        "sheetNames": [
+          "Summary",
+          "matched",
+          "different",
+          "unmatched",
+          "review",
+          "Sources"
+        ]
+      }
+    },
+    {
+      "name": "staff-calls",
+      "passed": true,
+      "elapsedMs": 41149,
+      "starts": 1,
+      "repairRequests": 0,
+      "injected502": false,
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "delivered"
+      ],
+      "text": "## ArexAi gözden geçirilmiş karşılaştırma özeti\n\nRaporun yöntemi **Summary!B8** hücresinde belirtildiği üzere, S1 diğer kaynakla ayrı ayrı karşılaştırılmış; her eşleştirme bir giriş olarak kaydedilmiş ve belirsiz kayıtlar ayrı tutulmuştur. Bu nedenle **giriş sayıları**, kaynaklardaki toplam kayıt sayısıyla aynı kavram değildir.\n\n### Genel sonuçlar\n\n- **Eşleşen girişler — 3:** `Summary!B2`\n- **Farklı girişler — 1:** `Summary!B3`\n- **Eşleşmeyen girişler — 3:** `Summary!B4`\n- **İnceleme gerektiren girişler — 4:** `Summary!B5`\n- Kaynak kayıt sayısı: **15**, `Summary!B6`\n\nKaynak ayrıntısında S1 için `Personnel` sayfasında 8 kayıt, S2 için `CSV` sayfasında 7 kayıt tanımlanmıştır (`Sources!I2:I3`). Bu değer, sınıflandırılmış karşılaştırma girişlerinin sayısından farklıdır; çünkü rapor eşleştirme çiftlerini, eksik kayıtları ve belirsiz kayıtları ayrı sınıflandırmaktadır.\n\n### Eşleşen kayıtlar\n\n`matched!A2:F4` bölümünde üç kayıt eşit olarak sınıflandırılmıştır:\n\n- `matched!A2:F2`: Anahtar `007`; S1 değeri `12`, S2 değeri `\"12\"`; gerekçe `equal`.\n- `matched!A3:F3`: Anahtar `008`; her iki kaynakta da değer `0`; gerekçe `equal`. Bu, gerçek sıfır değerinin eşleşme olarak korunduğu bir örnektir.\n- `matched!A4:F4`: Anahtar `010`; her iki kaynakta da değer `5`; gerekçe `equal`.\n\n### Farklı kayıt\n\n`different!A2:F2` satırında anahtar `009` için:\n\n- S1: `S1 · Personnel!B4`, değer `8`\n- S2: `S2 · CSV!B4`, değer `\"7\"`\n- Rapor gerekçesi: `different`\n\n`Sources!A4:B4` içindeki ayarlara göre biçim `native`, tolerans ise `0` olarak kaydedilmiştir. Bu nedenle kayıt, raporda eşleşen değil farklı olarak sınıflandırılmıştır.\n\n### Eşleşmeyen kayıtlar\n\n`unmatched!A2:F4` bölümünde tek taraflı kalan üç giriş vardır:\n\n- `unmatched!A2:F2`: Anahtar `011`; yalnızca S1 kaynağında, değer `7`.\n- `unmatched!A3:F3`: Anahtar `012`; yalnızca S2 kaynağında, değer `\"4\"`.\n- `unmatched!A4:F4`: Anahtar `7`; yalnızca S2 kaynağında, değer `\"12\"`.\n\nBu kayıtlar için raporun gerekçesi `missing` olarak verilmiştir. Kaynakların anahtar biçimi veya kayıt kapsamı arasında farklılık bulunması olası bir neden olabilir; bu yalnızca bir **hipotezdir** ve rapor bunu kesin neden olarak belirtmemektedir.\n\n### İnceleme gerektiren kayıtlar\n\n`review!A2:F5` bölümünde iki tür inceleme nedeni görülmektedir:\n\n- `review!A2:F2`: S1 kaynağında `Personnel!A9` hücresinden gelen kaydın anahtarı boştur; değer `2`. Gerekçe `blank`.\n- `review!A3:F5`: `DUP` anahtarı tekrar etmektedir:\n  - `review!A3:F3`: S1 `Personnel!A6`, değer `4`\n  - `review!A4:F4`: S1 `Personnel!A7`, değer `6`\n  - `review!A5:F5`: S2 `CSV!A6`, değer `\"10\"`\n\nBoş anahtar için olası nedenler; kaynakta kimlik alanının eksik olması, yanlış sütunun kullanılması veya veri girişindeki bir eksikliktir. `DUP` kayıtları için olası nedenler; yinelenen kimlik, birden fazla olayın aynı anahtarı paylaşması veya iki kaynağın farklı kayıt ayrıntı düzeyleri kullanmasıdır. Bunların tümü **hipotezdir**; raporun kaydettiği kesin sınıflandırma yalnızca `blank` ve `duplicate` gerekçeleridir.\n\n### Kısa sonraki adımlar\n\n1. `S1 · Personnel!A9` kaydındaki boş anahtarın kaynak sistemde tamamlanıp tamamlanamayacağını kontrol edin.\n2. `S1 · Personnel!A6:A7` ve `S2 · CSV!A6` kayıtlarında `DUP` anahtarının neden tekrarlandığını inceleyin.\n3. `009` için `S1 · Personnel!B4` ve `S2 · CSV!B4` değerlerinin kaynak sistemlerde doğrulanmasını sağlayın.\n4. `011`, `012` ve `7` anahtarları için eksik karşılıkların gerçekten beklenen kapsam dışında mı, yoksa kaynak veride eksik mi olduğunu netleştirin.\n5. Veri düzeltmeleri onaylandıktan sonra aynı onaylı kapsam ve ayarlarla raporu yeniden üretin; mevcut sınıflandırmaları geriye dönük olarak elle değiştirmeyin.",
+      "evidence": {
+        "version": 1,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "Summary",
+            "range": "A1:B8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Giriş sınıflandırmaları B2:B5 hücrelerinde; kaynak kayıt sayısı B6 hücresinde; yöntem B8 hücresinde."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "matched",
+            "range": "A1:F4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Eşleşen kayıtlar."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "different",
+            "range": "A1:F2",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Farklı kayıtlar."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "unmatched",
+            "range": "A1:F4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Eşleşmeyen kayıtlar."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "review",
+            "range": "A1:F5",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Boş ve yinelenen anahtarlar için inceleme kayıtları."
+            ]
+          },
+          {
+            "source": "S1",
+            "sheet": "Sources",
+            "range": "A1:I4",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Kaynak dosya, sayfa, kayıt kapsamı ve ayar bilgileri."
+            ]
+          }
+        ],
+        "clarification": null,
+        "calculations": [
+          {
+            "source": "S1",
+            "label": "matched",
+            "sheet": "Summary",
+            "ranges": [
+              "B2"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 3,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary!B2 giriş sayısı.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 3
+          },
+          {
+            "source": "S1",
+            "label": "different",
+            "sheet": "Summary",
+            "ranges": [
+              "B3"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 1,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary!B3 giriş sayısı.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 1
+          },
+          {
+            "source": "S1",
+            "label": "unmatched",
+            "sheet": "Summary",
+            "ranges": [
+              "B4"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 3,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary!B4 giriş sayısı.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 3
+          },
+          {
+            "source": "S1",
+            "label": "review",
+            "sheet": "Summary",
+            "ranges": [
+              "B5"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 4,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Summary!B5 giriş sayısı.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 4
+          }
+        ],
+        "source": {
+          "name": "ArexAi-reviewed-comparison.xlsx",
+          "sha256": "8968edbc2d17022daf3e5a70c2cbf2b9f0bfa6c5d4d78bfc032f855b9d6e18d9"
+        },
+        "sources": [
+          {
+            "id": "S1",
+            "name": "ArexAi-reviewed-comparison.xlsx",
+            "sha256": "8968edbc2d17022daf3e5a70c2cbf2b9f0bfa6c5d4d78bfc032f855b9d6e18d9"
+          }
+        ]
+      },
+      "check": {
+        "sheets": 6,
+        "rows": 27,
+        "columns": 9,
+        "formulas": 0,
+        "formulaErrors": 0,
+        "uncachedFormulas": 0,
+        "sheetNames": [
+          "Summary",
+          "matched",
+          "different",
+          "unmatched",
+          "review",
+          "Sources"
+        ]
+      }
+    },
+    {
+      "name": "stock-shipments-repeat",
+      "passed": false,
+      "elapsedMs": 60139,
+      "error": "REVIEWED_EXPLANATION_UNVERIFIED",
+      "cleanup": "failed",
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "repairing",
+        "queued",
+        "thinking",
+        "checking"
+      ]
+    },
+    {
+      "name": "source-address-delivery",
+      "passed": false,
+      "elapsedMs": 52150,
+      "error": "AI_REQUEST_FAILED",
+      "cleanup": "requested",
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "reconnecting",
+        "paused"
+      ]
+    }
+  ]
+}

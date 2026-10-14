@@ -1,0 +1,82 @@
+{
+  "data": "synthetic",
+  "browserQA": false,
+  "results": [
+    {
+      "name": "source-address-delivery",
+      "passed": true,
+      "elapsedMs": 47176,
+      "starts": 1,
+      "repairRequests": 0,
+      "injected502": false,
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "delivered"
+      ],
+      "text": "Hazırladığım XLSX dosyası:\n\nDosyayı indir\n\nReport sayfasında dört kayıt, kaynak sırası korunarak yer alıyor. ID değerleri metin olarak, `0` değeri ise literal olarak korunmuştur. Formül, grafik, bağlantı veya ek sayfa eklenmemiştir.",
+      "evidence": {
+        "version": 1,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "CSV",
+            "range": "A1:B3",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "İlk iki kaynak kaydı kullanıldı"
+            ]
+          },
+          {
+            "source": "S2",
+            "sheet": "CSV",
+            "range": "A1:B3",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "İkinci iki kaynak kaydı kullanıldı"
+            ]
+          }
+        ],
+        "clarification": null,
+        "calculations": []
+      },
+      "check": {
+        "sheets": 1,
+        "rows": 5,
+        "columns": 4,
+        "formulas": 0,
+        "formulaErrors": 0,
+        "uncachedFormulas": 0,
+        "sheetNames": [
+          "Report"
+        ],
+        "verification": {
+          "version": 1,
+          "formulas": 0,
+          "evaluated": 0,
+          "unavailable": 0,
+          "staleCaches": 0,
+          "calculations": 0,
+          "calculationUnavailable": 0,
+          "scenarios": 0,
+          "scenarioUnavailable": 0,
+          "requirements": 0,
+          "tables": 0,
+          "tableFormulas": 0,
+          "growthScenarios": 0,
+          "growthUnavailable": 0,
+          "sourceReferences": 4,
+          "inheritedReferences": 0,
+          "manifest": "unsupported"
+        }
+      }
+    }
+  ]
+}

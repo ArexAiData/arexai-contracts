@@ -1,0 +1,232 @@
+{
+  "fingerprint": "17a7554e78c34e9c0fa99eb17490ce089e529c2f6e8f5d7d1f004eb825f73bd3",
+  "rows": [
+    {
+      "status": "review",
+      "key": "",
+      "left": "S1 · Stock!A7",
+      "right": "",
+      "leftValue": 5,
+      "rightValue": null,
+      "reason": "blank"
+    },
+    {
+      "status": "matched",
+      "key": "0001",
+      "left": "S1 · Stock!B2",
+      "right": "S2 · CSV!B2",
+      "leftValue": 10,
+      "rightValue": "10",
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "0002",
+      "left": "S1 · Stock!B3",
+      "right": "S2 · CSV!B3",
+      "leftValue": 0,
+      "rightValue": "0",
+      "reason": "equal"
+    },
+    {
+      "status": "different",
+      "key": "0003",
+      "left": "S1 · Stock!B4",
+      "right": "S2 · CSV!B4",
+      "leftValue": 12,
+      "rightValue": "11",
+      "reason": "different"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "S1 · Stock!A5",
+      "right": "",
+      "leftValue": 4,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "S1 · Stock!A6",
+      "right": "",
+      "leftValue": 6,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "",
+      "right": "S2 · CSV!A5",
+      "leftValue": null,
+      "rightValue": "10",
+      "reason": "duplicate"
+    },
+    {
+      "status": "unmatched",
+      "key": "OnlyStock",
+      "left": "S1 · Stock!A8",
+      "right": "",
+      "leftValue": 9,
+      "rightValue": null,
+      "reason": "missing"
+    },
+    {
+      "status": "matched",
+      "key": "X-10",
+      "left": "S1 · Stock!B9",
+      "right": "S2 · CSV!B7",
+      "leftValue": 20,
+      "rightValue": "20",
+      "reason": "equal"
+    },
+    {
+      "status": "unmatched",
+      "key": "OnlyShipment",
+      "left": "",
+      "right": "S2 · CSV!A6",
+      "leftValue": null,
+      "rightValue": "2",
+      "reason": "missing"
+    },
+    {
+      "status": "unmatched",
+      "key": "1",
+      "left": "",
+      "right": "S2 · CSV!A8",
+      "leftValue": null,
+      "rightValue": "10",
+      "reason": "missing"
+    },
+    {
+      "status": "review",
+      "key": "",
+      "left": "S1 · Stock!A7",
+      "right": "",
+      "leftValue": 5,
+      "rightValue": null,
+      "reason": "blank"
+    },
+    {
+      "status": "matched",
+      "key": "0001",
+      "left": "S1 · Stock!B2",
+      "right": "S3 · Count!B2",
+      "leftValue": 10,
+      "rightValue": 10,
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "0002",
+      "left": "S1 · Stock!B3",
+      "right": "S3 · Count!B3",
+      "leftValue": 0,
+      "rightValue": 0,
+      "reason": "equal"
+    },
+    {
+      "status": "matched",
+      "key": "0003",
+      "left": "S1 · Stock!B4",
+      "right": "S3 · Count!B4",
+      "leftValue": 12,
+      "rightValue": 12,
+      "reason": "equal"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "S1 · Stock!A5",
+      "right": "",
+      "leftValue": 4,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "S1 · Stock!A6",
+      "right": "",
+      "leftValue": 6,
+      "rightValue": null,
+      "reason": "duplicate"
+    },
+    {
+      "status": "review",
+      "key": "DUP-7",
+      "left": "",
+      "right": "S3 · Count!A5",
+      "leftValue": null,
+      "rightValue": 10,
+      "reason": "duplicate"
+    },
+    {
+      "status": "matched",
+      "key": "OnlyStock",
+      "left": "S1 · Stock!B8",
+      "right": "S3 · Count!B6",
+      "leftValue": 9,
+      "rightValue": 9,
+      "reason": "equal"
+    },
+    {
+      "status": "different",
+      "key": "X-10",
+      "left": "S1 · Stock!B9",
+      "right": "S3 · Count!B7",
+      "leftValue": 20,
+      "rightValue": 18,
+      "reason": "different"
+    }
+  ],
+  "counts": {
+    "matched": 7,
+    "different": 2,
+    "unmatched": 3,
+    "review": 8
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "name": "stock-plan.xlsx",
+      "sha256": "19d0fe488248421c09317b93653e38a3e1574cb6018a7e4a703624f36fe486e1",
+      "sheet": "Stock",
+      "header": 1,
+      "end": 9,
+      "key": "SKU",
+      "value": "PlannedQty",
+      "rows": 8
+    },
+    {
+      "id": "S2",
+      "name": "shipments.csv",
+      "sha256": "34fa3d875102726dfec4ff9665ed65b5bddcbc0c2065d5fbe529ac8f0efd3e7f",
+      "sheet": "CSV",
+      "header": 1,
+      "end": 8,
+      "key": "SKU",
+      "value": "ShippedQty",
+      "rows": 7
+    },
+    {
+      "id": "S3",
+      "name": "warehouse-count.xlsx",
+      "sha256": "c0e70f7fda4b79eec5603ff1b03ff0b6f16eb307fe3d5bc33d187acc9c3d7600",
+      "sheet": "Count",
+      "header": 1,
+      "end": 7,
+      "key": "SKU",
+      "value": "CountedQty",
+      "rows": 6
+    }
+  ],
+  "settings": {
+    "trim": true,
+    "caseSensitive": true,
+    "format": "native",
+    "tolerance": 0
+  }
+}

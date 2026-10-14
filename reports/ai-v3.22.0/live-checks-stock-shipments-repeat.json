@@ -1,0 +1,145 @@
+{
+  "data": "synthetic",
+  "browserQA": false,
+  "results": [
+    {
+      "name": "stock-shipments-repeat",
+      "passed": true,
+      "elapsedMs": 53746,
+      "starts": 1,
+      "repairRequests": 1,
+      "injected502": false,
+      "stages": [
+        "uploading",
+        "thinking",
+        "queued",
+        "thinking",
+        "checking",
+        "repairing",
+        "queued",
+        "thinking",
+        "checking",
+        "delivered"
+      ],
+      "text": "S1 · Summary sayfasındaki deterministik rapor korunarak dört tek hücre toplamı kontrolü hazırlandı: matched = 7 (B2), different = 2 (B3), unmatched = 3 (B4), review = 8 (B5). Eşleştirme yeniden yapılmadı ve workbook oluşturulmadı. Uygulama doğrulamasının geçtiği iddia edilmemektedir.",
+      "evidence": {
+        "version": 1,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "Summary",
+            "range": "A1:B8",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Summary sayfasındaki dört durum giriş sayısı hücresi doğrulandı."
+            ]
+          }
+        ],
+        "clarification": null,
+        "calculations": [
+          {
+            "source": "S1",
+            "label": "matched",
+            "sheet": "Summary",
+            "ranges": [
+              "B2"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 7,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Tek hücre toplamı; Summary!B2.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 7
+          },
+          {
+            "source": "S1",
+            "label": "different",
+            "sheet": "Summary",
+            "ranges": [
+              "B3"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 2,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Tek hücre toplamı; Summary!B3.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 2
+          },
+          {
+            "source": "S1",
+            "label": "unmatched",
+            "sheet": "Summary",
+            "ranges": [
+              "B4"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 3,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Tek hücre toplamı; Summary!B4.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 3
+          },
+          {
+            "source": "S1",
+            "label": "review",
+            "sheet": "Summary",
+            "ranges": [
+              "B5"
+            ],
+            "excludedCells": [],
+            "operation": "sum",
+            "claimed": 8,
+            "numberFormat": "native",
+            "blankPolicy": "skip",
+            "note": "Tek hücre toplamı; Summary!B5.",
+            "status": "matched",
+            "includedCells": 1,
+            "blankCells": 0,
+            "computed": 8
+          }
+        ],
+        "source": {
+          "name": "ArexAi-reviewed-comparison.xlsx",
+          "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+        },
+        "sources": [
+          {
+            "id": "S1",
+            "name": "ArexAi-reviewed-comparison.xlsx",
+            "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+          }
+        ]
+      },
+      "check": {
+        "sheets": 6,
+        "rows": 37,
+        "columns": 9,
+        "formulas": 0,
+        "formulaErrors": 0,
+        "uncachedFormulas": 0,
+        "sheetNames": [
+          "Summary",
+          "matched",
+          "different",
+          "unmatched",
+          "review",
+          "Sources"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+SKU,ShippedQty,Warehouse
+0001,10,WH-A
+0002,0,WH-A
+0003,11,WH-A
+DUP-7,10,WH-A
+OnlyShipment,2,WH-A
+X-10,20,WH-A
+1,10,WH-A
