@@ -1,0 +1,108 @@
+{
+  "synthetic": true,
+  "productVersion": "3.22.0",
+  "privateSiteSourceCommit": "b567b1ae729aacbd15a7211dbc6c8b457d65b59f",
+  "scope": "Unmodified synthetic source files, saved reviewed reports and historical application evidence. Public checks do not run the private app or model.",
+  "files": [
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/cases.json",
+      "sha256": "3320206754ec6bee57d8f58edbaf8884d659a7f73460d8c2fe236a9601cda66f"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/invoice-payments/invoices.csv",
+      "sha256": "14ebe71cec60fab9a7c93620779abef3a6f21296513ba25f3f570cc63f71c99c"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/invoice-payments/payments.csv",
+      "sha256": "2941eb4768fc24497e8d25abd0673ed2b94ae1b1e94644161703357d9e9b4dbb"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/invoice-payments/reviewed-report.json",
+      "sha256": "9be75e08db14120b2915cf5f01218fbc1fc7cb4aeb77a761f30fe0978fb2f98d"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/invoice-payments/reviewed-report.xlsx",
+      "sha256": "8a8376ad8a4a899a2ea095129bd46994f94a61a6c080fd780879bdeec11e9954"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/staff-calls/call-summary.csv",
+      "sha256": "6c003c336920212db9a221053e4b0b351cba2a50c845582934366e6ff22db732"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/staff-calls/reviewed-report.json",
+      "sha256": "de9f0984d4932312dbe5b3a74a31cf84de314b087332c0e05c00899e814ae0bb"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/staff-calls/reviewed-report.xlsx",
+      "sha256": "487eea07583d81fdf1ad8577289ad581c6a3b20c850d5e62dcce2c815ba2c8a2"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/staff-calls/staff-summary.xlsx",
+      "sha256": "d44151827ae41cac7cdc9e1d402f1550b39e70c166641fccc0259791300159f8"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/stock-shipments/reviewed-report.json",
+      "sha256": "1ebb9eeac2538235e75bce6ee250a31e88376642eb35d0232750e8a0f18f6d51"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/stock-shipments/reviewed-report.xlsx",
+      "sha256": "ff62c2ce765ec2489e69a621e1664f55b4cfe8de825642802d0d6cdd2b8776ef"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/stock-shipments/shipments.csv",
+      "sha256": "34fa3d875102726dfec4ff9665ed65b5bddcbc0c2065d5fbe529ac8f0efd3e7f"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/stock-shipments/stock-plan.xlsx",
+      "sha256": "19d0fe488248421c09317b93653e38a3e1574cb6018a7e4a703624f36fe486e1"
+    },
+    {
+      "path": "docs/ai/examples/reliable-delivery-v3.22/stock-shipments/warehouse-count.xlsx",
+      "sha256": "c0e70f7fda4b79eec5603ff1b03ff0b6f16eb307fe3d5bc33d187acc9c3d7600"
+    },
+    {
+      "path": "reports/ai-v3.22.0/checks.json",
+      "sha256": "15d393c161aa6bd89a3e224c7850cc458717a7d934ffe44558cf27a54b93dba5"
+    },
+    {
+      "path": "reports/ai-v3.22.0/independent-checks.json",
+      "sha256": "5f00925731d02ec24c5757031a69a0d14e8aa6c749f192853ea02cf48c777d18"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-checks-source-address-delivery-final.json",
+      "sha256": "eef1e4c0ded173cc85f119f1892da10a90401cb0f4244eefdc709c3488202935"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-checks-stock-shipments-repeat.json",
+      "sha256": "31d19dc3b34380852aaefc4a599ee0e65ac18f1a3a6674cff8094a333cbef8d0"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-checks.json",
+      "sha256": "17f0a420e449a68f8918590af1eb97b6b38d92e3b41558c654764dd1adb16608"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-invoice-payments.xlsx",
+      "sha256": "88e1108df6e26ec276c8dc1a9eb0f63b8da3113295a5ca05264fb7a88062b645"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-source-address-delivery.xlsx",
+      "sha256": "3bb99907958f0594c6a342b734e65516a26c813275517710f88c66cce1a13690"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-staff-calls.xlsx",
+      "sha256": "8968edbc2d17022daf3e5a70c2cbf2b9f0bfa6c5d4d78bfc032f855b9d6e18d9"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-stock-shipments-repeat.xlsx",
+      "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+    },
+    {
+      "path": "reports/ai-v3.22.0/live-stock-shipments.xlsx",
+      "sha256": "107efaafe0f17376abe04624c6e63a46f8ec099b90d1a91d6149091829d17b0b"
+    },
+    {
+      "path": "reports/ai-v3.22.0/release-validation.json",
+      "sha256": "48c3972993a26e842de350fc2cbeca61c91d043249b2ef6d60d910acc3a174db"
+    }
+  ]
+}

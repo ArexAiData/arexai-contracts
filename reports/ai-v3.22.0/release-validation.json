@@ -1,0 +1,27 @@
+{
+  "version": "3.22.0",
+  "regressionGroups": {
+    "delivery": 13,
+    "workspace": 28,
+    "recovery": 13,
+    "evidence": 16,
+    "workbookAgent": 24
+  },
+  "totalGroups": 94,
+  "independentSourceRecords": 55,
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "liveAttempts": 7,
+  "livePassed": 5,
+  "initialFailuresRetained": [
+    "stock-shipments-repeat: REVIEWED_EXPLANATION_UNVERIFIED",
+    "source-address-delivery: AI_REQUEST_FAILED"
+  ],
+  "targetedReplays": "both passed",
+  "browserAndIndexedDbQA": "not performed; supported control-browser unavailable",
+  "limitations": [
+    "Source-address checks do not certify arbitrary report coverage or business semantics",
+    "AI qualitative explanations are not fully certified by the four summary checks",
+    "Historic unrestricted three-source generation timeout is not a claimed universal fix"
+  ]
+}

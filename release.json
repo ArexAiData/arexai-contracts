@@ -1,7 +1,7 @@
 {
-  "tag": "engineering-2026-10-09",
-  "title": "ArexAi reviewer refresh and staking usage evidence — 9 October 2026",
+  "tag": "engineering-2026-10-14",
+  "title": "ArexAi AI v3.22.0 evidence and 191-test reviewer package — 14 October 2026",
   "prerelease": true,
-  "report": "reports/reviewer-refresh-2026-10-09.md",
-  "summary": "Updated reviewer quick start, AI v3.9.6 documentation and a limited confirmed staking principal-exit observation. Documentation and evidence only; no deployed contract changes or independent audit."
+  "report": "reports/reviewer-refresh-2026-10-14.md",
+  "summary": "Refresh public AI v3.22.0 documentation and reproducible synthetic source/report evidence; include previously merged 191-test staking coverage. Preserve failed live attempts and verification boundaries. No contract deployment, allocation change or independent audit."
 }

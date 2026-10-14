@@ -5,6 +5,7 @@ This guide connects recorded BNB Smart Chain deployments with reproducible repos
 ## Requirements
 
 - Node.js 22.13 or later and npm; the repository records npm 11.9.0.
+- Python 3.10+ for the independent synthetic XLSX/CSV reference checker; no Python third-party packages are required.
 - Git and enough disk space for dependencies and compiler output.
 - Internet access for the initial clone and dependency installation.
 

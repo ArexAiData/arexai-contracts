@@ -1,0 +1,396 @@
+[
+  {
+    "id": "stock-shipments",
+    "title": "Stok ve sevkiyat kontrolü",
+    "format": "native",
+    "tolerance": 0,
+    "counts": {
+      "matched": 7,
+      "different": 2,
+      "unmatched": 3,
+      "review": 8
+    },
+    "sources": [
+      {
+        "name": "stock-plan.xlsx",
+        "sheet": "Stock",
+        "headers": [
+          "SKU",
+          "PlannedQty",
+          "Warehouse"
+        ],
+        "rows": [
+          [
+            "0001",
+            10,
+            "WH-A"
+          ],
+          [
+            "0002",
+            0,
+            "WH-A"
+          ],
+          [
+            "0003",
+            12,
+            "WH-A"
+          ],
+          [
+            "DUP-7",
+            4,
+            "WH-A"
+          ],
+          [
+            "DUP-7",
+            6,
+            "WH-A"
+          ],
+          [
+            "",
+            5,
+            "WH-A"
+          ],
+          [
+            "OnlyStock",
+            9,
+            "WH-A"
+          ],
+          [
+            "X-10",
+            20,
+            "WH-A"
+          ]
+        ]
+      },
+      {
+        "name": "shipments.csv",
+        "sheet": "CSV",
+        "headers": [
+          "SKU",
+          "ShippedQty",
+          "Warehouse"
+        ],
+        "rows": [
+          [
+            "0001",
+            "10",
+            "WH-A"
+          ],
+          [
+            "0002",
+            "0",
+            "WH-A"
+          ],
+          [
+            "0003",
+            "11",
+            "WH-A"
+          ],
+          [
+            "DUP-7",
+            "10",
+            "WH-A"
+          ],
+          [
+            "OnlyShipment",
+            "2",
+            "WH-A"
+          ],
+          [
+            "X-10",
+            "20",
+            "WH-A"
+          ],
+          [
+            "1",
+            "10",
+            "WH-A"
+          ]
+        ]
+      },
+      {
+        "name": "warehouse-count.xlsx",
+        "sheet": "Count",
+        "headers": [
+          "SKU",
+          "CountedQty",
+          "Warehouse"
+        ],
+        "rows": [
+          [
+            "0001",
+            10,
+            "WH-A"
+          ],
+          [
+            "0002",
+            0,
+            "WH-A"
+          ],
+          [
+            "0003",
+            12,
+            "WH-A"
+          ],
+          [
+            "DUP-7",
+            10,
+            "WH-A"
+          ],
+          [
+            "OnlyStock",
+            9,
+            "WH-A"
+          ],
+          [
+            "X-10",
+            18,
+            "WH-A"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "invoice-payments",
+    "title": "Fatura ve ödeme kontrolü",
+    "format": "decimal-comma",
+    "tolerance": 0.01,
+    "counts": {
+      "matched": 3,
+      "different": 1,
+      "unmatched": 2,
+      "review": 7
+    },
+    "sources": [
+      {
+        "name": "invoices.csv",
+        "sheet": "CSV",
+        "headers": [
+          "InvoiceNo",
+          "InvoiceAmount",
+          "Currency"
+        ],
+        "rows": [
+          [
+            "INV-001",
+            "1.234,56",
+            "EUR"
+          ],
+          [
+            "INV-002",
+            "0,00",
+            "EUR"
+          ],
+          [
+            "INV-003",
+            "-150,00",
+            "EUR"
+          ],
+          [
+            "INV-004",
+            "100,00",
+            "EUR"
+          ],
+          [
+            "PART-5",
+            "200,00",
+            "EUR"
+          ],
+          [
+            "MISSING",
+            "25,00",
+            "EUR"
+          ],
+          [
+            "",
+            "10,00",
+            "EUR"
+          ],
+          [
+            "AMBIG",
+            "1,2,3",
+            "EUR"
+          ],
+          [
+            "BLANK",
+            "",
+            "EUR"
+          ]
+        ]
+      },
+      {
+        "name": "payments.csv",
+        "sheet": "CSV",
+        "headers": [
+          "InvoiceNo",
+          "PaidAmount",
+          "Currency"
+        ],
+        "rows": [
+          [
+            "INV-001",
+            "1.234,57",
+            "EUR"
+          ],
+          [
+            "INV-002",
+            "0,00",
+            "EUR"
+          ],
+          [
+            "INV-003",
+            "-150,00",
+            "EUR"
+          ],
+          [
+            "INV-004",
+            "99,98",
+            "EUR"
+          ],
+          [
+            "PART-5",
+            "100,00",
+            "EUR"
+          ],
+          [
+            "PART-5",
+            "100,00",
+            "EUR"
+          ],
+          [
+            "EXTRA",
+            "30,00",
+            "EUR"
+          ],
+          [
+            "AMBIG",
+            "123,00",
+            "EUR"
+          ],
+          [
+            "BLANK",
+            "0,00",
+            "EUR"
+          ],
+          [
+            "",
+            "5,00",
+            "EUR"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "staff-calls",
+    "title": "Personel ve çağrı kayıtları kontrolü",
+    "format": "native",
+    "tolerance": 0,
+    "counts": {
+      "matched": 3,
+      "different": 1,
+      "unmatched": 3,
+      "review": 4
+    },
+    "sources": [
+      {
+        "name": "staff-summary.xlsx",
+        "sheet": "Personnel",
+        "headers": [
+          "EmployeeID",
+          "RecordedCalls",
+          "Name"
+        ],
+        "rows": [
+          [
+            "007",
+            12,
+            "Efe A"
+          ],
+          [
+            "008",
+            0,
+            "Deniz"
+          ],
+          [
+            "009",
+            8,
+            "Efe B"
+          ],
+          [
+            "010",
+            5,
+            "Derya"
+          ],
+          [
+            "DUP",
+            4,
+            "Alex A"
+          ],
+          [
+            "DUP",
+            6,
+            "Alex B"
+          ],
+          [
+            "011",
+            7,
+            "Former staff"
+          ],
+          [
+            "",
+            2,
+            "Unknown"
+          ]
+        ]
+      },
+      {
+        "name": "call-summary.csv",
+        "sheet": "CSV",
+        "headers": [
+          "EmployeeID",
+          "LoggedCalls",
+          "Period"
+        ],
+        "rows": [
+          [
+            "007",
+            "12",
+            "2026-09"
+          ],
+          [
+            "008",
+            "0",
+            "2026-09"
+          ],
+          [
+            "009",
+            "7",
+            "2026-09"
+          ],
+          [
+            "010",
+            "5",
+            "2026-09"
+          ],
+          [
+            "DUP",
+            "10",
+            "2026-09"
+          ],
+          [
+            "012",
+            "4",
+            "2026-09"
+          ],
+          [
+            "7",
+            "12",
+            "2026-09"
+          ]
+        ]
+      }
+    ]
+  }
+]

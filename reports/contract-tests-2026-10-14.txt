@@ -1,0 +1,399 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> arexai-contracts@1.0.0 test
+> hardhat test nodejs
+
+No contracts to compile
+
+Running node:test tests
+
+
+  - BSC fixed-block fork: six runtime sources, immutable links and local token transfer
+
+  ✔ Deployed TeamVesting rejects zero addresses and invalid calendar schedules (471ms)
+
+  ✔ Deployed TeamVesting retains the creation transaction's twenty dates and fixed destinations
+
+  ✔ Deployed TeamVesting applies all twenty exact calendar boundaries
+
+  ✔ Deployed TeamVesting rolls back underfunded release and recovers after funding
+
+  ✔ Deployed TeamVesting permits public triggers, cumulative catch-up and no excess release
+
+  ✔ LiquidityReserveVault rejects every zero-address constructor dependency
+
+  ✔ LiquidityReserveVault exposes its fixed cap and immutable manager
+
+  ✔ LiquidityReserveVault releases partial amounts only to its manager
+
+  ✔ LiquidityReserveVault blocks non-owner releases
+
+  ✔ LiquidityReserveVault rejects zero and cumulative over-allocation
+
+  ✔ LiquidityReserveVault rolls state back when its token balance is insufficient
+
+  ✔ LiquidityReserveVault permits the exact cap and rejects any later release
+
+  ✔ LiquidityReserveVault ownership transfer requires pending-owner acceptance
+
+  ✔ PresaleRound routes exact payment and delivers ARXAI immediately
+
+  ✔ PresaleRound enforces minimum and cumulative wallet maximum
+
+  ✔ PresaleRound consumes an exact payment-token approval
+
+  ✔ PresaleRound rejects purchases before start and at the end timestamp
+
+  ✔ PresaleRound pause control belongs only to the owner
+
+  ✔ PresaleRound ownership transfer requires acceptance by the pending owner
+
+  ✔ PresaleRound burns only the unsold allocation after the round
+
+  ✔ PresaleRound rejects invalid constructor configuration
+
+  ✔ PresaleRound rejects a purchase when sale-token inventory is insufficient
+
+  ✔ PresaleRound returns an exact quote and restricts finalization to the owner (76ms)
+
+  ✔ PresaleRound rejects every zero-address constructor dependency
+
+  ✔ PresaleRound rejects every invalid numeric constructor configuration
+
+  ✔ PresaleRound rejects payment tokens with more than 18 decimals
+
+  ✔ PresaleRound rejects a payment that rounds down to zero ARXAI
+
+  ✔ PresaleRound rejects purchases beyond the configured allocation
+
+  ✔ PresaleRound rejects finalization when unsold inventory is underfunded
+
+  ✔ PresaleRound rolls state back when allowance is insufficient
+
+  ✔ PresaleRound rolls state back when payment-token balance is insufficient
+
+  ✔ PresaleRound rejects purchases after finalization
+
+  ✔ PresaleRound finalizes without burning when the allocation is sold out
+
+  ✔ PresaleRound allows only the pending owner to accept ownership
+
+  ✔ PresaleRound documents the operational consequences of ownership renunciation
+
+  ✔ PresaleRound enforces START-1, START, END-1 and END boundaries
+
+  ✔ PresaleRound tracks maximum contributions independently per buyer
+
+  ✔ PresaleRound rejects cumulative small purchases above the wallet maximum
+
+  ✔ Recipient risk: blocked treasury rolls back payment, delivery, allowance and sale accounting
+
+  ✔ Recipient risk: blocked buyer cannot pay and contributes nothing
+
+  ✔ Pause policy: unpause within the original window resumes without extending the deadline
+
+  ✔ Pause policy: unpause after end does not reopen the sale; finalization still burns unsold tokens
+
+  ✔ Pause policy: owner may finalize an ended round while it remains paused
+
+  ✔ Recipient risk: reserve ownership rotation does not redirect its immutable beneficiary (76ms)
+
+  ✔ Recipient risk: liquidity release rolls back its counter when the immutable manager is blocked
+
+  ✔ Recipient risk: TeamVesting retains earned liability after a blocked beneficiary transfer
+
+  ✔ Recipient risk: ArexAITeamVesting retains earned liability after a blocked beneficiary transfer
+
+  ✔ ReserveVault rejects every zero-address constructor dependency
+
+  ✔ ReserveVault exposes the fixed allocation and immutable destinations
+
+  ✔ ReserveVault releases one exact tranche only to the beneficiary
+
+  ✔ ReserveVault blocks non-owner releases
+
+  ✔ ReserveVault rolls state back when a tranche is underfunded
+
+  ✔ ReserveVault releases exactly twenty tranches and rejects a twenty-first
+
+  ✔ ReserveVault ownership transfer requires acceptance by the pending owner
+
+  ✔ Safe preflight rejects the getter-compatible test harness before treating it as genuine Safe
+
+  ✔ Safe strict policy accepts a pinned synthetic configuration and rejects bypass settings
+
+  ✔ Safe proxy evidence is pinned to official 1.4.1 and not the unrestricted harness
+
+  ✔ Staking boundary load preserves allocated claims despite another overdue boundary (1380ms)
+
+  ✔ Deadline queue matches an independent sorted model through root pruning and rescheduling (1846ms)
+
+  ✔ Deadline queue enforces packed bounds, monotone deadlines and empty-root safety
+
+  ✔ Frozen deployment load: delayed-30-days (738ms)
+
+  ✔ Frozen deployment load: dense-1024 (15310ms)
+
+  ✔ Frozen deployment load: exhaustion (4202ms)
+
+  ✔ Frozen deployment load: emergency (2881ms)
+
+  ✔ Development interleaving: delayed principal exit retains post-snapshot days and stops future accrual (384ms)
+
+  ✔ Development interleaving: exhaustion scan permits allocated claims and exits without changing pro-rata shares (533ms)
+
+  ✔ Development interleaving: exhaustion allocate permits allocated claims and exits without changing pro-rata shares (511ms)
+
+  ✔ Development interleaving: emergency scan preserves mixed liabilities across exits, claims and delayed batches (394ms)
+
+  ✔ Development interleaving: emergency allocate preserves mixed liabilities across exits, claims and delayed batches (509ms)
+
+  ✔ Frozen mainnet interleaving: delayed principal exit retains post-snapshot days and stops future accrual (312ms)
+
+  ✔ Frozen mainnet interleaving: exhaustion scan permits allocated claims and exits without changing pro-rata shares (553ms)
+
+  ✔ Frozen mainnet interleaving: exhaustion allocate permits allocated claims and exits without changing pro-rata shares (528ms)
+
+  ✔ Frozen mainnet interleaving: emergency scan preserves mixed liabilities across exits, claims and delayed batches (433ms)
+
+  ✔ Frozen mainnet interleaving: emergency allocate preserves mixed liabilities across exits, claims and delayed batches (488ms)
+
+  ✔ Staking seeded model 17: mixed users, terms, time, claims, exits and closure conserve balances (2027ms)
+
+  ✔ Staking seeded model 2026: mixed users, terms, time, claims, exits and closure conserve balances (1672ms)
+
+  ✔ Staking seeded model 64091: mixed users, terms, time, claims, exits and closure conserve balances (1754ms)
+
+  ✔ Staking seeded model 2638: mixed users, terms, time, claims, exits and closure conserve balances (2164ms)
+
+  ✔ Staking load: 1 positions settle in bounded batches and unlock withdrawal (155ms)
+
+  ✔ Staking load: 64 positions settle in bounded batches and unlock withdrawal (1243ms)
+
+  ✔ Staking load: 256 positions settle in bounded batches and unlock withdrawal (4956ms)
+
+  ✔ Frozen mainnet: Staking rejects EOAs as governance, requires full funding and has immutable rates (144ms)
+
+  ✔ Frozen mainnet: Staking quotes all agreed terms using a 365-day simple APR (172ms)
+
+  ✔ Frozen mainnet: Staking allows independent deposits without a 5M cap and protects holder ownership (86ms)
+
+  ✔ Frozen mainnet: Locked staking early exit returns principal only and recycles the entire reserved reward (181ms)
+
+  ✔ Frozen mainnet: All locked terms pay their fixed reward at maturity and stop accruing afterwards (2839ms)
+
+  ✔ Frozen mainnet: Flexible staking has no first-day reward and supports claims without resetting its clock (2721ms)
+
+  ✔ Frozen mainnet: Flexible exit before 24h pays only principal (441ms)
+
+  ✔ Frozen mainnet: Exhausted flexible allocation is pro rata independent of claim order and locked promises survive (268ms)
+
+  ✔ Frozen mainnet: Bounded checkpoints freeze mutation and anyone may complete settlement (465ms)
+
+  ✔ Frozen mainnet: Emergency closure needs two harness approvals and permanently burns only surplus (92ms)
+
+  ✔ Frozen mainnet: Emergency flexible reward remains daily, preserves prior claims and protects delayed withdrawals (346ms)
+
+  ✔ Frozen mainnet: Direct donations never enlarge the reward cap (137ms)
+
+  ✔ Frozen mainnet: Recycled locked rewards reopen admissions without paying the flexible paused interval (156ms)
+
+  ✔ Frozen mainnet: Zero-rounded flexible positions do not enlarge daily checkpoint work (700ms)
+
+  ✔ Frozen mainnet: More than one batch of positions closes without an unbounded transaction (1560ms)
+
+  ✔ Frozen mainnet: Staking emergency with no positions burns the entire reward cap immediately (630ms)
+
+  ✔ Frozen mainnet: Principal-only flexible exit is immediate, stops accrual and never pays principal twice (294ms)
+
+  ✔ Frozen mainnet: Principal exits and allocated claims cannot invalidate either checkpoint pass (577ms)
+
+  ✔ Frozen mainnet: Early locked principal exit remains forfeited if emergency happens before reward cleanup (820ms)
+
+  ✔ Frozen mainnet: Emergency principal exits preserve locked and flexible cutoff rewards and the burn budget (339ms)
+
+  ✔ Frozen mainnet: Principal exit during exhausted pro-rata allocation preserves both holders' reward shares (113ms)
+
+  ✔ Frozen mainnet: Locked maturity withdrawal is independent of other holders' overdue flexible boundaries
+
+  ✔ Frozen mainnet: A day completed between checkpoint snapshot and principal exit stays scheduled for allocation (112ms)
+
+  ✔ Frozen mainnet: Inactive deadline entries are pruned once without accrual or aggregate-rate drift (100ms)
+
+  ✔ Frozen mainnet: Locked mode 1 withdrawal at maturity -1s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Locked mode 1 withdrawal at maturity 0s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Locked mode 2 withdrawal at maturity -1s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Locked mode 2 withdrawal at maturity 0s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Locked mode 3 withdrawal at maturity -1s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Locked mode 3 withdrawal at maturity 0s uses the exact reward boundary
+
+  ✔ Frozen mainnet: Flexible claims reject a foreign holder and repeated payment without altering liabilities
+
+  ✔ Frozen mainnet: Exhausted multi-holder allocations are identical for batches of 1 and 64 (252ms)
+
+  ✔ Development Safe 1.4.1: real Safe rejects one signature without changing staking or nonce
+
+  ✔ Development Safe 1.4.1: real Safe executes two signatures and rejects their replay
+
+  ✔ Development Safe 1.4.1: real Safe rejects an outsider signature paired with an owner
+
+  ✔ Development Safe 1.4.1: real Safe rejects two copies of one owner signature (75ms)
+
+  ✔ Development Safe 1.4.1: emergency preserves active principal and cutoff rewards before burning surplus (87ms)
+
+  ✔ Frozen mainnet Safe 1.4.1: real Safe rejects one signature without changing staking or nonce
+
+  ✔ Frozen mainnet Safe 1.4.1: real Safe executes two signatures and rejects their replay
+
+  ✔ Frozen mainnet Safe 1.4.1: real Safe rejects an outsider signature paired with an owner
+
+  ✔ Frozen mainnet Safe 1.4.1: real Safe rejects two copies of one owner signature
+
+  ✔ Frozen mainnet Safe 1.4.1: emergency preserves active principal and cutoff rewards before burning surplus (117ms)
+
+  ✔ Development Safe 1.5.0: real Safe rejects one signature without changing staking or nonce
+
+  ✔ Development Safe 1.5.0: real Safe executes two signatures and rejects their replay (86ms)
+
+  ✔ Development Safe 1.5.0: real Safe rejects an outsider signature paired with an owner
+
+  ✔ Development Safe 1.5.0: real Safe rejects two copies of one owner signature
+
+  ✔ Development Safe 1.5.0: emergency preserves active principal and cutoff rewards before burning surplus (218ms)
+
+  ✔ Frozen mainnet Safe 1.5.0: real Safe rejects one signature without changing staking or nonce
+
+  ✔ Frozen mainnet Safe 1.5.0: real Safe executes two signatures and rejects their replay
+
+  ✔ Frozen mainnet Safe 1.5.0: real Safe rejects an outsider signature paired with an owner
+
+  ✔ Frozen mainnet Safe 1.5.0: real Safe rejects two copies of one owner signature
+
+  ✔ Frozen mainnet Safe 1.5.0: emergency preserves active principal and cutoff rewards before burning surplus (83ms)
+
+  ✔ Sparse deadlines: only two due positions are visited among 1,026 queued positions (7976ms)
+
+  ✔ Dense 1,024-position normal settlement uses one pass; emergency and simultaneous exits conserve rewards (18097ms)
+
+  ✔ 1,024-position exhaustion falls back to proportional allocation independent of claim order (18075ms)
+
+  ✔ Staking differential model 17: 256 operations match independent ledger and frozen deployment (31311ms)
+
+  ✔ Staking differential model 2026: 256 operations match independent ledger and frozen deployment (31411ms)
+
+  ✔ Staking differential model 64091: 256 operations match independent ledger and frozen deployment (27850ms)
+
+  ✔ Staking differential model 2638: 256 operations match independent ledger and frozen deployment (32014ms)
+
+  ✔ Staking differential model 3735928559: 256 operations match independent ledger and frozen deployment (37025ms)
+
+  ✔ Staking differential model 2654435769: 256 operations match independent ledger and frozen deployment (27446ms)
+
+  ✔ Staking differential model 324508639: 256 operations match independent ledger and frozen deployment (33388ms)
+
+  ✔ Staking differential model 38177486: 256 operations match independent ledger and frozen deployment (36491ms)
+
+  ✔ Development: Staking rejects EOAs as governance, requires full funding and has immutable rates
+
+  ✔ Development: Staking quotes all agreed terms using a 365-day simple APR
+
+  ✔ Development: Staking allows independent deposits without a 5M cap and protects holder ownership
+
+  ✔ Development: Locked staking early exit returns principal only and recycles the entire reserved reward (84ms)
+
+  ✔ Development: All locked terms pay their fixed reward at maturity and stop accruing afterwards
+
+  ✔ Development: Flexible staking has no first-day reward and supports claims without resetting its clock
+
+  ✔ Development: Flexible exit before 24h pays only principal
+
+  ✔ Development: Exhausted flexible allocation is pro rata independent of claim order and locked promises survive (87ms)
+
+  ✔ Development: Bounded checkpoints freeze mutation and anyone may complete settlement (101ms)
+
+  ✔ Development: Emergency closure needs two harness approvals and permanently burns only surplus (84ms)
+
+  ✔ Development: Emergency flexible reward remains daily, preserves prior claims and protects delayed withdrawals (158ms)
+
+  ✔ Development: Direct donations never enlarge the reward cap (104ms)
+
+  ✔ Development: Recycled locked rewards reopen admissions without paying the flexible paused interval (176ms)
+
+  ✔ Development: Zero-rounded flexible positions do not enlarge daily checkpoint work (98ms)
+
+  ✔ Development: More than one batch of positions closes without an unbounded transaction (946ms)
+
+  ✔ Development: Staking emergency with no positions burns the entire reward cap immediately
+
+  ✔ Development: Principal-only flexible exit is immediate, stops accrual and never pays principal twice (80ms)
+
+  ✔ Development: Principal exits and allocated claims cannot invalidate either checkpoint pass (185ms)
+
+  ✔ Development: Early locked principal exit remains forfeited if emergency happens before reward cleanup (99ms)
+
+  ✔ Development: Emergency principal exits preserve locked and flexible cutoff rewards and the burn budget (269ms)
+
+  ✔ Development: Principal exit during exhausted pro-rata allocation preserves both holders' reward shares (167ms)
+
+  ✔ Development: Locked maturity withdrawal is independent of other holders' overdue flexible boundaries (133ms)
+
+  ✔ Development: A day completed between checkpoint snapshot and principal exit stays scheduled for allocation (195ms)
+
+  ✔ Development: Inactive deadline entries are pruned once without accrual or aggregate-rate drift (106ms)
+
+  ✔ Development: Locked mode 1 withdrawal at maturity -1s uses the exact reward boundary (145ms)
+
+  ✔ Development: Locked mode 1 withdrawal at maturity 0s uses the exact reward boundary
+
+  ✔ Development: Locked mode 2 withdrawal at maturity -1s uses the exact reward boundary (75ms)
+
+  ✔ Development: Locked mode 2 withdrawal at maturity 0s uses the exact reward boundary (86ms)
+
+  ✔ Development: Locked mode 3 withdrawal at maturity -1s uses the exact reward boundary
+
+  ✔ Development: Locked mode 3 withdrawal at maturity 0s uses the exact reward boundary (77ms)
+
+  ✔ Development: Flexible claims reject a foreign holder and repeated payment without altering liabilities
+
+  ✔ Development: Exhausted multi-holder allocations are identical for batches of 1 and 64 (172ms)
+
+  ✔ team allocation unlocks in 20 exact monthly five-percent tranches
+
+  ✔ team vesting rejects zero token and beneficiary addresses
+
+  ✔ team vesting exposes valid tranche times and rejects an invalid index
+
+  ✔ team vesting reports its funding state accurately
+
+  ✔ team vesting rejects release when an unlocked tranche is underfunded
+
+  ✔ any caller can trigger release but funds always go to the beneficiary
+
+  ✔ team vesting handles exact schedule boundaries and cumulative catch-up
+
+  ✔ ArexAI rejects a zero treasury
+
+  ✔ ArexAI mints the fixed supply once to the configured treasury
+
+  ✔ ArexAI holders can burn only their own balance
+
+  ✔ ArexAI burnFrom requires and consumes holder allowance
+
+  ✔ ArexAI exposes no owner, mint, pause, blacklist or upgrade entry points
+
+  ✔ ArexAIToken verified source rejects a zero initial holder and has no privileged supply controls
+
+  ✔ ArexAIToken conserves balances and burned supply through a reproducible mixed operation sequence (640ms)
+
+  ✔ ArexAIToken failed delegated burns preserve supply, balance and allowance
+
+
+  191 passing (371538ms)
+  1 skipped
+
+
