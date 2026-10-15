@@ -23,7 +23,7 @@ Controls and messages support EN/TR/DE/ES/FR. Accounting, inventory, personnel, 
 
 ## Privacy and processing scope
 
-Full-file AI mode sends the complete selected file bytes, including hidden worksheets and sensitive values, plus the request and applicable recent context to OpenAI. It does not automatically mask raw values. The reviewed-explanation route sends the complete reviewed report, without reconstructing its original sources or carrying unrelated prior instructions. Local-only analysis and its bounded, masked reference views have a separate scope. Device retention settings do not describe provider retention. Never post customer workbooks, signed task tokens or private tracking links in public issues.
+ArexAi’s full-file AI mode sends the complete selected file bytes, including hidden worksheets and sensitive values, plus the request and applicable recent context to its external AI service provider. It does not automatically mask raw values. The reviewed-explanation route sends the complete reviewed report, without reconstructing its original sources or carrying unrelated prior instructions. Local-only analysis and its bounded, masked reference views have a separate scope. Device retention settings do not describe provider retention. Never post customer workbooks, signed task tokens or private tracking links in public issues.
 
 ## Recorded private application verification
 
@@ -69,6 +69,6 @@ Raw synthetic results and delivered files are in [reports/ai-v3.22.0](../../repo
 
 ## Public reproduction and remaining work
 
-Run `npm run verify:ai-examples` (Node.js and Python 3.10+; no Python third-party packages) or `python3 scripts/verify-ai-delivery-fixtures.py`. See the [fixture guide](examples/reliable-delivery-v3.22/README.md). The public check validates the committed source/report files, source metadata, exact XLSX cells and expected classifications, and rejects missing, duplicate, wrongly cited and misclassified records. It checks historical evidence integrity/consistency; it does not rerun the private app, call OpenAI, test UI controls or validate on-chain contracts.
+Run `npm run verify:ai-examples` (Node.js and Python 3.10+; no Python third-party packages) or `python3 scripts/verify-ai-delivery-fixtures.py`. See the [fixture guide](examples/reliable-delivery-v3.22/README.md). The public check validates the committed source/report files, source metadata, exact XLSX cells and expected classifications, and rejects missing, duplicate, wrongly cited and misclassified records. It checks historical evidence integrity/consistency; it does not rerun the private app, call the ArexAi AI service, test UI controls or validate on-chain contracts.
 
 Browser/mobile interaction, actual IndexedDB reloads and real customer pilots were not performed. A historical unrestricted three-source AI-generated report timed out; this release does not claim a universal fix. The reviewed deterministic-report route avoids asking the model to reconstruct those joins. Unrestricted AI generation, supported formula verification and qualitative explanations still have their documented limits.
