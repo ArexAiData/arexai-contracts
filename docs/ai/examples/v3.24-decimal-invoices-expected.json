@@ -1,0 +1,61 @@
+{
+  "fixture": "v3.24-decimal-invoices.csv",
+  "synthetic": true,
+  "policy": {
+    "arithmetic": "exact decimal",
+    "rounding": "ROUND_HALF_UP, 2 decimals per line for discount and tax",
+    "duplicate": "flag duplicate invoice ID, require review",
+    "invalid": "flag invalid price, require review"
+  },
+  "lines": {
+    "INV-001": {
+      "base": "59.97",
+      "discount": "6.00",
+      "net": "53.97",
+      "tax": "10.79",
+      "gross": "64.76"
+    },
+    "INV-002": {
+      "base": "0.20",
+      "discount": "0.00",
+      "net": "0.20",
+      "tax": "0.04",
+      "gross": "0.24"
+    },
+    "INV-003": {
+      "base": "100.00",
+      "discount": "100.00",
+      "net": "0.00",
+      "tax": "0.00",
+      "gross": "0.00"
+    },
+    "INV-004": {
+      "base": "0.00",
+      "discount": "0.00",
+      "net": "0.00",
+      "tax": "0.00",
+      "gross": "0.00"
+    },
+    "INV-005": {
+      "base": "0.05",
+      "discount": "0.00",
+      "net": "0.05",
+      "tax": "0.01",
+      "gross": "0.06"
+    }
+  },
+  "review": {
+    "duplicate_ids": [
+      "INV-005"
+    ],
+    "invalid_price_ids": [
+      "INV-006"
+    ]
+  },
+  "oracle_subset_totals": {
+    "net": "54.22",
+    "tax": "10.84",
+    "gross": "65.06"
+  },
+  "disclaimer": "Synthetic tax rates, not jurisdiction-specific tax guidance. Totals apply only to one explicitly selected occurrence per valid invoice ID; never silently deduplicate customer data."
+}
