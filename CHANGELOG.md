@@ -1,5 +1,11 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-15 — ArexAi product terminology
+
+- Use ArexAi product terminology in the current AI reference and the retained v3.16.1 and v3.22.0 documentation.
+- Preserve the external AI processing disclosure, complete-file scope, masking limits and provider retention boundaries.
+- Documentation wording only; application behavior, recorded evidence, source hashes and tagged release archives are unchanged.
+
 ## 2026-10-14 — AI v3.22.0 evidence and reviewer package refresh
 
 - Refresh AI documentation from v3.16.1 to v3.22.0: multi-source review, complete deterministic reports, local recovery, task stages and checked source addresses. Preserve historical reports and their limits.
