@@ -85,7 +85,7 @@ Start with the [reviewer quick start](docs/REVIEWER_QUICKSTART.md) for prerequis
 - [Contribution guide](CONTRIBUTING.md) and issue templates describe reproducible, privacy-safe reports.
 - [Release procedure](docs/RELEASING.md) records the tested commit, tool versions and evidence scope before publication.
 - [Immutable recipients and pause policy](docs/RECIPIENT_AND_PAUSE_POLICY.md) explains transfer failures, atomic rollback, fixed deadlines and recovery limitations, with nine executable reproductions.
-- [AI v3.22.0 technical reference](docs/ai/README.md) documents multi-source review, complete reviewed reports, continued edits, task recovery and source-address delivery checks. The [14 October delivery report](docs/ai/reliable-delivery-v3.22.0.md) separates 94 historical application regression groups, seven live attempts (five passed; both initial failures retained), and publicly reproducible synthetic source/report checks. AI evidence is separate from the 191-test Solidity baseline.
+- [Current AI technical reference](docs/ai/README.md) covers the published v3.28.0 capabilities and the 16 October Excel hardening. The [200-scenario campaign](docs/ai/excel-campaign-2026-10-16.md) records 100 source analyses and 100 workbook creations, 510 numerical probes and 20 cache-free native-office recalculations. Final latest results are 200/200 after targeted fixes/retries; the raw initial repair-free result is 189/200, including one preserved test-harness false alarm. Public CI verifies the archived evidence and independent Decimal examples; it does not rerun the private AI application. AI evidence remains separate from the 191-test Solidity baseline.
 
 ## Compiler configuration
 

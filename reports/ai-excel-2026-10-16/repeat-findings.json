@@ -1,0 +1,167 @@
+{
+  "status": "Tamamlandı. Ürün düzeltmeleri v383 dahil yayında. 200 senaryonun son sonuçları geçti; 12 ek canlı denemede 11 başarı ve korunmuş 1 başarısız deneme var. Önbelleksiz bağımsız ofis hesabında 20/20 temsilci dosya eşleşti.",
+  "findings": [
+    {
+      "cases": [
+        "A006",
+        "A008"
+      ],
+      "finding": "Kaynak başlık adı fiziksel sütunla karıştırıldı; bir başka yanıtta son veri satırı atlandı. Mevcut denetim ikisini de otomatik onarımla düzeltti.",
+      "change": "Kaynak talimatına başlık-sütun eşlemesi ve boşluklardan sonraki son veri satırını kapsama koşulu eklendi.",
+      "validation": "Her iki özgün senaryo canlı v382 üzerinde yeniden çalıştı ve otomatik onarım olmadan geçti. Kaynak dosyaları ve önceden belirlenmiş beklenen değerler değişmedi.",
+      "liveRetests": [
+        {
+          "id": "A006",
+          "resultPath": "runs/followup-v382/A006.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        },
+        {
+          "id": "A008",
+          "resultPath": "runs/followup-v382/A008.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "A031"
+      ],
+      "finding": "Doğru hesap, çift kaçışlı satır sonları ve yinelenen iç kanıt bloğu yüzünden istenen JSON biçiminde teslim edilmedi.",
+      "change": "Sayısal JSON bloğunun sınırları güvenli biçimde düzeltilir; yinelenen iç protokol gizlenir, yalnız üst düzey doğrulanmış şema yetkilidir.",
+      "validation": "Gerçek başarısız yanıt normal istemcide yeniden oynatıldı; kaynak toplamları bağımsız eşleşti, belirsiz bloklar ve gerçek ters eğik çizgiler korundu.",
+      "liveRetests": [
+        {
+          "id": "A031",
+          "resultPath": "runs/followup-v382/A031.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C039"
+      ],
+      "finding": "Özet tablosundaki farklı toplam satırları otomatik doldurma metadata koşuluna takıldı; onarım teknik işi kullanıcı sorusu olarak bıraktı. Reddedilen asıl XLSX indirilemedi.",
+      "change": "Başka giriş tablolarından ayrı ayrı doğrulanan sabit özet çıktıları ile büyüyen giriş sütunları ayrıldı. Rutin teknik onarım için yeniden izin istememe talimatı eklendi.",
+      "validation": "Tanıyı yeniden üreten sentetik dosya geçti; giriş sütunu, bildirilmemiş formül ve bozuk metadata olumsuz kontrolleri reddedilmeye devam etti.",
+      "liveRetests": [
+        {
+          "id": "C039",
+          "resultPath": "runs/followup-v382/C039.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C044"
+      ],
+      "finding": "Bozuk tablo başvurusu otomatik onarımda sabit A1 toplamına çevrildi; büyüme denetimi teslimi engelledi.",
+      "change": "İmzalı yapısal gereksinimler onarıma açıkça taşınır; gerçek tablo adını kullanma, büyümeyi ve metadata bilgisini koruma koşulları tekrar verilir.",
+      "validation": "Altı servis teslim/onarım grubu geçti; sabit aralık hâlâ reddediliyor, özgün kontrol kapsamı değiştirilemiyor.",
+      "liveRetests": [
+        {
+          "id": "C044",
+          "resultPath": "runs/followup-v382/C044.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "A077"
+      ],
+      "finding": "Kaynak eşik formüllerinin toplamı 7 iken model 8 bildirdi. Bağımsız hesap kontrolü, onarımdan sonra da yanlış yanıtı gizledi.",
+      "change": "Kaynak formülü ve satır kimliği sözleşmesi kanıt onarımında da gönderilir. Satır sonuçlarının kodla toplanması ve yeniden hesabın önbellekle aynı çıkabileceği açıklaştırıldı.",
+      "validation": "Gerçek ilk yanlış yanıt ve aynı dosya ile yerel yeniden oynatma: yanlış sonuç gizli kalır, özgün G4:G18 formüllerinin doğru toplamı 7 kabul edilir. Aynı senaryo canlı v382 üzerinde otomatik onarım olmadan geçti.",
+      "liveRetests": [
+        {
+          "id": "A077",
+          "resultPath": "runs/followup-v382/A077.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C078"
+      ],
+      "finding": "Başlangıç isteği 65 saniyelik istemci süresini aştı. Eski günlükte HTTP yanıtı veya kuyruk süresi olmadığı için kesin ağ/kuyruk nedeni bilinmiyor.",
+      "change": "Sonraki test denemelerine kuyruk süresi ve isteğin gönderim durumu kaydı eklendi. Ürün süresi veya doğrulama kuralları gevşetilmedi.",
+      "validation": "Aynı isteğin v382 tekrarında HTTP yanıtı ve dosya alındı; bağımsız boş-metin ölçütü denetimi desteklenmediğinden o deneme başarısız kaydedildi. Bounded hesap düzeltmesinden sonraki v383 tekrarı otomatik onarım olmadan geçti. Özgün zaman aşımı ve sonraki başarısız deneme korunuyor.",
+      "liveRetests": [
+        {
+          "id": "C078",
+          "resultPath": "runs/empty-criteria-v383/C078.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C079"
+      ],
+      "finding": "Dosya okuyucusu row alanı okunamıyor hatasıyla iki teslimi de reddetti. Asıl reddedilen dosya indirilemedi; aynı istisna tek hücrelik birleştirme kaydıyla yeniden üretildi.",
+      "change": "A1 biçimindeki tek hücrelik birleştirme kaydı desteklenir; ters, bozuk ve sınır dışı aralıklar reddedilir.",
+      "validation": "Gerçek geçen C076 dosyasının sentetik XML değişiklikleriyle okuyucu kontrol edildi. Sayılar ve formüller değişmeden kaldı; canlı C079 tekrarı v382 üzerinde otomatik onarım olmadan geçti.",
+      "liveRetests": [
+        {
+          "id": "C079",
+          "resultPath": "runs/followup-v382/C079.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C095"
+      ],
+      "finding": "Test aracı grafiğin görev planında listelenmemesini grafik yokluğu saydı. Gerçek dosyada istenen sütun grafiği, Ozet!A5:B5 kaynağı ve D4 konumu mevcut.",
+      "change": "Test grafiğin gerçek çizim ilişkilerini, türünü, kaynağını ve konumunu kontrol eder; görev planına tek başına dayanmaz. Beklenen kullanıcı isteği değişmedi.",
+      "validation": "Asıl C095 dosyasının grafiği doğrulandı. Grafik parçası silinmiş, kaynağı veya konumu değiştirilmiş kopyalar reddedildi. İlk yanlış alarm kaydı korunuyor; yeni canlı v382 denemesi de otomatik onarım olmadan geçti.",
+      "liveRetests": [
+        {
+          "id": "C095",
+          "resultPath": "runs/followup-v382/C095.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    },
+    {
+      "cases": [
+        "C078"
+      ],
+      "finding": "Yeni üretimde sayısal sonuçlar doğruydu; COUNTIFS boş metin ölçütü denetim motorunda desteklenmediği için test tamamlanamadı.",
+      "change": "COUNTIF(S), SUMIF(S) ve AVERAGEIF(S) için hücrede saklanan boş metin ile formülün ürettiği boş metin ayrılır. Yalnız literal boş hücre ölçütleri desteklenir; formül kaynaklı boş metin belirsizliği doğrulanmamış kalır. Sıfır, false, boşluk karakteri ve COUNTA kuralı korunur.",
+      "validation": "Gerçek C078 dosyasında bağımsız sonuçlar 10 ve 2; özgün dondurulmuş veri değişikliği kontrolleri de geçti. Formül önbellekleri kaldırılmış kopyalarla 18 literal boş hücre ölçütü bağımsız ofis motorunda eşleşti; formül kaynaklı boş metin için 3 olumsuz kontrol doğrulanmamış kalıyor. Canlı v383 tekrarı otomatik onarım olmadan geçti.",
+      "liveRetests": [
+        {
+          "id": "C078",
+          "resultPath": "runs/empty-criteria-v383/C078.result.json",
+          "passed": true,
+          "automaticRepairs": 0
+        }
+      ]
+    }
+  ],
+  "rawStatisticsNote": "İlk tur ham kaydında 193/200 teslim başarılı, 189/200 onarımsız başarılıdır. C095 gerçek dosyada grafik varken test aracı tarafından yanlış başarısız sayılmıştır; ham ilk-tur sayıları geriye dönük değiştirilmemiştir.",
+  "liveFollowups": {
+    "attempts": 12,
+    "passed": 11,
+    "failed": 1,
+    "uniqueCases": 11,
+    "latestAllPassed": true,
+    "automaticRepairs": 0,
+    "failedAttempt": "runs/followup-v382/C078.result.json",
+    "successfulRetry": "runs/empty-criteria-v383/C078.result.json"
+  }
+}

@@ -1,0 +1,437 @@
+{
+  "updatedAt": "2026-10-16T14:23:50.761Z",
+  "engine": "LibreOfficeDev 26.8.0.0.alpha0",
+  "mode": "Actual delivered files copied with ALL formula caches removed before native import/export; saved native results checked against frozen expected values. Earlier conversion-only evidence superseded; originals unchanged.",
+  "planned": 20,
+  "completed": 20,
+  "passed": 20,
+  "attempts": 20,
+  "attemptsDefinition": "Latest result per representative; infrastructure retries retained separately.",
+  "priorConversionOnlyAttempts": 20,
+  "results": [
+    {
+      "id": "C001",
+      "family": "sum",
+      "resultPath": "runs/repeat-v381/C001.result.json",
+      "sourceSha256": "b15cfdd196b1edb4e979d8b1a52ea7aa55e32c90055d1ad3d620773f784da148",
+      "uncachedSha256": "51d3a9864945f8545e6945614dbbd69fbef0c9cc35525658ba0ce4ed0bf7f1d9",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "2a84e92bb17af20f100faeea0c07b5fcf3614be7b24a3005502a07bbb9c63ff4",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        }
+      ]
+    },
+    {
+      "id": "C006",
+      "family": "average",
+      "resultPath": "runs/repeat-v381/C006.result.json",
+      "sourceSha256": "be71f3f9ccd9109c0fd1dcd8ac6b79106a0c6a88b644bc2849cce18a14324a57",
+      "uncachedSha256": "2173357dd32d21607cacb47cf740b336456f3f45bf4eb9cebe47134196d49250",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "025e72ad8eb99ef0444572dbf984b175b97ee69512434abfbd6478fe8d8388c6",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 5,
+          "actual": 5
+        }
+      ]
+    },
+    {
+      "id": "C011",
+      "family": "minmax",
+      "resultPath": "runs/repeat-v381/C011.result.json",
+      "sourceSha256": "96459838895943d2fc7a543425b1c17ab6f0882135a487d935100431c6b2df09",
+      "uncachedSha256": "09ee7a25d6ad161fbd32a9b4378bf33981f1639edb15ae4ea49869dabe9dd6c9",
+      "inputContentVerified": true,
+      "formulas": 2,
+      "cachesRemoved": 2,
+      "nativeSha256": "b13b00d7563fed9c386ba8df208ad8c8e663f08734be78a5fbaceafb00cc4856",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": -3,
+          "actual": -3
+        },
+        {
+          "sheet": "Ozet",
+          "cell": "B6",
+          "expected": 10,
+          "actual": 10
+        }
+      ]
+    },
+    {
+      "id": "C016",
+      "family": "count",
+      "resultPath": "runs/repeat-v381/C016.result.json",
+      "sourceSha256": "c0e43f567a93fc46d30b43271f5c3b0b6bae996846ab004aff9444d51bae0373",
+      "uncachedSha256": "e58149a4ccc0b423ec4c3da7a5689bbbdd87363da4f7560e684055c9f4ca22b6",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "fbf92207aef5c80160b801373a6087aabde52a3006c580229130061da69c0695",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 3,
+          "actual": 3
+        }
+      ]
+    },
+    {
+      "id": "C021",
+      "family": "conditional",
+      "resultPath": "runs/repeat-v381/C021.result.json",
+      "sourceSha256": "42f293ae1f78ebc31aaafe32b5df4af28afcd9bef6f11ae7909fe88175b2f37f",
+      "uncachedSha256": "b6f08d738e82c274fdf3264992afed2f11a3690f616e4d3f348e3438197fa0ad",
+      "inputContentVerified": true,
+      "formulas": 4,
+      "cachesRemoved": 4,
+      "nativeSha256": "860708896b219a50a8d587a55f83fd9e09cbdab340b1c92801c8c5d39713bc74",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 10,
+          "actual": 10
+        },
+        {
+          "sheet": "Ozet",
+          "cell": "B6",
+          "expected": 2,
+          "actual": 2
+        }
+      ]
+    },
+    {
+      "id": "C026",
+      "family": "period",
+      "resultPath": "runs/repeat-v381/C026.result.json",
+      "sourceSha256": "b300e7aed4269b9e08c71f9e2c241b907ca07947cb178f89fd6289fed28a8222",
+      "uncachedSha256": "9be7b877e4c0b81d52e38548115a1bcd320b30c560b2a325e12d4c5633f45d5e",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "3f76095596036bc38341fdd71fc00cc1f3fc7268e2b908493bb42f7926c22494",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 30,
+          "actual": 30
+        }
+      ]
+    },
+    {
+      "id": "C031",
+      "family": "returns",
+      "resultPath": "runs/repeat-v381/C031.result.json",
+      "sourceSha256": "1ab863046d59f918b992f02d09d1db731e8ee77746dbe00c755539503e76d4e6",
+      "uncachedSha256": "779916387f422afe4379ab6f19eb7bdb1b8622b18739e70b8dc1373f0a835d61",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "1778e22069dc8afd34f7c348047f502ee1b249752535709318e23d888e74238c",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        }
+      ]
+    },
+    {
+      "id": "C036",
+      "family": "currency",
+      "resultPath": "runs/repeat-v381/C036.result.json",
+      "sourceSha256": "3b12422c207b2c068bef018467145a50c8865dc8a17963f6e0024557f92189e4",
+      "uncachedSha256": "30007a09a6058d3e754a8c0c2a212f775c21419e46ff9104378d677895d5d0d4",
+      "inputContentVerified": true,
+      "formulas": 2,
+      "cachesRemoved": 2,
+      "nativeSha256": "5706e43dfd4b09be4102fda093fdb2794a090e4e4a8993ac2504960df3cbeda1",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        },
+        {
+          "sheet": "Ozet",
+          "cell": "B6",
+          "expected": 100,
+          "actual": 100
+        }
+      ]
+    },
+    {
+      "id": "C041",
+      "family": "product",
+      "resultPath": "runs/repeat-v381/C041.result.json",
+      "sourceSha256": "deb18c48c676c210b4f8ba15c47e5fcc2478657525fc06fa0a82060a843ef898",
+      "uncachedSha256": "1416195512d7fc3bcb8cdc9b09ee035dba523b8b159256f6262b27fe35ea2b4f",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "885f0202b7f9a721b6443d7c7463e72f750eb51432725ca65aa27801bc314f73",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 40,
+          "actual": 40
+        }
+      ]
+    },
+    {
+      "id": "C046",
+      "family": "balance",
+      "resultPath": "runs/repeat-v381/C046.result.json",
+      "sourceSha256": "78601f65a629ea55ee8e3c3a43ee384d5e2d88c999c37718b03f4d2f53ffd043",
+      "uncachedSha256": "79caa3c83997faca3760a60395bc81675c504a7ec7982ebcc878649f6886f7ac",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "9afddf9349d14c4806c45a2584be0aeda995c472cfaec10e321057ec58d5cd7f",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 6,
+          "actual": 6
+        }
+      ]
+    },
+    {
+      "id": "C051",
+      "family": "ratio",
+      "resultPath": "runs/repeat-v381/C051.result.json",
+      "sourceSha256": "a325fe472d3b0316c470081dfda8e3227101146674fcf2e373a3735a3c13d2f6",
+      "uncachedSha256": "818120b0512755d521c1fd3f9fac41d456fe67d371d2e4239899bf9916788998",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "a431d1e2a85ee47d9728256d47015d39dfab7c81829245caff3a08486b49e99a",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 6.25,
+          "actual": 6.25
+        }
+      ]
+    },
+    {
+      "id": "C056",
+      "family": "weighted",
+      "resultPath": "runs/repeat-v381/C056.result.json",
+      "sourceSha256": "302df18fdeadbcaedc61134edcbfe0a5a74d9ba790583e753b90a6dc2519a249",
+      "uncachedSha256": "9ed4ae5156b37f45c7d059fe9e556d4102d4f0b20eaf17a365c13a70f570593c",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "8ec81deb709d27ae478fbdaf540943c19853d35192928d1ec3ca7a8c2c77a99c",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 4.444444444444445,
+          "actual": 4.44444444444445
+        }
+      ]
+    },
+    {
+      "id": "C061",
+      "family": "budget",
+      "resultPath": "runs/repeat-v381/C061.result.json",
+      "sourceSha256": "6c4e4c04aed88ff1d9556931d72798aeedc921343db0e3cd1f1cd5df31340414",
+      "uncachedSha256": "e7f314663732174567cf56ee5e848b418b61b75877b5a2bc5374906f8db7a750",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "21c85240beb49f19e7b09f4ea96649370a529006aebc50b452680fa9e0244973",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 6,
+          "actual": 6
+        }
+      ]
+    },
+    {
+      "id": "C066",
+      "family": "lookup",
+      "resultPath": "runs/repeat-v381/C066.result.json",
+      "sourceSha256": "5c7c850a7dd0c14c3feaf036b1e45dfb550b2b35185d78d6acbe23e33622bd2d",
+      "uncachedSha256": "6e62b04cfc4654df911513baf7b68e5ed5de01d1155ba74c0b9b859b92a4433e",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "e237d7acd5c680f900688b9816c13552917fcf95dd33a15236debf40c0474422",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 13,
+          "actual": 13
+        }
+      ]
+    },
+    {
+      "id": "C071",
+      "family": "round",
+      "resultPath": "runs/repeat-v381/C071.result.json",
+      "sourceSha256": "58c3c76647df4e84e3d29d575fb287c00c27114f1f799aea66778bca6f40a505",
+      "uncachedSha256": "1c49f29a6a88d9de3233692c02866d1dff7e2087523ec13fb3c8dbc8267093c5",
+      "inputContentVerified": true,
+      "formulas": 21,
+      "cachesRemoved": 21,
+      "nativeSha256": "eff3fa3733cd74676f631b263aa72a5553d50219fcc7e5cd187eb5613eb734bd",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 6.25,
+          "actual": 6.25
+        }
+      ]
+    },
+    {
+      "id": "C076",
+      "family": "threshold",
+      "resultPath": "runs/repeat-v381/C076.result.json",
+      "sourceSha256": "3d3a4a606d1b70870f791d43f63f8042e91f33d6dab494039e67da998f026cda",
+      "uncachedSha256": "c148654bf993534817bb8197fca0e4d3c8721891d9dca2b157c2f26fc0f2ea41",
+      "inputContentVerified": true,
+      "formulas": 3,
+      "cachesRemoved": 3,
+      "nativeSha256": "9facc5b2f9376a276373a635a07501a9d6dd685658b47a0de5835589220bb9b7",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 10,
+          "actual": 10
+        },
+        {
+          "sheet": "Ozet",
+          "cell": "B6",
+          "expected": 2,
+          "actual": 2
+        }
+      ]
+    },
+    {
+      "id": "C081",
+      "family": "multisheet",
+      "resultPath": "runs/repeat-v381/C081.result.json",
+      "sourceSha256": "ff23bf5896f3c6b7d3b21f219c4737a56790e1f60ad55461dd27fb0cf0360749",
+      "uncachedSha256": "e0882dc790a82d8a272892fd95db7e51fff74ac34c0871a9f58e8469ecb31491",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "b6cf420d23db0d9e6bb85c9907f1c7f6c5fd1531a0182488944b527fb4b2e8bc",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 0,
+          "actual": 0
+        }
+      ]
+    },
+    {
+      "id": "C086",
+      "family": "layout",
+      "resultPath": "runs/repeat-v381/C086.result.json",
+      "sourceSha256": "acdd81d42b524c424f22adb3cfb949c24f64c1db5d62835079d6d20f9e240826",
+      "uncachedSha256": "92f8fdf01e7c387101f9afaa46f0dc87a23ee9b8139b85c4fe27d458a5d99221",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "2de343242de1fc5224c54e870add70deed7a7930b16e045f6df90b0ae7f716c7",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        }
+      ]
+    },
+    {
+      "id": "C091",
+      "family": "locale",
+      "resultPath": "runs/repeat-v381/C091.result.json",
+      "sourceSha256": "205d3d618ae2fb878c4dad6512e7155966ee5b82e3c9b46725b01017b5a2a284",
+      "uncachedSha256": "fed8244ddaff83ec06972c0d4fddd366b72dad02d5d5768c6d7ef868d0f2900c",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "e3539a4c5d438d6cd7c2f8dfb00d74387c8c7e0dc11e350ecc04239740eb0b79",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        }
+      ]
+    },
+    {
+      "id": "C096",
+      "family": "scale",
+      "resultPath": "runs/repeat-v381/C096.result.json",
+      "sourceSha256": "be9b75f81b931de5260b31d52189bcfdb372e0e90a25340f13602a71b7f2d824",
+      "uncachedSha256": "67205f40d03ac46738e786e82cdb696823f824f82da3c64c83df3fdcc0107306",
+      "inputContentVerified": true,
+      "formulas": 1,
+      "cachesRemoved": 1,
+      "nativeSha256": "f2bc1b94ccf82b92958097caa5466e657188a211b17eced68faea5eda494da55",
+      "passed": true,
+      "checks": [
+        {
+          "sheet": "Ozet",
+          "cell": "B5",
+          "expected": 7,
+          "actual": 7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "D004",
+  "startedAt": "2026-10-17T19:35:31.859Z",
+  "sourceSha256": "1a4c76c84b87e67fd5d232ab68267ac33e3baf7e82bb0ac17d9c095c45fda8aa",
+  "prompt": "INV-006, fiziksel CSV satır 8, geçersiz fiyat nedeniyle hesap kapsamından çıkarılsın. Bu testin açık iş kuralı şudur: invoice_id benzersiz bir faturayı temsil eder; aynı invoice_id birden fazla satırda bulunursa bu kayıtlardan hangilerinin hesaba katılacağı kullanıcı tarafından ayrıca kararlaştırılmadan genel net/vergi/brüt toplamı üretme. Bunlar çok kalemli fatura satırları değildir. INV-006 dışında hiçbir kayıt için karar vermedim. Kaynağı değiştirmeden bir sonraki gerekli kararı sor; dosya oluşturma.",
+  "text": "INV-005 için hangi fiziksel CSV satırı veya satırları hesap kapsamına alınsın?\n\nINV-005 tekrarlanan bir invoice_id içeriyor. Kayıtları birleştirmeden veya sessizce silmeden genel net/vergi/brüt toplamını hesaplamak için hangi fiziksel satırın ya da satırların kapsama alınacağı belirlenmelidir.",
+  "evidence": {
+    "version": 2,
+    "layout": [
+      {
+        "source": "S1",
+        "sheet": "CSV",
+        "range": "CSV1:CSV9",
+        "headerRows": [
+          1
+        ],
+        "notes": [
+          "Başlık fiziksel satır 1'dir; 8 veri satırı fiziksel satır 2-9 arasındadır.",
+          "INV-006, veri satırı 8 ve başlık dahil fiziksel satır 9'dur; geçersiz unit_price nedeniyle kapsam dışı bırakılmıştır.",
+          "INV-005, fiziksel satır 6 ve 7'de tekrarlanmaktadır. INV-006 dışındaki kayıtlar için henüz seçim uygulanmamıştır."
+        ]
+      }
+    ],
+    "clarification": {
+      "question": "INV-005 için hangi fiziksel CSV satırı veya satırları hesap kapsamına alınsın?",
+      "why": "INV-005 tekrarlanan bir invoice_id içeriyor. Kayıtları birleştirmeden veya sessizce silmeden genel net/vergi/brüt toplamını hesaplamak için hangi fiziksel satırın ya da satırların kapsama alınacağı belirlenmelidir.",
+      "options": [
+        "INV-005'in yalnızca fiziksel satır 6'sı hesaba katılsın",
+        "INV-005'in yalnızca fiziksel satır 7'si hesaba katılsın",
+        "INV-005'in iki kaydı da ayrı fatura kaydı olarak hesaba katılsın",
+        "INV-005'in iki kaydı da kapsam dışında bırakılsın"
+      ]
+    },
+    "calculations": []
+  },
+  "toolCalls": 1,
+  "checks": [
+    "Expected unresolved blocker disclosed",
+    "Clarification requested; no verified total or workbook delivered"
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-17T19:35:54.891Z",
+  "actions": [
+    {
+      "action": "start",
+      "sentAt": "2026-10-17T19:35:31.862Z",
+      "status": 200,
+      "ms": 8664
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:35:43.071Z",
+      "status": 200,
+      "ms": 206
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:35:45.780Z",
+      "status": 200,
+      "ms": 236
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:35:48.518Z",
+      "status": 200,
+      "ms": 225
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:35:51.247Z",
+      "status": 200,
+      "ms": 253
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:35:54.003Z",
+      "status": 200,
+      "ms": 322
+    },
+    {
+      "action": "cleanup",
+      "sentAt": "2026-10-17T19:35:54.328Z",
+      "status": 200,
+      "ms": 563
+    }
+  ],
+  "completions": [
+    {
+      "action": "poll",
+      "text": "INV-005 için hangi fiziksel CSV satırı veya satırları hesap kapsamına alınsın?\n\nINV-005 tekrarlanan bir invoice_id içeriyor. Kayıtları birleştirmeden veya sessizce silmeden genel net/vergi/brüt toplamını hesaplamak için hangi fiziksel satırın ya da satırların kapsama alınacağı belirlenmelidir.",
+      "evidence": {
+        "version": 2,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "CSV",
+            "range": "CSV1:CSV9",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "Başlık fiziksel satır 1'dir; 8 veri satırı fiziksel satır 2-9 arasındadır.",
+              "INV-006, veri satırı 8 ve başlık dahil fiziksel satır 9'dur; geçersiz unit_price nedeniyle kapsam dışı bırakılmıştır.",
+              "INV-005, fiziksel satır 6 ve 7'de tekrarlanmaktadır. INV-006 dışındaki kayıtlar için henüz seçim uygulanmamıştır."
+            ]
+          }
+        ],
+        "clarification": {
+          "question": "INV-005 için hangi fiziksel CSV satırı veya satırları hesap kapsamına alınsın?",
+          "why": "INV-005 tekrarlanan bir invoice_id içeriyor. Kayıtları birleştirmeden veya sessizce silmeden genel net/vergi/brüt toplamını hesaplamak için hangi fiziksel satırın ya da satırların kapsama alınacağı belirlenmelidir.",
+          "options": [
+            "INV-005'in yalnızca fiziksel satır 6'sı hesaba katılsın",
+            "INV-005'in yalnızca fiziksel satır 7'si hesaba katılsın",
+            "INV-005'in iki kaydı da ayrı fatura kaydı olarak hesaba katılsın",
+            "INV-005'in iki kaydı da kapsam dışında bırakılsın"
+          ]
+        },
+        "calculations": []
+      },
+      "files": [],
+      "missingOutput": false,
+      "toolCalls": 1
+    }
+  ],
+  "automaticRepairs": 0
+}

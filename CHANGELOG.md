@@ -1,5 +1,13 @@
 # ArexAi Contracts Changelog
 
+## 2026-10-17 — Excel campaign evidence and decimal regression completion
+
+- Refresh the current AI reference for published v3.28.0 capabilities and the 16 October hardening, with exact private source/publication identifiers and route-specific limits.
+- Publish the unchanged 200-scenario evidence archive: 100 source analyses, 100 workbook creations, 510 numerical probes and 20 representative cache-free native recalculations. Separate the raw 189/200 initial repair-free result, 193/200 initial delivery result and 200/200 latest result after targeted fixes/retries. Preserve all 212 request attempts, eight raw failures, one request with no HTTP response and the C095 chart-checker false alarm.
+- Add an offline public verifier for all 481 archived file hashes, 100 original input hashes, saved analysis values, source/output provenance, native cache-removal copies and aggregate history. This verifies historical evidence; it does not rerun AI, Office or the private application.
+- Complete PR #48's exact-decimal invoice oracle with explicit physical-row selection, per-line ROUND_HALF_UP and damaged-fixture rejection checks; document separate fresh live application observations.
+- Extend the existing `verify:ai-examples` CI command. Existing Solidity behavior, deployed contracts, allocation, dependency versions and dated release archives are unchanged. No new independent audit or universal accuracy claim is made.
+
 ## 2026-10-15 — ArexAi product terminology
 
 - Use ArexAi product terminology in the current AI reference and the retained v3.16.1 and v3.22.0 documentation.
