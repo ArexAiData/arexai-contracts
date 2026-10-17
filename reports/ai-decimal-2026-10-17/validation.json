@@ -1,0 +1,80 @@
+{
+  "recordedAt": "2026-10-17T19:37:00.477051+00:00",
+  "synthetic": true,
+  "applicationSourceCommit": "92d2942bc0fe6758dea494ae1e41e9b460cdaede",
+  "sitePublication": 384,
+  "liveAttempts": 4,
+  "rawPassed": 2,
+  "rawFailed": 2,
+  "automaticRepairs": 0,
+  "separateFrom200CaseCampaign": true,
+  "assessments": [
+    {
+      "id": "D001",
+      "rawPassed": false,
+      "classification": "test-harness-false-alarm",
+      "observation": "Application asked one unresolved invalid-price question and withheld totals. Initial assertion incorrectly required both invalid-price and duplicate disclosures in the same one-question response. Original record retained."
+    },
+    {
+      "id": "D002",
+      "rawPassed": true,
+      "classification": "approved-scope-workbook-passed",
+      "sourceCellsPreserved": 48,
+      "independentDecimalAmountComparisons": 28,
+      "savedDependencyFormulas": 33
+    },
+    {
+      "id": "D003",
+      "rawPassed": false,
+      "classification": "duplicate-review-not-observed-with-underspecified-id-semantics",
+      "observation": "After only the invalid-price exclusion, the application retained both repeated-ID rows as separate invoice lines and reported net 54.27, tax 10.85, gross 65.12. These are arithmetically correct for that interpretation, but the test expected another duplicate-review decision. The prompt did not explicitly declare invoice IDs unique. Do not count this as a duplicate-review pass or silently deduplicate the source."
+    },
+    {
+      "id": "D004",
+      "rawPassed": true,
+      "classification": "explicit-unique-invoice-policy-clarification-passed",
+      "observation": "With explicit one-ID-one-invoice semantics and a requirement to review repeated IDs before totals, the application asked about INV-005 and withheld verified totals."
+    }
+  ],
+  "limits": [
+    "Actual model/API observations through the normal client, not browser/mobile UI tests.",
+    "D002 comparisons used independent Decimal expectations and the bounded application evaluator; no native Office recalculation was run for this new fixture.",
+    "The public checker verifies exact saved formula dependencies and historical output values; it does not invoke a model or a general Excel engine.",
+    "One-ID-one-invoice semantics must be explicit; D003 remains a scope-interpretation observation linked from issue #47."
+  ],
+  "files": [
+    {
+      "path": "reports/ai-decimal-2026-10-17/cases.json",
+      "sha256": "f7a67b1ec4934c1f90bf78d815ac07a832405814987421896f51b779516cf178"
+    },
+    {
+      "path": "reports/ai-decimal-2026-10-17/D002.xlsx",
+      "sha256": "8fcb9055839b29c543d6ff629a6f6095ce1adce80d62ed36c0015c66be5bf514"
+    },
+    {
+      "path": "reports/ai-decimal-2026-10-17/D001.result.json",
+      "sha256": "453bfab9bc315afadb2fb285709ea7f9181b7dbe5028fbe8b370e092b3235e3e"
+    },
+    {
+      "path": "reports/ai-decimal-2026-10-17/D002.result.json",
+      "sha256": "84a9d7328a27c5656c3fffc18a02021c32ad2f620b96e8669484f9f06ba632d2"
+    },
+    {
+      "path": "reports/ai-decimal-2026-10-17/D003.result.json",
+      "sha256": "6f52d6e9b3d8e3b14a36d7d5dce4f15129eca9af50f803ae1db6c01ef663fb97"
+    },
+    {
+      "path": "reports/ai-decimal-2026-10-17/D004.result.json",
+      "sha256": "f0a629a12f5cb0d120fa28a88e40f965443dbd1a74fc2a42d221242499aa0c45"
+    },
+    {
+      "path": "docs/ai/examples/v3.24-decimal-invoices.csv",
+      "sha256": "1a4c76c84b87e67fd5d232ab68267ac33e3baf7e82bb0ac17d9c095c45fda8aa"
+    },
+    {
+      "path": "docs/ai/examples/v3.24-decimal-invoices-expected.json",
+      "sha256": "efde31d7780cef0b041cfd8d5f36ad5bba10e0fc3133fbd9446e63e6c448e68c"
+    }
+  ],
+  "applicationAmountComparisonTolerance": "absolute error < 1e-9 versus exact Python Decimal expectations; binary floating-point representation is not claimed exact"
+}

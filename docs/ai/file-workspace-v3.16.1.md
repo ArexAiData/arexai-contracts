@@ -27,7 +27,7 @@ The application source is maintained in a separate private Site repository. Thes
 
 Local mode keeps its existing browser-only analysis and workbook tools. Local import remains bounded separately: 8 MB, 20 worksheets, 1,000 records and 100 fields under that flow.
 
-AI full-file processing requires opt-in. The complete selected file, including names, hidden sheets and cell contents, plus the request and up to 12 recent messages is sent to OpenAI. Values are not automatically masked in this mode. Uploaded/generated workbooks are treated as data; macros and external links are not executed.
+ArexAi full-file AI processing requires opt-in. The complete selected file, including names, hidden sheets and cell contents, plus the request and up to 12 recent messages is sent through ArexAi to an external AI service provider. Values are not automatically masked in this mode. Uploaded/generated workbooks are treated as data; macros and external links are not executed.
 
 AI file limits are 6 MiB per input/output, 20 worksheets, 50,000 populated rows per sheet, 200 columns, 250,000 stored cells in total and 32 MiB expanded XLSX package size. Temporary workspace deletion is requested after the task; uploaded provider files also carry a 24-hour expiry. Provider retention policies apply. Users should download copies they want to retain.
 

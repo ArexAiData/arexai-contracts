@@ -57,5 +57,19 @@
     "tax": "10.84",
     "gross": "65.06"
   },
-  "disclaimer": "Synthetic tax rates, not jurisdiction-specific tax guidance. Totals apply only to one explicitly selected occurrence per valid invoice ID; never silently deduplicate customer data."
+  "disclaimer": "Synthetic tax rates, not jurisdiction-specific tax guidance. Totals apply only to one explicitly selected occurrence per valid invoice ID; never silently deduplicate customer data.",
+  "approved_subset_csv_rows": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "excluded_csv_rows": {
+    "7": "Second occurrence of INV-005 excluded only by explicit scenario approval.",
+    "8": "Invalid price excluded only by explicit scenario approval."
+  },
+  "row_semantics": "One synthetic invoice line per CSV data row; header is physical row 1.",
+  "currency": "Synthetic monetary units, no currency conversion.",
+  "tax_scope": "Illustrative rates only; no jurisdiction, tax period or legal applicability is asserted."
 }

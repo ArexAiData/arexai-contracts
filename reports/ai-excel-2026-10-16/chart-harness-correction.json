@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "id": "C095",
+  "proof": {
+    "sheet": "Ozet",
+    "anchor": "D4",
+    "type": "column",
+    "category": "Ozet!A5:A5",
+    "values": "Ozet!B5:B5",
+    "chartPart": "xl/charts/chart1.xml"
+  },
+  "classification": "Test harness false positive: actual requested native chart present, absent only from model-authored task plan; original failed result preserved",
+  "negativeControls": [
+    "missing chart part",
+    "wrong value source",
+    "wrong anchor"
+  ]
+}

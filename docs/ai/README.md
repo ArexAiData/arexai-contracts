@@ -1,12 +1,24 @@
-# ArexAi AI engineering reference — v3.22.0
+# ArexAi AI engineering reference
 
-This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product v3.22.0 and contract repository release versions have independent meanings.
+This directory documents the ArexAi Analyst product separately from the Solidity contracts. It contains **synthetic example data and reference expectations**, not real users' files or the private application implementation. AI product versions, Site publication numbers and contract repository release versions have independent meanings.
 
 Product: https://arexaidata.com/app · Product release notes: https://arexaidata.com/updates
 
-## Current v3.22.0 workspace and delivery — 14 October 2026
+## Current published reference — v3.28.0 and 16 October hardening
 
-The current Beta supports up to three XLSX/CSV sources, user-reviewed exact-key comparison, downloadable reviewed reports, continued workbook edits, four retained output versions and optional device-local recovery. It covers inventory, accounting, personnel, call records and other tabular domains; it does not provide a live ERP connector or country-specific tax-compliance engine.
+The separate application source published as Site version 384 is commit `92d2942bc0fe6758dea494ae1e41e9b460cdaede`. Its product release notes identify v3.28.0; Site versions 381–384 are publication identifiers, not new AI semantic versions. This public repository contains documentation, synthetic fixtures and sanitized evidence, not the private application implementation.
+
+- [200-scenario Excel campaign and limits](excel-campaign-2026-10-16.md): 100 fresh uploaded-file analyses and 100 fresh workbook-generation topics. After fixes and targeted retries, the latest result for each scenario passed. The raw initial repair-free count was 189/200, including one preserved chart-checker false alarm; 212 task attempts and all eight raw failures remain available.
+- [Download the original hashed evidence ZIP](../../reports/ai-excel-2026-10-16/arexai-excel-test-kanitlari.zip), or inspect the [machine-readable report](../../reports/ai-excel-2026-10-16/report.json). Historical evidence includes 510 numerical probes and 20 representative files recalculated after removing formula caches from disposable copies.
+- Current capabilities include conditional source calculations with distinct numeric/filled/record/distinct-ID counts, supported dependency-formula recalculation, reviewed scope pinning, verified generated tables and ratios, explicit-credit/refund settlement with approved conversion rates, and a complete source-linked analysis package. Unsupported formulas and unresolved business choices remain unverified; this is not an unrestricted Excel engine or a tax-compliance service.
+- The general AI workspace permits up to three XLSX/CSV sources, 6 MiB per file and 12 MiB total. The reviewed analysis-package route has its own narrower limits: one original source up to 2 MiB, 10,000 selected rows, 50 columns and 100,000 source cells. Limits belong to their specific route; larger synthetic boundary tests are not a promise that every route accepts that size.
+- [Decimal invoice example and fresh live observations](examples/v3.24-decimal-invoices.md) cover explicit per-line rounding, duplicate review, invalid prices, zero quantity and full discount. Its legacy filename identifies the original PR #48 fixture; it does not claim that the current application is v3.24.0.
+
+`npm run verify:ai-examples` now also checks the frozen campaign archive, source/output hashes, preserved initial failures, saved answers, cache-free input copies, saved native results and exact-decimal invoice expectations. It uses standard-library Python and the existing Node reference checkers. These public CI checks do not call AI, run native Office, execute the private application or create new live accuracy measurements. Browser/mobile interaction and Microsoft Excel desktop UI were not exercised by the 16 October campaign. The narrower formula-empty-string cases explicitly identified in that report remain unverified.
+
+## Historical v3.22.0 workspace and delivery — 14 October 2026
+
+At v3.22.0, the Beta supported up to three XLSX/CSV sources, user-reviewed exact-key comparison, downloadable reviewed reports, continued workbook edits, four retained output versions and optional device-local recovery. It covers inventory, accounting, personnel, call records and other tabular domains; it does not provide a live ERP connector or country-specific tax-compliance engine.
 
 v3.22.0 adds real task stages and timing, bounded retries of read-only polls/downloads, pausing and continuing the same received job within its 20-minute session, and source-address checks before delivery. Reviewed comparison explanations read the complete deterministic report. The original reviewed workbook remains the delivered file; four Summary checks gate the explanation, without certifying all qualitative prose.
 
@@ -16,7 +28,7 @@ v3.22.0 adds real task stages and timing, bounded retries of read-only polls/dow
 - `npm run verify:ai-examples` now also checks these public source/report fixtures, their hashes and twelve damaged-report rejection cases using Python 3.10+ (standard library only). It does not execute the private application, rerun its 94 groups or call an AI provider.
 - Browser/mobile interaction and actual IndexedDB reloads remain untested. The previous unrestricted three-source model-generation timeout is not claimed universally fixed.
 
-Full-file AI mode still sends complete selected file bytes (including hidden sheets), the request and applicable conversation context to OpenAI; raw values are not automatically masked. Optional device storage is off by default and expires after 24 hours of inactivity. That setting does not govern provider retention, extend the signed job's 20-minute lifetime or create account-backed cloud history. A task must have returned a checkpoint before it can be resumed. Local-only analysis remains separate.
+ArexAi’s full-file AI mode sends complete selected file bytes (including hidden sheets), the request and applicable conversation context through ArexAi to an external AI service provider; raw values are not automatically masked. Optional device storage is off by default and expires after 24 hours of inactivity. That setting does not govern provider retention, extend the signed job's 20-minute lifetime or create account-backed cloud history. A task must have returned a checkpoint before it can be resumed. Local-only analysis remains separate.
 
 The following sections retain dated historical scope. Their old version numbers and old local-import limits are not the current full-file workspace limits.
 
@@ -24,7 +36,7 @@ The following sections retain dated historical scope. Their old version numbers 
 
 At v3.16.1, the AI workspace could inspect complete selected XLSX/CSV files, create downloadable Excel copies and continue editing the latest generated workbook. Earlier copies remain available within the current browser session. Local mode retains its browser-only tools.
 
-AI file processing is a separate opt-in mode: the complete selected file (including names, hidden worksheets and cell contents), the request and up to 12 recent messages are sent to OpenAI. Sensitive values are not automatically masked in this mode. Local analysis limits and privacy behavior do not describe this full-file mode.
+ArexAi AI file processing is a separate opt-in mode: the complete selected file (including names, hidden worksheets and cell contents), the request and up to 12 recent messages are sent through ArexAi to an external AI service provider. Sensitive values are not automatically masked in this mode. Local analysis limits and privacy behavior do not describe this full-file mode.
 
 v3.16.1 retains uploaded CSV bytes for AI processing, continues edits from locally generated workbooks, formats AI answers as readable headings/lists/tables, and displays formula text when a workbook has no saved formula result.
 

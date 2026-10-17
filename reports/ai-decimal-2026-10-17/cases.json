@@ -1,0 +1,52 @@
+{
+  "synthetic": true,
+  "source": "docs/ai/examples/v3.24-decimal-invoices.csv",
+  "sourceSha256": "1a4c76c84b87e67fd5d232ab68267ac33e3baf7e82bb0ac17d9c095c45fda8aa",
+  "applicationSourceCommit": "92d2942bc0fe6758dea494ae1e41e9b460cdaede",
+  "applicationSiteVersion": 384,
+  "method": "Actual production requests through the normal application client; separate from the historical 200-case campaign. Independent expected amounts use Python Decimal.",
+  "cases": [
+    {
+      "id": "D001",
+      "mode": "ambiguity",
+      "prompt": "Bu CSV tamamen sentetik fatura kalemleridir. İlk satır başlıktır, her veri satırı bir fatura kalemidir. quantity adet, unit_price parasal birim, discount_percent ve tax_percent yüzde oranıdır; oranlar örnek varsayımlardır, bir ülkenin vergi mevzuatı değildir. Net, vergi ve brüt toplamı hesapla. Matrah = adet × birim fiyat; indirimi ROUND_HALF_UP ile iki ondalığa yuvarla, netten hesaplanan vergiyi de her satırda ayrı ROUND_HALF_UP ile iki ondalığa yuvarla. Tekrarlanan fatura kimliklerini kullanıcı kararı olmadan birleştirme veya silme; geçersiz fiyatı sıfır kabul etme. Çözümlenmemiş karar varsa toplam uydurma. Yeni dosya oluşturma."
+    },
+    {
+      "id": "D002",
+      "mode": "approved-workbook",
+      "prompt": "Bu CSV tamamen sentetik fatura kalemleri içerir. CSV fiziksel satırları 2,3,4,5,6 için hesap yapılmasını açıkça onaylıyorum. Satır 7 aynı INV-005 kimliğinin ikinci kaydı olduğu için, satır 8 fiyatı INVALID olduğu için yalnız hesap kapsamı dışında tutulacak; kaynak dosyadaki bütün kayıtlar aynen korunacak. Bu seçimi benim açık onayım olarak kullan, tekrar sorma. Örnek parasal birimler ve vergi oranları hiçbir ülkenin mevzuatı değildir. İndirilebilir bir Excel dosyası oluştur: Veriler sayfasında A1:F8 orijinal CSV başlıkları ve 7 kayıt aynen bulunsun. Hesaplar sayfası A1:F1 başlıkları ID,Matrah,Indirim,Net,Vergi,Brut olsun; 2:6 satırları onaylı beş kayda bağlansın. ID kaynak kimliğine, Matrah kaynak quantity*unit_price değerine başvursun; Indirim=ROUND(Matrah*discount_percent/100,2), Net=Matrah-Indirim, Vergi=ROUND(Net*tax_percent/100,2), Brut=Net+Vergi formülleri kullanılsın. Bu pozitif değerlerde ROUND_HALF_UP, Excel ROUND ile aynı iki ondalık kuralıdır. Ozet sayfasında A2 Net, A3 Vergi, A4 Brut etiketleri ve B2:B4 hücrelerinde Hesaplar sayfasının ilgili beş satırını toplayan gerçek formüller olsun. Ozet üzerinde satır 7 ve 8 için kapsam dışı bırakma nedenini yaz. Kaynak CSV üzerinde değişiklik yapma; yeni örnek kayıt, grafik veya ek iş kuralı üretme."
+    },
+    {
+      "id": "D003",
+      "mode": "ambiguity",
+      "expectedBlocker": "INV-005",
+      "history": [
+        {
+          "role": "user",
+          "text": "Bu CSV tamamen sentetik fatura kalemleridir. İlk satır başlıktır, her veri satırı bir fatura kalemidir. quantity adet, unit_price parasal birim, discount_percent ve tax_percent yüzde oranıdır; oranlar örnek varsayımlardır, bir ülkenin vergi mevzuatı değildir. Net, vergi ve brüt toplamı hesapla. Matrah = adet × birim fiyat; indirimi ROUND_HALF_UP ile iki ondalığa yuvarla, netten hesaplanan vergiyi de her satırda ayrı ROUND_HALF_UP ile iki ondalığa yuvarla. Tekrarlanan fatura kimliklerini kullanıcı kararı olmadan birleştirme veya silme; geçersiz fiyatı sıfır kabul etme. Çözümlenmemiş karar varsa toplam uydurma. Yeni dosya oluşturma."
+        },
+        {
+          "role": "assistant",
+          "text": "INV-006 için nasıl ilerleyeyim?\n\nBir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam."
+        }
+      ],
+      "prompt": "INV-006 kaydını, yani fiziksel CSV satır 8i geçersiz fiyat nedeniyle hesap dışında bırakmayı onaylıyorum. Bunun dışında birleştirme veya kayıt dışlama kararı vermedim. Aynı kaynak dosyada aynı satır başına ROUND_HALF_UP kuralıyla net, vergi ve brüt toplam için devam et; çözümlenmemiş başka veri kararı varsa toplam uydurma. Yeni dosya oluşturma."
+    },
+    {
+      "id": "D004",
+      "mode": "ambiguity",
+      "expectedBlocker": "INV-005",
+      "history": [
+        {
+          "role": "user",
+          "text": "Bu CSV tamamen sentetik fatura kalemleridir. İlk satır başlıktır, her veri satırı bir fatura kalemidir. quantity adet, unit_price parasal birim, discount_percent ve tax_percent yüzde oranıdır; oranlar örnek varsayımlardır, bir ülkenin vergi mevzuatı değildir. Net, vergi ve brüt toplamı hesapla. Matrah = adet × birim fiyat; indirimi ROUND_HALF_UP ile iki ondalığa yuvarla, netten hesaplanan vergiyi de her satırda ayrı ROUND_HALF_UP ile iki ondalığa yuvarla. Tekrarlanan fatura kimliklerini kullanıcı kararı olmadan birleştirme veya silme; geçersiz fiyatı sıfır kabul etme. Çözümlenmemiş karar varsa toplam uydurma. Yeni dosya oluşturma."
+        },
+        {
+          "role": "assistant",
+          "text": "INV-006 için nasıl ilerleyeyim?\n\nBir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam."
+        }
+      ],
+      "prompt": "INV-006, fiziksel CSV satır 8, geçersiz fiyat nedeniyle hesap kapsamından çıkarılsın. Bu testin açık iş kuralı şudur: invoice_id benzersiz bir faturayı temsil eder; aynı invoice_id birden fazla satırda bulunursa bu kayıtlardan hangilerinin hesaba katılacağı kullanıcı tarafından ayrıca kararlaştırılmadan genel net/vergi/brüt toplamı üretme. Bunlar çok kalemli fatura satırları değildir. INV-006 dışında hiçbir kayıt için karar vermedim. Kaynağı değiştirmeden bir sonraki gerekli kararı sor; dosya oluşturma."
+    }
+  ]
+}

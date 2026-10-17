@@ -1,0 +1,116 @@
+{
+  "id": "D001",
+  "startedAt": "2026-10-17T19:29:27.539Z",
+  "sourceSha256": "1a4c76c84b87e67fd5d232ab68267ac33e3baf7e82bb0ac17d9c095c45fda8aa",
+  "prompt": "Bu CSV tamamen sentetik fatura kalemleridir. İlk satır başlıktır, her veri satırı bir fatura kalemidir. quantity adet, unit_price parasal birim, discount_percent ve tax_percent yüzde oranıdır; oranlar örnek varsayımlardır, bir ülkenin vergi mevzuatı değildir. Net, vergi ve brüt toplamı hesapla. Matrah = adet × birim fiyat; indirimi ROUND_HALF_UP ile iki ondalığa yuvarla, netten hesaplanan vergiyi de her satırda ayrı ROUND_HALF_UP ile iki ondalığa yuvarla. Tekrarlanan fatura kimliklerini kullanıcı kararı olmadan birleştirme veya silme; geçersiz fiyatı sıfır kabul etme. Çözümlenmemiş karar varsa toplam uydurma. Yeni dosya oluşturma.",
+  "text": "INV-006 için nasıl ilerleyeyim?\n\nBir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam.",
+  "evidence": {
+    "version": 2,
+    "layout": [
+      {
+        "source": "S1",
+        "sheet": "CSV",
+        "range": "A1:F9",
+        "headerRows": [
+          1
+        ],
+        "notes": [
+          "İlk satır başlık olarak yorumlandı; her sonraki satır bir fatura kalemidir.",
+          "INV-005 kimliği iki ayrı veri satırında bulundu ve satırlar birleştirilmedi veya silinmedi.",
+          "INV-006 satırında unit_price değeri INVALID; bu değer sayısal fiyat olarak çözümlenemiyor."
+        ]
+      }
+    ],
+    "clarification": {
+      "question": "INV-006 için nasıl ilerleyeyim?",
+      "why": "Bir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam.",
+      "options": [
+        "INV-006 satırını geçersiz fiyat nedeniyle toplamların dışında bırak",
+        "INV-006 için doğru unit_price değerini belirt",
+        "INV-006 satırını inceleme gerektiren kayıt olarak tut ve toplamları hesaplama"
+      ]
+    },
+    "calculations": []
+  },
+  "toolCalls": 1,
+  "passed": false,
+  "error": "Missing duplicate or invalid-price disclosure",
+  "stage": "delivered",
+  "finishedAt": "2026-10-17T19:29:51.460Z",
+  "actions": [
+    {
+      "action": "start",
+      "sentAt": "2026-10-17T19:29:27.542Z",
+      "status": 200,
+      "ms": 11685
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:29:41.775Z",
+      "status": 200,
+      "ms": 241
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:29:44.518Z",
+      "status": 200,
+      "ms": 263
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:29:47.284Z",
+      "status": 200,
+      "ms": 269
+    },
+    {
+      "action": "poll",
+      "sentAt": "2026-10-17T19:29:50.056Z",
+      "status": 200,
+      "ms": 315
+    },
+    {
+      "action": "cleanup",
+      "sentAt": "2026-10-17T19:29:50.374Z",
+      "status": 200,
+      "ms": 1085
+    }
+  ],
+  "completions": [
+    {
+      "action": "poll",
+      "text": "INV-006 için nasıl ilerleyeyim?\n\nBir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam.",
+      "evidence": {
+        "version": 2,
+        "layout": [
+          {
+            "source": "S1",
+            "sheet": "CSV",
+            "range": "A1:F9",
+            "headerRows": [
+              1
+            ],
+            "notes": [
+              "İlk satır başlık olarak yorumlandı; her sonraki satır bir fatura kalemidir.",
+              "INV-005 kimliği iki ayrı veri satırında bulundu ve satırlar birleştirilmedi veya silinmedi.",
+              "INV-006 satırında unit_price değeri INVALID; bu değer sayısal fiyat olarak çözümlenemiyor."
+            ]
+          }
+        ],
+        "clarification": {
+          "question": "INV-006 için nasıl ilerleyeyim?",
+          "why": "Bir satırdaki unit_price sayısal değil. Kullanıcının belirttiği gibi geçersiz fiyatı sıfır kabul edemem; bu seçim yapılmadan net, vergi ve brüt toplamı uydurmadan hesaplayamam.",
+          "options": [
+            "INV-006 satırını geçersiz fiyat nedeniyle toplamların dışında bırak",
+            "INV-006 için doğru unit_price değerini belirt",
+            "INV-006 satırını inceleme gerektiren kayıt olarak tut ve toplamları hesaplama"
+          ]
+        },
+        "calculations": []
+      },
+      "files": [],
+      "missingOutput": false,
+      "toolCalls": 1
+    }
+  ],
+  "automaticRepairs": 0
+}
