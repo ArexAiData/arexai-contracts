@@ -32,7 +32,7 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "4.2.0",
     "@nomicfoundation/hardhat-node-test-runner": "3.1.0",
-    "@safe-global/safe-deployments": "1.37.63",
+    "@safe-global/safe-deployments": "1.37.64",
     "@types/node": "22.19.19",
     "ethers": "6.17.0",
     "hardhat": "3.18.1",
