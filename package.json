@@ -30,12 +30,12 @@
     "@openzeppelin/contracts": "5.4.0"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-ethers": "4.2.0",
-    "@nomicfoundation/hardhat-node-test-runner": "3.1.0",
+    "@nomicfoundation/hardhat-ethers": "4.2.1",
+    "@nomicfoundation/hardhat-node-test-runner": "3.1.1",
     "@safe-global/safe-deployments": "1.37.63",
     "@types/node": "22.19.19",
     "ethers": "6.17.0",
-    "hardhat": "3.18.1",
+    "hardhat": "3.20.0",
     "solc": "0.8.24",
     "typescript": "5.9.3"
   },
